@@ -80,11 +80,30 @@ if ($teams === null || empty($teams)) {
 
 $teamId = (int) $teams[0]['id'];
 
-// Step 2: Fetch the next upcoming fixture for Boleskine
+// Step 2: Fetch upcoming events and filter for Boleskine
 $today = date('Y-m-d\TH:i:s');
-$events = json_get(API_BASE . "/events?team={$teamId}&after={$today}&order=asc&orderby=date&per_page=1&status=future");
+$events = json_get(API_BASE . "/events?after={$today}&order=asc&orderby=date&per_page=50");
 
 if ($events === null || empty($events)) {
+    $output = [
+        'has_fixture' => false,
+        'last_updated' => date('c'),
+    ];
+    file_put_contents(OUTPUT_FILE, 'var fixtureData = ' . json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';' . "\n");
+    fwrite(STDERR, "No upcoming events found on remote API.\n");
+    exit(0);
+}
+
+// Filter to only events that include Boleskine's team ID and are still upcoming
+$boleskineEvents = array_filter($events, function ($e) use ($teamId, $today) {
+    $teamIds = array_map('intval', $e['teams'] ?? []);
+    $status = $e['status'] ?? '';
+    $date = $e['date'] ?? '';
+    return in_array($teamId, $teamIds) && $status === 'future' && $date >= $today;
+});
+$boleskineEvents = array_values($boleskineEvents);
+
+if (empty($boleskineEvents)) {
     $output = [
         'has_fixture' => false,
         'last_updated' => date('c'),
@@ -94,48 +113,51 @@ if ($events === null || empty($events)) {
     exit(0);
 }
 
-$event = $events[0];
+$event = $boleskineEvents[0];
 
-// Determine home / away teams
-$teamsData = $event['teams'] ?? [];
+// The API returns team IDs in a flat array, not full objects.
+// Fetch team names for the two teams in this event.
+$eventTeamIds = array_map('intval', $event['teams'] ?? []);
+$teamNames = [];
+foreach ($eventTeamIds as $tid) {
+    $teamInfo = json_get(API_BASE . "/teams/{$tid}");
+    if ($teamInfo !== null) {
+        $teamNames[$tid] = $teamInfo['title']['rendered'] ?? "Team {$tid}";
+    } else {
+        $teamNames[$tid] = "Team {$tid}";
+    }
+}
+
+// Determine home / away — first team ID is home
 $homeTeam = '';
 $awayTeam = '';
 $isHome = null;
 
-$metaTeams = $event['meta']['sp_team'] ?? [];
-$metaHome  = $event['meta']['sp_home'] ?? null;
+if (count($eventTeamIds) >= 2) {
+    $homeTeam = $teamNames[$eventTeamIds[0]] ?? '';
+    $awayTeam = $teamNames[$eventTeamIds[1]] ?? '';
+    $isHome = ($eventTeamIds[0] === $teamId);
+} elseif (count($eventTeamIds) === 1) {
+    $homeTeam = $teamNames[$eventTeamIds[0]] ?? '';
+    $isHome = ($eventTeamIds[0] === $teamId);
+}
 
-foreach ($teamsData as $t) {
-    if ($metaHome !== null && (int) $t['id'] === (int) $metaHome) {
-        $homeTeam = $t['name'];
-        $isHome = ((int) $t['id'] === $teamId);
-    } elseif ($metaHome !== null && (int) $t['id'] !== (int) $metaHome) {
-        $awayTeam = $t['name'];
+// Venue from event — API returns venue IDs, fetch name
+$venueName = '';
+$eventVenueIds = $event['venues'] ?? [];
+if (!empty($eventVenueIds)) {
+    $venueInfo = json_get(API_BASE . "/venues/{$eventVenueIds[0]}");
+    if ($venueInfo !== null) {
+        $venueName = $venueInfo['title']['rendered'] ?? '';
     }
 }
 
-// Fallback if meta_home not set — infer from team IDs
-if ($homeTeam === '' && count($teamsData) >= 2) {
-    $homeTeam = $teamsData[0]['name'];
-    $awayTeam = $teamsData[1]['name'];
-    $isHome = ($teamsData[0]['id'] == $teamId);
-}
+// Date/time from top-level event fields
+$rawDate = $event['date'] ?? '';
 
-// Raw date/time from API
-$rawDate = $event['meta']['sp_date'] ?? '';
-$rawTime = $event['meta']['sp_time'] ?? '';
-
-// Venue from event meta
-$venueName = '';
-$venues = $event['venues'] ?? [];
-if (!empty($venues)) {
-    $venueName = $venues[0]['name'] ?? '';
-}
-
-// Format date
+// Format date and time from the top-level date field
 $dateFormatted = '';
 $timeFormatted = '';
-$locationFormatted = '';
 
 if ($rawDate) {
     $ts = strtotime($rawDate);
@@ -143,10 +165,6 @@ if ($rawDate) {
     $monthName = date('F', $ts);
     $dayNum = (int) date('j', $ts);
     $dateFormatted = $dayName . ', ' . $monthName . ' ' . ordinalSuffix($dayNum);
-}
-
-if ($rawTime) {
-    $ts = strtotime($rawTime);
     $timeFormatted = date('g:i', $ts) . ' PM BST';
 }
 
