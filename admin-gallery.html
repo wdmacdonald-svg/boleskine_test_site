@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Admin | Boleskine Camanachd Club</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --color-black: #0B0B0C;
+            --color-charcoal: #141416;
+            --color-gold: #F2910E;
+            --color-gold-hover: #C5720A;
+            --color-text: #EAEAEA;
+            --color-text-muted: #A0A0A5;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--color-black);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 340px;
+            min-width: 340px;
+            background: var(--color-charcoal);
+            border-right: 1px solid rgba(242,145,14,0.15);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(242,145,14,0.15);
+        }
+        .sidebar-header h1 {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            color: var(--color-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .sidebar-header p {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-top: 0.3rem;
+        }
+        .file-status {
+            font-size: 0.7rem;
+            padding: 0.5rem 1.5rem;
+            border-bottom: 1px solid rgba(242,145,14,0.08);
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            word-break: break-all;
+        }
+        .file-status .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #666;
+            flex-shrink: 0;
+        }
+        .file-status .dot.loaded { background: #28a745; }
+        .item-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.75rem;
+        }
+        .item-list .empty {
+            text-align: center;
+            color: var(--color-text-muted);
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+        .item-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(242,145,14,0.1);
+            border-radius: 4px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .item-card:hover {
+            border-color: rgba(242,145,14,0.3);
+            background: rgba(242,145,14,0.05);
+        }
+        .item-card.active {
+            border-color: var(--color-gold);
+            background: rgba(242,145,14,0.08);
+        }
+        .item-card .era-badge {
+            font-size: 0.6rem;
+            font-family: var(--font-title);
+            color: var(--color-gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .item-card .item-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .item-card .item-number {
+            font-size: 0.65rem;
+            color: rgba(160,160,165,0.4);
+            margin-top: 0.1rem;
+        }
+        .item-card .item-meta {
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            margin-top: 0.2rem;
+        }
+        .item-card .item-actions {
+            position: absolute;
+            top: 0.4rem;
+            right: 0.4rem;
+            display: none;
+            gap: 0.3rem;
+        }
+        .item-card:hover .item-actions { display: flex; }
+        .item-card .item-actions button {
+            background: var(--color-charcoal);
+            border: 1px solid rgba(242,145,14,0.2);
+            color: var(--color-text-muted);
+            width: 24px;
+            height: 24px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+        .item-card .item-actions button:hover {
+            background: var(--color-gold);
+            color: var(--color-black);
+            border-color: var(--color-gold);
+        }
+        .item-card .item-actions button.danger:hover {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: #fff;
+        }
+
+        .main {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        .main h2 {
+            font-family: var(--font-title);
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-family: var(--font-title);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 0.35rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            background: var(--color-charcoal);
+            border: 1px solid rgba(242,145,14,0.2);
+            border-radius: 3px;
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-gold);
+        }
+        .form-group textarea { resize: vertical; min-height: 60px; }
+        .form-group select option { background: var(--color-charcoal); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.4rem;
+            font-family: var(--font-title);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .btn-gold {
+            background: var(--color-gold);
+            color: var(--color-black);
+            border-color: var(--color-gold);
+        }
+        .btn-gold:hover {
+            background: var(--color-gold-hover);
+            border-color: var(--color-gold-hover);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--color-gold);
+            border-color: rgba(242,145,14,0.3);
+        }
+        .btn-outline:hover {
+            background: rgba(242,145,14,0.1);
+            border-color: var(--color-gold);
+        }
+        .btn-success {
+            background: #28a745;
+            color: #fff;
+            border-color: #28a745;
+        }
+        .btn-success:hover {
+            background: #218838;
+            border-color: #218838;
+        }
+        .btn-danger {
+            background: transparent;
+            color: #dc3545;
+            border-color: rgba(220,53,69,0.3);
+        }
+        .btn-danger:hover {
+            background: rgba(220,53,69,0.1);
+            border-color: #dc3545;
+        }
+        .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.7rem; }
+        .btn-group { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+        .btn-group .spacer { flex: 1; }
+
+        .section-divider {
+            margin: 2rem 0;
+            border: none;
+            border-top: 1px solid rgba(242,145,14,0.12);
+        }
+
+        .file-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .preview-area {
+            background: var(--color-charcoal);
+            border: 1px solid rgba(242,145,14,0.12);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .preview-area .preview-label {
+            font-size: 0.7rem;
+            font-family: var(--font-title);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+        .preview-masonry {
+            column-count: 3;
+            column-gap: 1rem;
+        }
+        .preview-masonry .gallery-item,
+        .preview-masonry .placeholder-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(242,145,14,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--color-charcoal);
+        }
+        .preview-masonry .gi-img-wrap {
+            position: relative;
+            overflow: hidden;
+            background: #0d0d0e;
+        }
+        .preview-masonry .gi-img-wrap img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+        .preview-masonry .gi-caption {
+            padding: 0.8rem 1rem 1rem;
+        }
+        .preview-masonry .gi-caption h3 {
+            font-family: var(--font-title);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+            color: #fff;
+        }
+        .preview-masonry .gi-caption p {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.4rem;
+        }
+        .preview-masonry .gi-meta {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .preview-masonry .gi-meta span {
+            font-size: 0.68rem;
+            color: rgba(160,160,165,0.6);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .preview-masonry .gi-meta span i { color: rgba(242,145,14,0.5); }
+        .preview-masonry .gallery-era-divider {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            padding: 1rem 1.2rem;
+            border-left: 3px solid var(--color-gold);
+            background: linear-gradient(to right, rgba(242,145,14,0.08), transparent);
+            border-radius: 0 4px 4px 0;
+        }
+        .preview-masonry .gallery-era-divider h2 {
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 0.15rem;
+            font-family: var(--font-title);
+        }
+        .preview-masonry .gallery-era-divider p {
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+
+        .html-output {
+            position: relative;
+            margin-top: 1rem;
+        }
+        .html-output textarea {
+            width: 100%;
+            min-height: 300px;
+            background: var(--color-charcoal);
+            border: 1px solid rgba(242,145,14,0.2);
+            border-radius: 4px;
+            color: var(--color-text);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            padding: 1rem;
+            resize: vertical;
+            tab-size: 2;
+        }
+        .html-output textarea:focus { outline: none; border-color: var(--color-gold); }
+        .html-output .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--color-gold);
+            color: var(--color-black);
+            font-family: var(--font-title);
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+
+        .unsupported-notice {
+            background: rgba(220,53,69,0.1);
+            border: 1px solid rgba(220,53,69,0.3);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        .unsupported-notice i { color: #dc3545; margin-right: 0.4rem; }
+
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                min-width: unset;
+                height: auto;
+                max-height: 40vh;
+                position: relative;
+            }
+            .main { max-height: unset; }
+            .form-grid { grid-template-columns: 1fr; }
+            .preview-masonry { column-count: 2; }
+        }
+        @media (max-width: 600px) {
+            .preview-masonry { column-count: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h1><i class="fa-solid fa-images"></i> Gallery Admin</h1>
+            <p>Manage gallery photos &amp; captions</p>
+        </div>
+        <div class="file-status" id="file-status">
+            <span class="dot" id="file-dot"></span>
+            <span id="file-label">No file opened yet</span>
+        </div>
+        <div style="padding:0.75rem;">
+            <button class="btn btn-gold btn-sm" style="width:100%;justify-content:center;" onclick="addItem()">
+                <i class="fa-solid fa-plus"></i> New Photo
+            </button>
+        </div>
+        <div class="item-list" id="item-list">
+            <div class="empty">No items yet. Add your first photo above.</div>
+        </div>
+        <div style="padding:0.75rem;border-top:1px solid rgba(242,145,14,0.15);font-size:0.7rem;color:var(--color-text-muted);">
+            <i class="fa-regular fa-floppy-disk"></i> Auto-saved to browser
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- File bar -->
+        <div class="file-bar">
+            <button class="btn btn-outline" onclick="openGalleryFile()"><i class="fa-solid fa-folder-open"></i> Open gallery.html</button>
+            <button class="btn btn-success" onclick="saveToGalleryFile()" id="save-file-btn" disabled><i class="fa-solid fa-floppy-disk"></i> Save to gallery.html</button>
+            <button class="btn btn-outline" onclick="loadSampleData()"><i class="fa-solid fa-table"></i> Load Sample</button>
+        </div>
+
+        <div id="unsupported-notice" class="unsupported-notice" style="display:none;">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Your browser doesn't support direct file editing. Use <strong>Chrome</strong> or <strong>Edge</strong> for the "Open/Save" feature, or use the Export section below to copy/paste manually.
+        </div>
+
+        <!-- Form -->
+        <h2 id="form-heading"><i class="fa-regular fa-pen-to-square"></i> Add Photo</h2>
+        <form id="item-form" onsubmit="return false;">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Image Filename</label>
+                    <input type="text" id="f-image" placeholder="e.g. my_photo.jpg">
+                    <div style="font-size:0.68rem;color:var(--color-text-muted);margin-top:0.25rem;">
+                        Place file in <code>gallery_files/</code> folder, then enter the filename here.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alt Text</label>
+                    <input type="text" id="f-alt" placeholder="Brief image description">
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="f-title" placeholder="Photo title">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="f-category">
+                        <option value="match">Match Day</option>
+                        <option value="training">Training</option>
+                        <option value="heritage">Heritage</option>
+                        <option value="community">Community</option>
+                        <option value="awards">Awards &amp; Events</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="text" id="f-date" placeholder="e.g. 2024, Feb 2026, Various Years">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="f-location" placeholder="e.g. Smith Park, Stratherrick">
+                </div>
+                <div class="form-group full">
+                    <label>Description</label>
+                    <textarea id="f-desc" placeholder="A short description of the photo..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Era Label</label>
+                    <input type="text" id="f-era" placeholder="e.g. 2025-26 (leave blank for no era divider)">
+                    <div style="font-size:0.68rem;color:var(--color-text-muted);margin-top:0.25rem;">
+                        Items with the same era label are grouped together.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Era Description</label>
+                    <input type="text" id="f-era-desc" placeholder="Optional era description">
+                </div>
+            </div>
+            <input type="hidden" id="f-editing-id" value="">
+            <div class="btn-group">
+                <button class="btn btn-gold" onclick="saveItem()"><i class="fa-solid fa-check"></i> <span id="save-btn-text">Add Photo</span></button>
+                <button class="btn btn-outline" onclick="resetForm()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+                <button class="btn btn-danger" id="delete-btn" onclick="deleteItem()" style="display:none;"><i class="fa-regular fa-trash-can"></i> Delete</button>
+            </div>
+        </form>
+
+        <hr class="section-divider">
+
+        <!-- Preview -->
+        <h2><i class="fa-regular fa-eye"></i> Preview</h2>
+        <div class="preview-area">
+            <div class="preview-label">Gallery preview</div>
+            <div class="preview-masonry" id="preview-masonry">
+                <div style="color:var(--color-text-muted);font-size:0.85rem;">Add some photos to see a preview.</div>
+            </div>
+        </div>
+
+        <!-- Export HTML -->
+        <h2><i class="fa-solid fa-code"></i> Export HTML</h2>
+        <p style="font-size:0.8rem;color:var(--color-text-muted);margin-bottom:0.5rem;">
+            Copy this HTML and paste it inside <code>&lt;div class="gallery-masonry" id="gallery-masonry"&gt;</code> in gallery.html.
+        </p>
+        <div class="html-output">
+            <button class="btn btn-gold btn-sm copy-btn" onclick="copyHtml()"><i class="fa-regular fa-copy"></i> Copy</button>
+            <textarea id="html-output" readonly placeholder="Generated HTML will appear here..."></textarea>
+        </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ─── State ────────────────────────────────────────
+        let items = [];
+        let nextId = 1;
+        let editingId = null;
+
+        // File handle for File System Access API
+        let galleryFileHandle = null;
+        let galleryOriginalContent = ''; // cached original file content
+
+        const STORAGE_KEY = 'boleskine_gallery_admin';
+
+        // ─── Persistence ──────────────────────────────────
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    items = data.items || [];
+                    nextId = data.nextId || 1;
+                }
+            } catch(e) {}
+        }
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ items, nextId }));
+        }
+
+        // ─── Data Model ───────────────────────────────────
+        function createItem(data) {
+            return {
+                id: 'gi-' + (nextId++),
+                number: 0, // assigned on render
+                image: data.image || '',
+                alt: data.alt || '',
+                title: data.title || 'Untitled',
+                description: data.description || '',
+                category: data.category || 'heritage',
+                date: data.date || '',
+                location: data.location || '',
+                era: data.era || '',
+                eraDesc: data.eraDesc || ''
+            };
+        }
+
+        // ─── Render Sidebar List ──────────────────────────
+        function renderList() {
+            const container = document.getElementById('item-list');
+            if (items.length === 0) {
+                container.innerHTML = '<div class="empty">No items yet. Add your first photo.</div>';
+                return;
+            }
+            let html = '';
+            let currentEra = '';
+            let itemNum = 0;
+            items.forEach((item, idx) => {
+                itemNum++;
+                item.number = itemNum;
+                const eraLabel = item.era || 'Ungrouped';
+                if (item.era && item.era !== currentEra) {
+                    currentEra = item.era;
+                    html += `<div style="font-size:0.65rem;font-family:var(--font-title);color:var(--color-gold);letter-spacing:2px;text-transform:uppercase;padding:0.5rem 0.3rem 0.25rem;">${escHtml(item.era)}</div>`;
+                }
+                html += `
+                    <div class="item-card ${editingId === item.id ? 'active' : ''}" onclick="editItem('${item.id}')">
+                        <div class="item-actions">
+                            ${idx > 0 ? `<button onclick="event.stopPropagation();moveItem(${idx}, -1)" title="Move up"><i class="fa-solid fa-chevron-up"></i></button>` : ''}
+                            ${idx < items.length - 1 ? `<button onclick="event.stopPropagation();moveItem(${idx}, 1)" title="Move down"><i class="fa-solid fa-chevron-down"></i></button>` : ''}
+                        </div>
+                        <div class="era-badge">${item.category}</div>
+                        <div class="item-number">#${itemNum}</div>
+                        <div class="item-title">${escHtml(item.title)}</div>
+                        <div class="item-meta">${item.date}${item.date && item.location ? ' &middot; ' : ''}${item.location}</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // ─── Render Preview ───────────────────────────────
+        function generateItemHtml(item, includeOverlay) {
+            const imgSrc = item.image ? `./gallery_files/${item.image}` : '';
+            const imgTag = imgSrc ? `<img src="${imgSrc}" alt="${escHtml(item.alt || item.title)}" loading="lazy">` : '';
+            const overlay = includeOverlay !== false ? `
+                        <div class="gi-overlay">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            <span>View Photo</span>
+                        </div>` : '';
+            return `
+                <!-- ${item.number} : ${escHtml(item.title)} -->
+                <div class="gallery-item" data-category="${item.category}" id="${item.id}" data-title="${escHtml(item.title)}" data-desc="${escHtml(item.description)}">
+                    <div class="gi-img-wrap">
+                        ${imgTag}
+                        ${overlay}
+                    </div>
+                    <div class="gi-caption">
+                        <h3 class="font-cinzel">${escHtml(item.title)}</h3>
+                        <p>${escHtml(item.description)}</p>
+                        <div class="gi-meta">
+                            ${item.date ? `<span><i class="fa-regular fa-calendar"></i>${escHtml(item.date)}</span>` : ''}
+                            ${item.location ? `<span><i class="fa-solid fa-location-dot"></i>${escHtml(item.location)}</span>` : ''}
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        function renderPreview() {
+            const container = document.getElementById('preview-masonry');
+            if (items.length === 0) {
+                container.innerHTML = '<div style="color:var(--color-text-muted);font-size:0.85rem;">Add some photos to see a preview.</div>';
+                return;
+            }
+            let html = '';
+            let currentEra = '';
+            let itemNum = 0;
+            items.forEach(item => {
+                itemNum++;
+                item.number = itemNum;
+                if (item.era && item.era !== currentEra) {
+                    currentEra = item.era;
+                    html += `
+                        <div class="gallery-era-divider">
+                            <h2>${escHtml(item.era)}</h2>
+                            ${item.eraDesc ? `<p>${escHtml(item.eraDesc)}</p>` : ''}
+                        </div>`;
+                }
+                html += generateItemHtml(item, true);
+            });
+            container.innerHTML = html;
+        }
+
+        // ─── Generate full gallery block ──────────────────
+        function generateGalleryBlock() {
+            if (items.length === 0) return '            <!-- No gallery items -->';
+            let html = '';
+            let currentEra = '';
+            let itemNum = 0;
+            items.forEach(item => {
+                itemNum++;
+                item.number = itemNum;
+                if (item.era && item.era !== currentEra) {
+                    currentEra = item.era;
+                    html += `
+                <!-- ERA: ${escHtml(item.era)} -->
+                <div class="gallery-era-divider">
+                    <h2>${escHtml(item.era)}</h2>
+                    ${item.eraDesc ? `<p>${escHtml(item.eraDesc)}</p>` : ''}
+                </div>
+`;
+                }
+                html += `
+                ${generateItemHtml(item, true)}
+`;
+            });
+            return html.trimEnd();
+        }
+
+        function updateExport() {
+            document.getElementById('html-output').value = generateGalleryBlock();
+        }
+
+        function copyHtml() {
+            const textarea = document.getElementById('html-output');
+            textarea.select();
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                showToast('HTML copied to clipboard!');
+            }).catch(() => {
+                document.execCommand('copy');
+                showToast('HTML copied!');
+            });
+        }
+
+        // ─── CRUD ─────────────────────────────────────────
+        function resetForm() {
+            document.getElementById('item-form').reset();
+            document.getElementById('f-editing-id').value = '';
+            document.getElementById('save-btn-text').textContent = 'Add Photo';
+            document.getElementById('delete-btn').style.display = 'none';
+            document.getElementById('form-heading').innerHTML = '<i class="fa-regular fa-pen-to-square"></i> Add Photo';
+            editingId = null;
+        }
+
+        function saveItem() {
+            const data = {
+                image: document.getElementById('f-image').value.trim(),
+                alt: document.getElementById('f-alt').value.trim(),
+                title: document.getElementById('f-title').value.trim() || 'Untitled',
+                description: document.getElementById('f-desc').value.trim(),
+                category: document.getElementById('f-category').value,
+                date: document.getElementById('f-date').value.trim(),
+                location: document.getElementById('f-location').value.trim(),
+                era: document.getElementById('f-era').value.trim(),
+                eraDesc: document.getElementById('f-era-desc').value.trim()
+            };
+
+            const editId = document.getElementById('f-editing-id').value;
+
+            if (editId) {
+                const idx = items.findIndex(i => i.id === editId);
+                if (idx > -1) {
+                    Object.assign(items[idx], data);
+                    showToast('Photo updated');
+                }
+            } else {
+                items.push(createItem(data));
+                showToast('Photo added');
+            }
+
+            resetForm();
+            saveState();
+            renderAll();
+        }
+
+        function editItem(id) {
+            const item = items.find(i => i.id === id);
+            if (!item) return;
+            editingId = item.id;
+            document.getElementById('f-editing-id').value = item.id;
+            document.getElementById('f-image').value = item.image;
+            document.getElementById('f-alt').value = item.alt;
+            document.getElementById('f-title').value = item.title;
+            document.getElementById('f-desc').value = item.description;
+            document.getElementById('f-category').value = item.category;
+            document.getElementById('f-date').value = item.date;
+            document.getElementById('f-location').value = item.location;
+            document.getElementById('f-era').value = item.era;
+            document.getElementById('f-era-desc').value = item.eraDesc;
+            document.getElementById('save-btn-text').textContent = 'Update Photo';
+            document.getElementById('delete-btn').style.display = '';
+            document.getElementById('form-heading').innerHTML = '<i class="fa-regular fa-pen-to-square"></i> Edit Photo';
+            renderList();
+        }
+
+        function deleteItem() {
+            const id = document.getElementById('f-editing-id').value;
+            if (!id) return;
+            if (!confirm('Delete this photo?')) return;
+            items = items.filter(i => i.id !== id);
+            resetForm();
+            saveState();
+            renderAll();
+            showToast('Photo deleted');
+        }
+
+        function addItem() {
+            resetForm();
+            document.getElementById('form-heading').innerHTML = '<i class="fa-regular fa-pen-to-square"></i> Add Photo';
+            document.getElementById('f-title').focus();
+            renderList();
+        }
+
+        function moveItem(idx, direction) {
+            const target = idx + direction;
+            if (target < 0 || target >= items.length) return;
+            [items[idx], items[target]] = [items[target], items[idx]];
+            saveState();
+            renderAll();
+        }
+
+        // ─── File System Access API ───────────────────────
+        function supportsFileSystemAccess() {
+            return 'showOpenFilePicker' in window;
+        }
+
+        function updateFileStatus(loaded, name) {
+            const dot = document.getElementById('file-dot');
+            const label = document.getElementById('file-label');
+            const btn = document.getElementById('save-file-btn');
+            if (loaded) {
+                dot.className = 'dot loaded';
+                label.textContent = name || 'gallery.html loaded';
+                btn.disabled = false;
+            } else {
+                dot.className = 'dot';
+                label.textContent = name || 'No file opened yet';
+                btn.disabled = true;
+            }
+        }
+
+        async function openGalleryFile() {
+            if (!supportsFileSystemAccess()) {
+                showToast('Open/Save requires Chrome or Edge');
+                return;
+            }
+            try {
+                [galleryFileHandle] = await window.showOpenFilePicker({
+                    types: [{
+                        description: 'HTML Files',
+                        accept: { 'text/html': ['.html', '.htm'] }
+                    }],
+                    multiple: false
+                });
+                const file = await galleryFileHandle.getFile();
+                galleryOriginalContent = await file.text();
+                updateFileStatus(true, file.name);
+
+                // Parse existing gallery items from the file
+                parseExistingContent(galleryOriginalContent);
+                showToast(`Opened ${file.name} (${items.length} photos found)`);
+            } catch(err) {
+                if (err.name !== 'AbortError') {
+                    showToast('Error opening file: ' + err.message);
+                }
+            }
+        }
+
+        async function saveToGalleryFile() {
+            if (!galleryFileHandle) {
+                showToast('Open a gallery.html file first');
+                return;
+            }
+            if (!supportsFileSystemAccess()) {
+                showToast('Open/Save requires Chrome or Edge');
+                return;
+            }
+            try {
+                const newContent = injectItemsIntoFile(galleryOriginalContent);
+                const writable = await galleryFileHandle.createWritable();
+                await writable.write(newContent);
+                await writable.close();
+                // Update the cached original content so subsequent saves work
+                galleryOriginalContent = newContent;
+                showToast('Saved to gallery.html successfully!');
+            } catch(err) {
+                if (err.name !== 'AbortError') {
+                    showToast('Error saving: ' + err.message);
+                }
+            }
+        }
+
+        function parseExistingContent(html) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const masonries = doc.querySelectorAll('.gallery-masonry');
+            let container = null;
+            if (masonries.length > 0) container = masonries[masonries.length - 1];
+
+            if (!container) {
+                showToast('Could not find .gallery-masonry in the file');
+                return;
+            }
+
+            const imported = [];
+            let maxNum = 0;
+            let currentEra = '';
+            let currentEraDesc = '';
+
+            Array.from(container.children).forEach(el => {
+                if (el.tagName === 'DIV' && el.classList.contains('gallery-era-divider')) {
+                    const h2 = el.querySelector('h2');
+                    const p = el.querySelector('p');
+                    currentEra = h2 ? h2.textContent.trim() : '';
+                    currentEraDesc = p ? p.textContent.trim() : '';
+                    return;
+                }
+                if (el.tagName === 'DIV' && el.classList.contains('gallery-item')) {
+                    const item = {
+                        id: el.id || 'gi-' + (nextId++),
+                        number: 0,
+                        image: '',
+                        alt: '',
+                        title: '',
+                        description: '',
+                        category: el.dataset.category || 'heritage',
+                        date: '',
+                        location: '',
+                        era: currentEra,
+                        eraDesc: currentEraDesc
+                    };
+
+                    const img = el.querySelector('img');
+                    if (img) {
+                        const src = img.getAttribute('src') || '';
+                        item.image = src.replace('./gallery_files/', '');
+                        item.alt = img.alt || '';
+                    }
+
+                    const h3 = el.querySelector('h3');
+                    if (h3) item.title = h3.textContent.trim();
+
+                    const captionP = el.querySelector('.gi-caption > p');
+                    if (captionP) item.description = captionP.textContent.trim();
+
+                    const meta = el.querySelectorAll('.gi-meta span');
+                    meta.forEach(span => {
+                        const icon = span.querySelector('i');
+                        if (icon) {
+                            const cls = icon.className;
+                            const text = span.textContent.replace(icon.textContent, '').trim();
+                            if (cls.includes('fa-calendar')) item.date = text;
+                            else if (cls.includes('fa-location-dot')) item.location = text;
+                        }
+                    });
+
+                    const idNum = parseInt(item.id.replace('gi-', ''));
+                    if (!isNaN(idNum) && idNum >= maxNum) maxNum = idNum + 1;
+
+                    imported.push(item);
+                }
+            });
+
+            if (imported.length === 0) {
+                showToast('No gallery items found in the file');
+                return;
+            }
+
+            if (maxNum > nextId) nextId = maxNum;
+            items = imported;
+            saveState();
+            renderAll();
+            document.getElementById('import-section').style.display = 'none';
+        }
+
+        function injectItemsIntoFile(originalHtml) {
+            const markerStart = '<div class="gallery-masonry" id="gallery-masonry">';
+            const markerEnd = '</div><!-- /gallery-masonry -->';
+
+            const startIdx = originalHtml.indexOf(markerStart);
+            const endIdx = originalHtml.indexOf(markerEnd);
+
+            if (startIdx === -1 || endIdx === -1) {
+                throw new Error('Could not find gallery-masonry div in the file');
+            }
+
+            const before = originalHtml.substring(0, startIdx + markerStart.length);
+            const after = originalHtml.substring(endIdx);
+
+            const newBlock = '\n' + generateGalleryBlock() + '\n        ';
+            return before + newBlock + after;
+        }
+
+        // ─── Load Sample ──────────────────────────────────
+        function loadSampleData() {
+            items = [
+                { id: 'gi-1', number: 0, image: 'Photo1.jpg', alt: 'Determined Boleskine shinty player with caman', title: 'The Determined Spirit', description: 'The fierce heart of Highland shinty captured on camera and what a great block by the young man!', category: 'heritage', date: '2018', location: 'Smith Park', era: '2025-26', eraDesc: '' },
+                { id: 'gi-2', number: 0, image: 'player_2_standing.png', alt: 'Boleskine player standing with caman', title: 'Rising Tall', description: 'Turning to face the future — caman in hand, spirit unbroken, and the Highlands at his back.', category: 'match', date: '2026', location: 'Highland Grounds', era: '2025-26', eraDesc: '' },
+                { id: 'gi-3', number: 0, image: 'gallery_screenshot_1.jpg', alt: 'Inkscape Work', title: 'Working on Logo', description: 'Some Ideas being used to construct Logo in SVG format.', category: 'match', date: '2026', location: 'In the Studio', era: '2025-26', eraDesc: '' },
+                { id: 'gi-4', number: 0, image: 'player_1_bowed.png', alt: 'Boleskine player bowed in contemplation', title: 'Silent Contemplation', description: 'A moment of stillness before the storm — in quiet focus, head bowed, caman held firm against the Highland sky.', category: 'heritage', date: '2026', location: 'Boleskine', era: '2025-26', eraDesc: '' },
+                { id: 'gi-5', number: 0, image: 'image2.png', alt: 'Pre-Season Training, 2026', title: 'Pre-Season Training, 2026', description: 'Intensity and focus as the squad gears up for the season during a training match under the Highland sky.', category: 'training', date: 'Feb 2026', location: 'Smith Park', era: '2025-26', eraDesc: '' },
+                { id: 'gi-6', number: 0, image: 'gallery_bolevet_2006.jpg', alt: 'Boleskine Veterans, 2006', title: 'Boleskine Veterans, 2006', description: 'Our annual veterans gathering at Farr, bringing together club legends and former players.', category: 'community', date: '2006', location: 'Farr Playing Field', era: '2025-26', eraDesc: '' },
+                { id: 'gi-7', number: 0, image: 'gallery_bol_2010_lpmm.jpg', alt: 'Away Fixture — Season 2010', title: 'Invitational Match 2010', description: 'Two teams of Boleskine players line up for a Photograph.', category: 'match', date: '2010', location: 'Away Ground', era: '2024-25', eraDesc: '' },
+                { id: 'gi-8', number: 0, image: 'player_1_original.png', alt: 'Boleskine player in black and gold hoops', title: 'Shinty in the Heart of the Highlands', description: 'The traditional hooped black and gold — colours that have represented Stratherrick, Foyers and Strathnairn since 1927.', category: 'heritage', date: '2024', location: 'Stratherrick', era: '2024-25', eraDesc: '' },
+                { id: 'gi-9', number: 0, image: 'gallery_bob_ewen_niel_2014.jpg', alt: 'Awards 2014', title: 'Awards 2014', description: 'Neil Hope and Ewen Fraser recieving their player of the season trophies, presented by Bob Black.', category: 'awards', date: '2014', location: 'Stratherrick Hall', era: '2024-25', eraDesc: '' },
+                { id: 'gi-10', number: 0, image: 'gallery_u14_tourn.jpg', alt: 'Youth Development Programme', title: 'Youth Development Programme', description: 'Our under-14 squad representing the club at a regional tournament, showcasing the future of Boleskine.', category: 'training', date: '2014', location: 'Youth Tournament', era: '2024-25', eraDesc: '' },
+                { id: 'gi-11', number: 0, image: 'gallery_jacket1.jpg', alt: 'Club Jackets & Gear', title: 'Club Jackets & Gear', description: 'Official club merchandise and commemorative jackets that Boleskine displayed for fundraising purposes.', category: 'awards', date: '2014', location: '', era: '2024-25', eraDesc: '' },
+                { id: 'gi-12', number: 0, image: 'yearbooks.png', alt: 'Shinty Yearbooks collection', title: 'Shinty Yearbooks Archive', description: 'Decades of Highland shinty, documented season by season. A treasure trove for any lover of the sport.', category: 'heritage', date: 'Various Years', location: 'Camanachd Archive', era: 'Historical Archive', eraDesc: '' },
+                { id: 'gi-13', number: 0, image: 'gallery_pavopenteams.jpg', alt: 'Boleskine Camanachd Team Photo', title: 'At the opening of the old pavillion', description: 'Under 14 teams that took part in a three team tournament at the Newtonmore Heritage Centre', category: 'heritage', date: '2014', location: 'Newtonmore', era: 'Historical Archive', eraDesc: '' },
+                { id: 'gi-14', number: 0, image: 'boleskine28a.jpg', alt: 'Founding Era — Est. 1927', title: 'Founding Era — Est. 1927', description: 'The original squad that established Boleskine Camanachd Club, pictured before the 1928 Camanached Cup final.', category: 'heritage', date: '1928', location: 'Old Anniesland Glasgow', era: 'Historical Archive', eraDesc: '' },
+                { id: 'gi-15', number: 0, image: 'gallery_bs_dm_2013.jpg', alt: 'Boleskine & Stratherrick Teams, 2013', title: 'Veterens and Boleskine teams', description: 'Veterans Versus Boleskine 2013', category: 'community', date: '2013', location: 'Smith Park', era: 'Historical Archive', eraDesc: '' },
+                { id: 'gi-16', number: 0, image: 'gallery_bol_2014_mod_cup.jpg', alt: 'Cup Match — Mod Cup 2014', title: 'Cup Match — Mod Cup 2014', description: 'A memorable highlight from the 2014 Mod Cup.', category: 'match', date: '2014', location: 'Mod Cup', era: 'Historical Archive', eraDesc: '' },
+                { id: 'gi-17', number: 0, image: 'gallery_bolben.jpg', alt: 'Stratherrick — Our Home', title: 'On Top Of The World', description: 'The breathtaking View from the top of Ben Nevis after the goungsters terrific fundraising climb.', category: 'community', date: '', location: 'Ben Nevis Summit', era: 'Historical Archive', eraDesc: '' },
+                { id: 'gi-18', number: 0, image: 'logo.png', alt: 'Club Crest History', title: 'Club Crest History', description: 'The iconic shield and crest design of Boleskine Camanachd Club, representing the club\'s proud heritage.', category: 'heritage', date: '1927–Present', location: 'Club Crest', era: 'Historical Archive', eraDesc: '' },
+            ];
+            nextId = 20;
+            saveState();
+            renderAll();
+            showToast('Loaded sample data');
+        }
+
+        // ─── Helpers ──────────────────────────────────────
+        function escHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        function showToast(msg) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(el._timeout);
+            el._timeout = setTimeout(() => el.classList.remove('show'), 2500);
+        }
+
+        function renderAll() {
+            renderList();
+            renderPreview();
+            updateExport();
+        }
+
+        // ─── Init ─────────────────────────────────────────
+        // Check browser support
+        if (!supportsFileSystemAccess()) {
+            document.getElementById('unsupported-notice').style.display = '';
+        }
+
+        loadState();
+
+        if (items.length > 0) {
+            renderAll();
+        } else {
+            renderList();
+            renderPreview();
+            updateExport();
+            document.getElementById('save-file-btn').disabled = true;
+        }
+    </script>
+
+</body>
+</html>

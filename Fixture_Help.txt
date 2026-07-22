@@ -1,0 +1,103 @@
+FIXTURE SETUP INSTRUCTIONS
+===========================
+Boleskine Camanachd Club - Automated Fixture Fetching
+
+Once you have uploaded all files to your web root directory,
+follow these steps in order.
+
+
+STEP 1: VERIFY THE FILES ARE IN PLACE
+--------------------------------------
+Check that these files exist in your web root:
+
+  index.html              (your existing homepage)
+  fixtures.js             (will be auto-updated by PHP script)
+  js/main.js              (existing)
+  js/fixtures.js          (reads fixture data and updates the page)
+  fetch-shinty-fixtures.php   (the PHP worker script)
+  CRON_SETUP.md           (reference only - you don't need to upload this)
+  css/style.css           (existing)
+
+If any are missing, re-upload them.
+
+
+STEP 2: TEST THE PHP SCRIPT MANUALLY
+-------------------------------------
+Run this command via SSH (or cPanel's "Terminal" feature):
+
+  php fetch-shinty-fixtures.php
+
+Expected output: "Fixtures updated successfully."
+
+If you see an error like "php: command not found", contact your
+hosting support and ask them to enable "PHP CLI" and "php-curl".
+
+After the script runs, open fixtures.js in a text editor.
+It should contain "var fixtureData = { ... }" with fixture details.
+If fixtures.js is empty or has "has_fixture: false", it means
+Boleskine has no upcoming matches scheduled yet. This is normal.
+
+
+STEP 3: TEST THE WEB PAGE
+--------------------------
+Open your website in a browser. The fixture card (first card under
+"Match Fixtures & News") should show the live fixture data.
+
+If the card still shows the hardcoded fallback data (Boleskine vs Lovat),
+open your browser's developer console (F12 > Console). If you see
+"fixtureData is not defined", the fixtures.js file wasn't loaded.
+Check that it exists in the same folder as index.html.
+
+
+STEP 4: SET UP THE CRON JOB
+----------------------------
+In cPanel, find "Cron Jobs" (usually under "Advanced" section).
+
+Add THREE cron entries using the schedule below.
+Use the FULL path to your script in place of /path/to/:
+
+  # Saturdays 3pm to midnight - every 20 minutes
+  */20 15-23 * * 6 php /home/username/public_html/fetch-shinty-fixtures.php
+
+  # Sundays midnight to midday - every 20 minutes
+  */20 0-11 * * 0 php /home/username/public_html/fetch-shinty-fixtures.php
+
+  # Monday to Friday - once daily at 8am
+  0 8 * * 1-5 php /home/username/public_html/fetch-shinty-fixtures.php
+
+Replace /home/username/public_html/ with your actual server path.
+(Find this by running "pwd" in cPanel Terminal from your web root.)
+
+
+STEP 5: CONFIRM CRON IS WORKING
+--------------------------------
+Wait for the next cron run (or run the script manually again).
+Check fixtures.js to see if the timestamp has updated
+(look at the "last_updated" field).
+
+
+TROUBLESHOOTING
+---------------
+
+Problem: Page still shows old hardcoded data
+  -> Open browser DevTools (F12) and check Console for errors
+  -> Make sure fixtures.js is in the root folder (same as index.html)
+  -> Make sure index.html includes: <script src="fixtures.js"></script>
+
+Problem: "php: command not found" when running the script
+  -> Contact your hosting provider and request PHP CLI access
+  -> In cPanel, check "Select PHP Version" > make sure "curl" extension
+     is ticked
+
+Problem: Cron job doesn't seem to run
+  -> In cPanel, check "Cron Jobs" and make sure the path is correct
+  -> Try: php /home/username/public_html/fetch-shinty-fixtures.php
+     in Terminal first to verify the path
+  -> Check your email for cron error messages (cPanel sends them
+     to your account email by default)
+
+Problem: "has_fixture: false" when you know there's a match
+  -> The script checks for upcoming matches only (not past results)
+  -> The API may use a different team name than "Boleskine"
+  -> Check https://matches.shinty.com/team/boleskine/ to confirm
+     the team page exists

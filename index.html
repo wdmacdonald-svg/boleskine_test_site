@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)#contact -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boleskine Camanachd Club | Est. 1927</title>
+    <link rel="icon" type="image/png" href="./assets/Round-Badge300.png">
+    <meta name="description" content="Official homepage of Boleskine Camanachd Club. Honoring shinty tradition in the Scottish Highlands since 1927. Strength in heritage, hopeful for a brighter future.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./index_files/css2" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="./index_files/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./index_files/style.css">
+</head>
+
+<body>
+
+    <!-- Dynamic Logo Container (Moves from center-screen to navbar on scroll) -->
+    
+
+    <!-- Sticky Navigation Bar (Revealed fully as user scrolls) -->
+    <header id="main-header" class="scrolled">
+        <div class="header-container">
+            <!-- Target slot for the dynamic logo -->
+            <div id="logo-target-slot"><div id="dynamic-logo-container" class="logo-docked" style="position: fixed;">
+        <div class="logo-wrapper">
+            <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" id="dynamic-logo">
+            <div class="logo-shimmer"></div>
+        </div>
+    </div></div>
+
+            <nav id="desktop-nav">
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#heritage">Heritage</a></li>
+                    <li><a href="#fixtures">Latest News</a></li>
+                    <li><a href="#membership">Membership</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu-drawer">
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#heritage">Heritage</a></li>
+                <li><a href="#fixtures">Latest News</a></li>
+                <li><a href="#membership">Membership</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Cinematic Hero Section -->
+    <section id="hero">
+        <div class="hero-slides-wrapper">
+            <!-- Slide 1: Bowed/Contemplation -->
+            <div class="hero-slide" id="slide-bowed" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(11,11,12,0.9)), url(&#39;assets/player_1_bowed.png&#39;);">
+                <div class="hero-text-overlay text-center">
+                    <span class="text-subtitle font-cinzel-bold">Silent Contemplation</span>
+                    <h1 class="font-cinzel">Strength in Tradition</h1>
+                    <p>Remembering the past, grounded in the roots of our Highland life.</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Standing/Turning -->
+            <div class="hero-slide" id="slide-standing" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(11,11,12,0.9)), url(&#39;assets/player_2_standing.png&#39;);">
+                <div class="hero-text-overlay text-center">
+                    <span class="text-subtitle font-cinzel-bold">Rising Tall</span>
+                    <h1 class="font-cinzel">Pride of the Gaidheal</h1>
+                    <p>Turning to face the future. Ready to continue our history.</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: Determined Close-Up (Brighter Future) -->
+            <div class="hero-slide active" id="slide-determined" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(11,11,12,0.95)), url(&#39;assets/determined.png&#39;);">
+                <div class="hero-text-overlay text-center">
+                    <span class="text-subtitle font-gold font-cinzel-bold">A Brighter Future</span>
+                    <h1 class="font-gold font-cinzel">Boleskine Camanachd</h1>
+                    <p>A hopeful, determined vision for tomorrow.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ambient Mist Overlay -->
+        <div class="ambient-mist"></div>
+
+        <!-- Skip Intro / Scroll Down Button -->
+        <div class="hero-controls">
+            <a href="#heritage" class="scroll-indicator" aria-label="Scroll down">
+                <span class="scroll-text font-cinzel">Explore Our Story</span>
+                <i class="fa-solid fa-chevron-down scroll-arrow"></i>
+            </a>
+        </div>
+
+        <!-- Infinite Scrolling Link Banner (Positioned near the bottom of the animation viewport) -->
+        <div class="marquee-banner-container">
+            <div class="marquee-banner">
+                <div class="marquee-track">
+                    <!-- Set 1 -->
+                    <a href="#heritage" class="marquee-card">
+                        <span class="card-num">01</span>
+                        <span class="card-title font-cinzel">Club History <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#fixtures" class="marquee-card">
+                        <span class="card-num">02</span>
+                        <span class="card-title font-cinzel">Match Fixtures <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#fixtures" class="marquee-card">
+                        <span class="card-num">03</span>
+                        <span class="card-title font-cinzel">Latest Results <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#membership" class="marquee-card">
+                        <span class="card-num">04</span>
+                        <span class="card-title font-cinzel">Join &amp; Support <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="gallery.html" class="marquee-card">
+                        <span class="card-num">05</span>
+                        <span class="card-title font-cinzel">Club Gallery <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#contact" class="marquee-card">
+                        <span class="card-num">06</span>
+                        <span class="card-title font-cinzel">Get in Touch <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+
+                    <!-- Set 2 (Duplicated for infinite looping) -->
+                    <a href="#heritage" class="marquee-card">
+                        <span class="card-num">01</span>
+                        <span class="card-title font-cinzel">Club History <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#fixtures" class="marquee-card">
+                        <span class="card-num">02</span>
+                        <span class="card-title font-cinzel">Match Fixtures <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#fixtures" class="marquee-card">
+                        <span class="card-num">03</span>
+                        <span class="card-title font-cinzel">Latest Results <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#membership" class="marquee-card">
+                        <span class="card-num">04</span>
+                        <span class="card-title font-cinzel">Join &amp; Support <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="gallery.html" class="marquee-card">
+                        <span class="card-num">05</span>
+                        <span class="card-title font-cinzel">Club Gallery <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                    <a href="#contact" class="marquee-card">
+                        <span class="card-num">06</span>
+                        <span class="card-title font-cinzel">Get in Touch <i class="fa-solid fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- Club Heritage Section -->
+        <section id="heritage" class="content-section">
+            <div class="container">
+                <div class="grid grid-2-col align-center">
+                    <div class="heritage-text reveal-on-scroll active">
+                        <div class="section-badge font-cinzel">Est. 1927</div>
+                        <h2 class="section-title font-cinzel">Legacy of the Caman</h2>
+                        <div class="accent-line"></div>
+                        <p class="lead">Boleskine Camanachd Club has been a cornerstone of the Stratherrick, Foyers and
+                            Strathdearn community
+                            and the wider shinty world for nearly a century.</p>
+                        <p>Based in Inverarnie near Farr, Inverness-shire, we pride ourselves on preserving the traditions of Scotland's
+                            most ancient sport. From the generations of players who have wielded the caman in our
+                            hooped black and gold jersey, our legacy is one of resilience, community pride, and passion.
+                        </p>
+                        <p>As we look out across the Highlands, we play not just for the game but for the heritage of our land and a hopeful, bright future for shinty in our community.</p>
+                        <a href="#membership" class="btn btn-gold btn-outline mt-3">Go to Boleskine Heritage Site</a>
+                    </div>
+                    <div class="heritage-image reveal-on-scroll active">
+                        <div class="image-frame-gold">
+                            <img src="./index_files/player_1_original.png" alt="Boleskine Player in Contemplation">
+                            <div class="frame-tag font-cinzel">Shinty in the heart of the Highlands. </div>
+                        </div>
+                    </div>
+                </div>
+        </div></section>
+
+        <!-- Fixtures & News Section -->
+        <section id="fixtures" class="content-section bg-charcoal">
+            <div class="container">
+                <div class="text-center mb-5 reveal-on-scroll active">
+                    <span class="section-badge font-cinzel">Up Next</span>
+                    <h2 class="section-title font-cinzel">Match Fixtures &amp; News</h2>
+                    <div class="accent-line center"></div>
+                </div>
+
+                <div class="grid grid-4-col">
+                    <!-- Fixture Card 1 -->
+                    <div class="news-card reveal-on-scroll active">
+                        <div class="card-type font-cinzel">Next Match</div>
+                        <div class="fixture-details">
+                            <div class="fixture-teams"><span class="team-name font-cinzel">Boleskine</span><span class="vs">vs</span><span class="team-name font-cinzel">Kingussie</span></div>
+                            <div class="fixture-meta"><p><i class="fa-regular fa-calendar-days"></i> Saturday, July 4th</p><p><i class="fa-regular fa-clock"></i> 2:30 PM BST</p><p><i class="fa-solid fa-location-dot"></i> Smith Pk Inverarnie (H)</p></div>
+                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank" class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League Standings</a>
+                            <a href="https://matches.shinty.com/" target="_blank" class="btn btn-gold btn-xs mt-3 w-100 text-center">Fixtures and Results</a>
+                        </div>
+                    </div>
+
+                    <!-- News Card 1 -->
+                    <div class="news-card reveal-on-scroll active">
+                        <div class="card-img-wrapper">
+                            <div class="card-type font-cinzel">Club Update</div>
+                            <img src="./index_files/player_2_standing.png" alt="Shinty Club Training Session">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-heading font-cinzel"><a href="#">Latest News In Brief</a></h3>
+                            <p>We are pleased to announce new material in the Odes and Airs section on the Heritage Site. This includes new poems by A.J. Mackay.</p>
+                            <span class="card-date"><i class="fa-regular fa-clock"></i> June 5, 2026</span>
+                        </div>
+                    </div>
+
+                    <!-- News Card 2 -->
+                    <div class="news-card reveal-on-scroll active">
+                        <div class="card-img-wrapper">
+                            <div class="card-type font-cinzel">Heritage</div>
+                            <img src="./index_files/determined.png" alt="Shinty Club Slogan Background">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-heading font-cinzel"><a href="#">Centenary Fundraising News</a>
+                            </h3>
+                            <p>As we approach our 100th anniversary, the club is hosting a series of special Events to celebrate One Hundred Years of Boleskine Shinty Club. See latest Heritage site.</p>
+                            <span class="card-date"><i class="fa-regular fa-clock"></i> May 28, 2026</span>
+                        </div>
+                    </div>
+
+                    <!-- News Card 3: Shinty Yearbooks -->
+                    <div class="news-card reveal-on-scroll active">
+                        <div class="card-img-wrapper">
+                            <div class="card-type font-cinzel">Resources</div>
+                            <img src="./index_files/yearbooks.png" alt="Shinty Yearbooks">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-heading font-cinzel"><a href="https://shinty.com/the-shinty-yearbook/" target="_blank">Shinty Yearbooks</a>
+                            </h3>
+                            <p>Read all previous Shinty Yearbooks on the Camanachd website.</p>
+                            <span class="card-date"><i class="fa-regular fa-clock"></i> Archive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Club Membership / Call To Action Section -->
+        <section id="membership" class="content-section cta-section">
+            <div class="cta-overlay"></div>
+            <div class="container relative-z">
+                <div class="text-center max-width-700 reveal-on-scroll active">
+                    <span class="section-badge font-cinzel text-gold">Get Involved</span>
+                    <h2 class="font-cinzel text-white mb-3">Be Part of the Future</h2>
+                    <p class="lead text-gray mb-4">Whether as a player, sponsor, or supporter, your involvement ensures
+                        the legacy of Boleskine Camanachd lives on for decades to come.</p>
+                    <div class="grid grid-2-col gap-3 justify-center">
+                        <a href="#contact" class="btn btn-gold btn-lg">Become a Member</a>
+                        <a href="#contact" class="btn btn-gold btn-outline btn-lg text-white">Sponsor the Club</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col footer-info">
+                <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" class="footer-logo">
+                <h3 class="font-cinzel text-gold mt-2">Boleskine Camanachd Club</h3>
+                <p class="text-gray mt-2">Strathdearn, Foyers and Stratherrick's official shinty club, honoring the sport of the Highlands since
+                    1927.</p>
+                <div class="social-icons mt-3">
+                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="font-cinzel text-gold">Quick Links</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#heritage">Heritage &amp; History</a></li>
+                    <li><a href="#fixtures">Fixtures &amp; News</a></li>
+                    <li><a href="#membership">Membership</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="font-cinzel text-gold">Training &amp; Match Ground</h4>
+                <p class="text-gray">Smith Park</p>
+                <p class="text-gray">Inverarnie, Inverness-shire</p>
+                <p class="text-gray">IV2 6XJ, Scotland</p>
+                <p class="text-gold mt-2"><i class="fa-solid fa-phone"></i> +44 (0) 1463 123456</p>
+                <p class="text-gold"><i class="fa-solid fa-envelope"></i> Email boleskine-camanachd-Club.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom text-center">
+            <div class="container">
+                <p class="text-gray">© 2026 Boleskine Camanachd Club. All rights reserved.</p>
+                <p class="dev-credits mt-1">Designed by Trial and Error.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./index_files/main.js"></script>
+    <script src="./index_files/fixtures.js"></script>
+    <script src="./index_files/fixtures(1).js"></script>
+
+
+</body></html>

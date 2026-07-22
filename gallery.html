@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+
+<!-- saved from url=(0061)gallery.html -->
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Club Gallery | Boleskine Camanachd Club</title>
+<link href="./assets/Round-Badge300.png" rel="icon" type="image/png"/>
+<meta content="Browse the official photo gallery of Boleskine Camanachd Club. Moments from matches, training, community events, and Highland heritage since 1927." name="description"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="./gallery_files/css2" rel="stylesheet"/>
+<!-- FontAwesome -->
+<link href="./gallery_files/all.min.css" rel="stylesheet"/>
+<!-- Shared Stylesheet -->
+<link href="./gallery_files/style.css" rel="stylesheet"/>
+<style>
+        /* ── Gallery Page Hero ─────────────────────────── */
+        #gallery-hero {
+            position: relative;
+           /* height: 52vh;*/
+           /* min-height: 380px;*/
+		    min-height: 62vh;
+            background-image:
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, rgba(11, 11, 12, 0.65) 100%),
+                url('assets/player_1_bowed.png');
+            background-size: cover;
+            background-position: center center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #gallery-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 60%, transparent 30%, rgba(11, 11, 12, 0.6) 100%);
+            pointer-events: none;
+        }
+
+        .gallery-hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery-hero-content .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            font-family: var(--font-title);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-hero-content .breadcrumb a { color: var(--color-gold); }
+        .gallery-hero-content .breadcrumb a:hover { text-decoration: underline; }
+        .gallery-hero-content .breadcrumb i { font-size: 0.65rem; }
+
+        .gallery-hero-content h1 {
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .gallery-hero-content p {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ── Filter Bar ────────────────────────────────── */
+        #filter-bar {
+            position: sticky;
+            top: 70px;
+            z-index: 90;
+            background-color: rgba(11, 11, 12, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(242, 145, 14, 0.15);
+            padding: 1rem 0;
+            scroll-margin-top: 80px;
+        }
+
+        .filter-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            font-family: var(--font-title);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.45rem 1.1rem;
+            border: 1px solid rgba(242, 145, 14, 0.25);
+            border-radius: 3px;
+            background: transparent;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background-color: var(--color-gold);
+            border-color: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        .gallery-count {
+            font-family: var(--font-title);
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+        .gallery-count span { color: var(--color-gold); }
+
+/* ════════════════════════════════════════════════════
+   LINEAR CAROUSEL — CLEANED & ACTIVE
+   ════════════════════════════════════════════════════ */
+
+/* Gallery section */
+#gallery-grid-section {
+    padding: 12rem 0 16rem;   /* your updated vertical spacing */
+    background-color: var(--color-black);
+    overflow: hidden;
+}
+
+/* Center the carousel */
+.carousel-outer {
+    max-width: 1200px;
+    margin: 0 auto;           /* centers the carousel */
+    padding: 0 3.5rem;        /* horizontal spacing */
+    position: relative;       /* needed for arrow positioning */
+}
+
+/* Remove old padding from container */
+.carousel-container {
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Keep arrows inside overflow:hidden */
+.carousel-arrow.carousel-next {
+    right: 1rem;
+}
+
+.carousel-arrow.carousel-prev {
+    left: 1rem;
+}
+
+
+
+
+
+        /* ── Container ──────────────────────────────── */
+        .carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3.5rem;
+            overflow: hidden;
+        }
+
+        /* ── Track ──────────────────────────────────── */
+        .carousel-track {
+            display: flex;
+            gap: 1.2rem;
+            cursor: grab;
+        }
+
+        .carousel-track.dragging {
+            cursor: grabbing;
+        }
+
+        /* ── Slide (single item) ────────────────────── */
+        .carousel-slide {
+            flex: 0 0 calc(50% - 0.6rem);
+            position: relative;
+            border: 1px solid rgba(242, 145, 14, 0.12);
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: var(--color-charcoal);
+            cursor: pointer;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+            /* reveal animation */
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .carousel-slide.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .carousel-slide:hover {
+            border-color: rgba(242, 145, 14, 0.5);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(242, 145, 14, 0.15);
+            transform: translateY(-4px);
+        }
+
+        /* ── Image Frame ────────────────────────────── */
+        .carousel-slide .image-frame-gold {
+            position: relative;
+            border: none;
+            padding: 0;
+            background-color: #0d0d0e;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .carousel-slide .image-frame-gold img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16/11;
+            object-fit: contain;
+            background-color: #0d0d0e;
+        }
+
+        /* Hover overlay */
+        .cs-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(11, 11, 12, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            z-index: 2;
+        }
+
+        .carousel-slide:hover .cs-overlay {
+            opacity: 1;
+        }
+
+        .cs-overlay i {
+            font-size: 1.5rem;
+            color: var(--color-gold);
+        }
+
+        .cs-overlay span {
+            font-family: var(--font-title);
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        /* ── Caption ────────────────────────────────── */
+        .carousel-caption {
+            padding: 0.7rem 0.9rem 0.8rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        .carousel-caption h3 {
+            font-family: var(--font-title);
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #fff;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .carousel-caption p {
+            font-size: 0.82rem;
+            line-height: 1.45;
+            color: var(--color-text-muted);
+            margin-bottom: 0.35rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .cs-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .cs-meta span {
+            font-size: 0.72rem;
+            color: rgba(160, 160, 165, 0.55);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .cs-meta span i {
+            color: rgba(242, 145, 14, 0.45);
+            font-size: 0.65rem;
+        }
+
+        /* ── Arrows ────────────────────────────────── */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2.8rem;
+            height: 2.8rem;
+            border-radius: 50%;
+            background: var(--color-gold);
+            border: 1px solid var(--color-gold);
+            color: var(--color-black);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.2s ease;
+        }
+
+        .carousel-arrow:hover {
+            background: #d97e0a;
+            border-color: #d97e0a;
+            box-shadow: 0 0 20px rgba(242, 145, 14, 0.4);
+        }
+
+        .carousel-arrow.carousel-prev { left: 0.3rem; }
+        .carousel-arrow.carousel-next { right: 0.3rem; }
+
+        .carousel-arrow:disabled {
+            opacity: 0.25;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* ── Dots ────────────────────────────────────── */
+        .carousel-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.8rem;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid rgba(242, 145, 14, 0.35);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 0;
+        }
+
+        .carousel-dot:hover {
+            background: rgba(242, 145, 14, 0.5);
+        }
+
+        .carousel-dot.active {
+            background: var(--color-gold);
+            border-color: var(--color-gold);
+            box-shadow: 0 0 8px rgba(242, 145, 14, 0.4);
+        }
+
+        /* ── Slide counter ──────────────────────────── */
+        .carousel-slide-counter {
+            text-align: center;
+            margin-top: 0.8rem;
+            font-family: var(--font-title);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-text);
+        }
+
+        .carousel-slide-counter span {
+            color: var(--color-gold);
+        }
+
+        /* ── Auto-scroll hint ────────────────────────── */
+        .carousel-auto-hint {
+            text-align: center;
+            margin-top: 0.6rem;
+            font-family: var(--font-title);
+            font-size: 0.64rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+
+        .carousel-auto-hint .dot {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(242, 145, 14, 0.35);
+            margin: 0 0.3rem;
+            vertical-align: middle;
+        }
+
+        /* ── Lightbox ──────────────────────────────── */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+            padding: 1.5rem;
+        }
+
+        #lightbox.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #lightbox .lb-inner {
+            position: relative;
+            max-width: 860px;
+            width: 100%;
+            animation: lbZoomIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) both;
+        }
+
+        @keyframes lbZoomIn {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        #lightbox img {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border: 1px solid rgba(242, 145, 14, 0.25);
+            border-radius: 4px;
+            display: block;
+        }
+
+        #lightbox .lb-placeholder {
+            width: 100%;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: var(--color-charcoal);
+            border: 1px solid rgba(242, 145, 14, 0.15);
+            border-radius: 4px;
+            color: var(--color-text-muted);
+        }
+
+        #lightbox .lb-placeholder i { font-size: 3rem; color: rgba(242, 145, 14, 0.3); }
+
+        #lightbox .lb-placeholder p {
+            font-family: var(--font-title);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(242, 145, 14, 0.4);
+            margin: 0;
+        }
+
+        #lightbox .lb-info {
+            background: var(--color-black);
+            border: 1px solid rgba(242, 145, 14, 0.12);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            padding: 1.4rem 1.6rem;
+        }
+
+        #lightbox .lb-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+            font-family: var(--font-title);
+        }
+
+        #lightbox .lb-info p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: var(--color-text-muted);
+        }
+
+        #lightbox .lb-close {
+            position: absolute;
+            top: -2.8rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #lightbox .lb-close:hover { color: var(--color-gold); }
+
+        #lightbox .lb-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(11, 11, 12, 0.8);
+            border: 1px solid rgba(242, 145, 14, 0.25);
+            color: var(--color-gold);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #lightbox .lb-nav:hover {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        #lightbox .lb-prev { left: -4rem; }
+        #lightbox .lb-next { right: -4rem; }
+
+        /* ── Upload CTA ────────────────────────────── */
+        #gallery-cta {
+            background: linear-gradient(135deg, var(--color-charcoal) 0%, #1a1a1d 100%);
+            border-top: 1px solid rgba(242, 145, 14, 0.15);
+            border-bottom: 1px solid rgba(242, 145, 14, 0.15);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        #gallery-cta .cta-icon {
+            font-size: 3rem;
+            color: rgba(242, 145, 14, 0.35);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        #gallery-cta h2 { font-size: 2rem; margin-bottom: 1rem; }
+
+        #gallery-cta p {
+            max-width: 540px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ── Page Nav Strip ────────────────────────── */
+        .page-nav-strip {
+            background-color: var(--color-charcoal);
+            border-bottom: 1px solid rgba(242, 145, 14, 0.1);
+            padding: 0.9rem 0;
+        }
+
+        .page-nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .page-nav-inner a {
+            font-family: var(--font-title);
+            font-size: 0.78rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-nav-inner a:hover { color: var(--color-gold); }
+
+        /* ── Running Man Footer Icon ────────────────── */
+        .footer-running-man {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(242, 145, 14, 0.1);
+        }
+
+        .footer-running-man i {
+            font-size: 1.4rem;
+            color: rgba(242, 145, 14, 0.3);
+        }
+
+        .footer-running-man span {
+            font-family: var(--font-title);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(242, 145, 14, 0.3);
+        }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 1024px) {
+            .carousel-slide { flex: 0 0 calc(50% - 0.6rem); }
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container { padding: 0 2.5rem; }
+            .carousel-slide { flex: 0 0 calc(100% - 0rem); }
+            .carousel-arrow { width: 2.2rem; height: 2.2rem; font-size: 0.85rem; }
+            #lightbox .lb-prev { left: 0.4rem; top: 38%; }
+            #lightbox .lb-next { right: 0.4rem; top: 38%; }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-container { padding: 0 2rem; }
+            .carousel-slide { flex: 0 0 100%; }
+            .carousel-arrow { width: 2rem; height: 2rem; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body style="overflow-x: hidden;">
+<!-- Dynamic Logo -->
+<div class="logo-center" id="dynamic-logo-container">
+<div class="logo-wrapper">
+<img alt="Boleskine Camanachd Club Logo" id="dynamic-logo" src="./gallery_files/logo.png"/>
+<div class="logo-shimmer"></div>
+</div>
+</div>
+<!-- Navigation Header -->
+<header id="main-header">
+<div class="header-container">
+<div id="logo-target-slot"></div>
+<nav id="desktop-nav">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="index.html#heritage">Heritage</a></li>
+<li><a href="index.html#fixtures">Latest News</a></li>
+<li><a href="index.html#membership">Membership</a></li>
+<li><a class="active" href="gallery.html">Gallery</a></li>
+<li><a href="index.html#contact">Contact</a></li>
+</ul>
+</nav>
+<div class="nav-actions">
+<button aria-label="Toggle Menu" id="mobile-menu-toggle">
+<span class="bar"></span>
+<span class="bar"></span>
+<span class="bar"></span>
+</button>
+</div>
+</div>
+</header>
+<!-- Mobile Drawer -->
+<div id="mobile-menu-drawer">
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="index.html#heritage">Heritage</a></li>
+<li><a href="index.html#fixtures">Latest News</a></li>
+<li><a href="index.html#membership">Membership</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="index.html#contact">Contact</a></li>
+</ul>
+</nav>
+</div>
+<!-- Gallery Hero -->
+<section id="gallery-hero">
+<div class="gallery-hero-content">
+<div class="breadcrumb font-cinzel">
+<a href="index.html">Home</a>
+<i class="fa-solid fa-chevron-right"></i>
+<span>Club Gallery</span>
+</div>
+<h1 class="font-cinzel">Club <span style="color:var(--color-gold)">Gallery</span></h1>
+<p>A growing archive of moments — matches, milestones, and Highland memories from Boleskine Camanachd Club.</p>
+</div>
+</section>
+<!-- Page Navigation Strip -->
+<div class="page-nav-strip">
+<div class="container page-nav-inner">
+<a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Homepage</a>
+<a href="gallery.html#filter-bar"><i class="fa-solid fa-images"></i> Browse Gallery</a>
+</div>
+</div>
+<!-- Filter Bar -->
+<div id="filter-bar">
+<div class="container filter-inner">
+<div aria-label="Filter gallery by category" class="filter-tabs" role="group">
+<button class="filter-tab active" data-filter="all">All Photos</button>
+<button class="filter-tab" data-filter="match">Match Day</button>
+<button class="filter-tab" data-filter="training">Training</button>
+<button class="filter-tab" data-filter="heritage">Heritage</button>
+<button class="filter-tab" data-filter="community">Community</button>
+<button class="filter-tab" data-filter="awards">Awards &amp; Events</button>
+</div>
+<div class="gallery-count font-cinzel">
+                Showing <span id="count-visible">38</span> of <span id="count-total">38</span> photos
+            </div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════════════
+         LINEAR CAROUSEL GALLERY
+         ════════════════════════════════════════════════════ -->
+<section id="gallery-grid-section">
+<div class="carousel-container">
+<button aria-label="Previous slide" class="carousel-arrow carousel-prev"><strong>Back</strong></button>
+<button aria-label="Next slide" class="carousel-arrow carousel-next"><strong>Fwd</strong></button>
+<div class="carousel-track" id="carousel-track"></div>
+<div class="carousel-nav" id="carousel-dots"></div>
+<div class="carousel-slide-counter" id="carousel-counter"></div>
+<div class="carousel-auto-hint"><span class="dot"></span> Auto-scrolling · Hover to pause <span class="dot"></span></div>
+</div>
+</section>
+<!-- Hidden item pool -->
+<div id="item-pool" style="display:none;">
+<div class="gallery-item" data-alt="MacTavish Juvenile Cup winners 1923" data-category="awards" data-desc="A restored picture of the 1923 Triumphant MacTavish Juvenile Cup winners, beating Beauly in the final" data-img="./gallery_files/FullyAI_Foyers.png" data-location="Unknown" data-title="MacTavish Juvenile Cup winners 1923" data-year="1923"></div><div class="gallery-item" data-alt="The Falls of Foyers" data-category="community" data-desc="The view of the falls in reasonable spate" data-img="./gallery_files/Falls-of-Foyers.jpg" data-location="Foyers" data-title="The Falls of Foyers" data-year="2004"></div><div class="gallery-item" data-alt="Old Crocs 2003" data-category="heritage" data-desc="Teams line up for the Old Crocs reunion in season 2003" data-img="./gallery_files/bololdcrocks2003.jpg" data-location="Smith Park Inverarnie" data-title="Old Crocs 2003" data-year="2003"></div><div class="gallery-item" data-alt="League winning team 2003" data-category="awards" data-desc="The last remnants of the  Foyers era players celebrate Div 4 Triumph" data-img="./gallery_files/boleskld503.jpg" data-location="Smith Park Inverarnie" data-title="Division 4 Champions 2003" data-year="2003"></div><div class="gallery-item" data-alt="1930 MacTavish Central District Final Team" data-category="heritage" data-desc="Boleskine lost out to Inverness on this occasion in 1930" data-img="./gallery_files/Boleskine1930_Remastered.png" data-location="Inverness" data-title="1930 MacTavish District Final" data-year="1930"></div><div class="gallery-item" data-alt="Restored 1971" data-category="heritage" data-desc="Original picture was worked on to improve  visually" data-img="./gallery_files/1971AIRestored.png" data-location="Ferry Park Beauly" data-title="Restored 1971  Strathdearn Cup Final" data-year="1971"></div><div class="gallery-item" data-alt="Determined Boleskine shinty player with caman" data-category="heritage" data-desc="A Boleskine player concentrates on the ball as a good blocking tackle comes in." data-img="./gallery_files/Photo1.jpg" data-location="Smith Park" data-title="The Determined Spirit" data-year="2018"></div>
+<div class="gallery-item" data-alt="Boleskine player standing with caman" data-category="heritage" data-desc="Turning to face the future — caman in hand, spirit unbroken, and the Highlands at his back." data-img="./gallery_files/player_2_standing.png" data-location="Highland Grounds" data-title="Rising Tall" data-year="2026"></div>
+<div class="gallery-item" data-alt="Inkscape Work" data-category="heritage" data-desc="Various attempts at reviving the Boleskine Logo." data-img="./gallery_files/gallery_screenshot_1.jpg" data-location="In the Studio" data-title="Logo work using Inkscape" data-year="2026"></div>
+<div class="gallery-item" data-alt="Boleskine player bowed in contemplation" data-category="heritage" data-desc="A moment of stillness before the storm — in quiet focus, head bowed, caman held firm against the Highland sky, we will continue our tradition." data-img="./gallery_files/player_1_bowed.png" data-location="Boleskine" data-title="Silent Contemplation" data-year="2026"></div>
+<div class="gallery-item" data-alt="Pre-Season Training, 2027" data-category="training" data-desc="Training for the 2027 season takes place at the Inverness Royal Academy training pitches or Smith Park Inverarnie." data-img="./gallery_files/image2a.png" data-location="Smith Park/Inverness R.A." data-title="Pre-Season Training, 2027" data-year="Feb 2027"></div>
+<div class="gallery-item" data-alt="Boleskine Veterans, 2006" data-category="community" data-desc="Our annual veterans gathering at Farr, bringing together club legends and former players." data-img="./gallery_files/gallery_bolevet_2006.jpg" data-location="Smith Park" data-title="Boleskine Veterans, 2006" data-year="2006"></div>
+<div class="gallery-item" data-alt="Away Fixture — Season 2010" data-category="match" data-desc="Two teams of Boleskine players line up for a Photograph." data-img="./gallery_files/gallery_bol_2010_lpmm.jpg" data-location="Away Ground" data-title="Invitation Fixture, 2010" data-year="2010"></div>
+<div class="gallery-item" data-alt="Boleskine player in black and gold hoops" data-category="heritage" data-desc="The traditional hooped black and gold — colours that have represented Stratherrick, Foyers and Strathnairn since 1927." data-img="./gallery_files/player_1_original.png" data-location="Stratherrick" data-title="Shinty in the Heart of the Highlands" data-year="2024"></div>
+<div class="gallery-item" data-alt="Awards 2014" data-category="awards" data-desc="Neil Hope and Ewen Fraser recieving their player of the season trophies, presented by Bob Black." data-img="./gallery_files/gallery_bob_ewen_niel_2014.jpg" data-location="Stratherrick Hall" data-title="Awards Presented, 2014" data-year="2014"></div>
+<div class="gallery-item" data-alt="Youth Development Programme" data-category="training" data-desc="Our under-14 squad were representing the club at a regional tournament under the watchful eye of the Development Team." data-img="./gallery_files/gallery_u14_tourn.jpg" data-location="Youth Tournament" data-title="Youth Development Programme" data-year="2014"></div>
+<div class="gallery-item" data-alt="Club Jackets &amp; Gear" data-category="awards" data-desc="Official club merchandise and commemorative jackets that Boleskine commissioned for fundraising purposes." data-img="./gallery_files/gallery_jacket1.jpg" data-location="" data-title="Club Jackets &amp; Gear" data-year="2014"></div>
+<div class="gallery-item" data-alt="Shinty Yearbooks collection" data-category="heritage" data-desc="Decades of Highland shinty, documented season by season. A treasure trove for any lover of the sport." data-img="./gallery_files/yearbooks.png" data-location="Camanachd Archive" data-title="Shinty Yearbooks Archive" data-year="Various Years"></div>
+<div class="gallery-item" data-alt="Boleskine Camanachd Team Photo" data-category="heritage" data-desc="Under 14 teams that took part in a three team tournament at the Newtonmore Heritage Centre" data-img="./gallery_files/gallery_pavopenteams.jpg" data-location="Newtonmore" data-title="Teep with the teams" data-year="2014"></div>
+<div class="gallery-item" data-alt="Founding Era — Est. 1927" data-category="heritage" data-desc="The original squad that established Boleskine Camanachd Club, pictured before the 1928 Camanached Cup final." data-img="./gallery_files/boleskine28a.jpg" data-location="Old Anniesland Glasgow" data-title="Founding Era — Est. 1927" data-year="1928"></div>
+<div class="gallery-item" data-alt="Boleskine &amp; Stratherrick Teams, 2013" data-category="community" data-desc="Veterans Versus Boleskine 2013" data-img="./gallery_files/gallery_bs_dm_2013.jpg" data-location="Smith Park" data-title="Boleskine &amp; Veterans Teams, 2013" data-year="2013"></div>
+<div class="gallery-item" data-alt="Cup Match — Mod Cup 2014" data-category="match" data-desc="A memorable highlight from the 2014 Mod Cup at The Bucht Park Inverness." data-img="./gallery_files/gallery_bol_2014_mod_cup.jpg" data-location="Mod Cup" data-title="Cup Match — Mod Cup 2014" data-year="2014"></div>
+<div class="gallery-item" data-alt="The Highlands — Our Home" data-category="community" data-desc="The breathtaking View from the top of Ben Nevis after the goungsters terrific fundraising climb." data-img="./gallery_files/gallery_bolben.jpg" data-location="Ben Nevis Summit" data-title="Ben Nevis Walk" data-year=""></div>
+<div class="gallery-item" data-alt="Club Crest History" data-category="heritage" data-desc="The iconic shield and crest design of Boleskine Camanachd Club, representing the club's proud heritage." data-img="./gallery_files/logo.png" data-location="Club Crest" data-title="Club Crest History" data-year="1927–Present"></div>
+<div class="gallery-item" data-alt="Alister Forbes in action for Scotland" data-category="match" data-desc="Taken at The Bught Park Inverness during the shinty/hurling international." data-img="./gallery_files/Ali-Forbes-V-Ireland.jpg" data-location="Bught Park Inverness. © Shinty Yearbook" data-title="Alister Forbes in action for Scotland" data-year="1973"></div>
+<div class="gallery-item" data-alt="Old Crocks 1992" data-category="heritage" data-desc="The Old Crocks team at the traditional season curtain raiser." data-img="./gallery_files/Old Crocks-Foyers-90s-.jpg" data-location="Factory Field Foyers" data-title="A Formidable Old Crocks Team" data-year="1992"></div>
+<div class="gallery-item" data-alt="Championship Clash" data-category="match" data-desc="Intense shinty action during a Sutherland Cup away tie in Oban." data-img="./gallery_files/AtOban1.JPG" data-location="Oban" data-title="Cup Clash" data-year="2019"></div>
+<div class="gallery-item" data-alt="Lewis Smith playing against Beauly" data-category="match" data-desc="Action from a league fixture versus Beauly, at their home ground." data-img="./gallery_files/DSC_0019.JPG" data-location="Beauly" data-title="Lewis Takes on Beauly" data-year="2017"></div>
+<div class="gallery-item" data-alt="Some fine trophies collected in 1990-1991" data-category="awards" data-desc="Some fine trophies collected in 1990-1991" data-img="./gallery_files/three-in- a-row-Sept-91.jpg" data-location="" data-title="Season 1990-91" data-year="September 1991"></div>
+<div class="gallery-item" data-alt="Young players 2014" data-category="match" data-desc="The future of Boleskine Camanachd in their hands." data-img="./gallery_files/DSC_0026_01.JPG" data-location="" data-title="The Players of the Future" data-year="2014"></div>
+<div class="gallery-item" data-alt="Scotland Lineup V Ireland" data-category="heritage" data-desc="A couple of well known Boleskine boys in this team. Between them they have multiple caps." data-img="./gallery_files/Scotland_1976.jpg" data-location="Fort William © Shinty Yearbook" data-title="Scottish National Squad 1976" data-year="1976"></div>
+<div class="gallery-item" data-alt="V Lochside Rovers" data-category="match" data-desc="A smartly turned out Boleskine squad prior to their match in Oban." data-img="./gallery_files/V-Lochside_Rovers.jpg" data-location="Oban" data-title="At Oban for Sutherland Cup Tie" data-year="2018"></div>
+<div class="gallery-item" data-alt="Versus Lochcarron 1979" data-category="match" data-desc="Two of the strongest players on the field, taken in a league match against Lochcarron at Foyers." data-img="./gallery_files/Jim.png" data-location="Factory Field Foyers" data-title="The Ox and The Hat" data-year="1979"></div>
+<div class="gallery-item" data-alt="Vignette" data-category="match" data-desc="A view of two shinty stalwarts Steve Munro and Keith MacRae" data-img="./gallery_files/random2.jpg" data-location="Factory Field Foyers" data-title="Steve and Keith" data-year="C 1990"></div>
+<div class="gallery-item" data-alt="Versus Lochcarron 1979" data-category="match" data-desc="Alan Sumner strikes a goal hit, Andrew Cameron waiting on the wing, Brian Stoddart in goals." data-img="./gallery_files/vlochcarron1979.jpg" data-location="Factory Field Foyers" data-title="Striking Out" data-year="1979"></div>
+<div class="gallery-item" data-alt="Stratherrick" data-category="community" data-desc="A view of Stratherrick stretching towards Strathnairn in the distance. Credit-Richard Elliot photography." data-img="./gallery_files/Stratherrick-wide.jpg" data-location="" data-title="A View of Home" data-year="2024 © Richard Elliot"></div>
+<div class="gallery-item" data-alt="Sutherland Cup 1964" data-category="match" data-desc="A brilliant performance on a really wet day, Alister lifting the Sutherland Cup." data-img="./gallery_files/Suth-64-Cutting-500.jpg" data-location="Strachur © Shinty Yearbook" data-title="Sutherland Cup 1964" data-year="1964"></div>
+<div class="gallery-item" data-alt="Bolvet Sutherland 2023" data-category="heritage" data-desc="A selection of Boleskine veterans attending an official lunch at the Sutherland Cup Final at Glenurqhart." data-img="./gallery_files/Bolvet-Suth2023a.jpg" data-location="Glenurqhart" data-title="Special Invitations to Boleskine Veterans" data-year="2023"></div>
+<div class="gallery-item" data-alt="Ala MacGruer Trophy" data-category="awards" data-desc="A beautiful trophy of a brass shinty stick on a hardwood plinth hand made by Ala MacGruer" data-img="./gallery_files/Allas-Trophy.jpg" data-location="" data-title="Trophy Donated by Ala MacGruer" data-year="1992"></div>
+<div class="gallery-item" data-alt="Boleskine Team 2018" data-category="heritage" data-desc="Photograph of the Boleskine team featuring club Sponsor, William Fraser." data-img="./gallery_files/Boleskine-Front-Page.jpg" data-location="Smith Park" data-title="Boleskine Team 2018" data-year="2018"></div>
+<div class="gallery-item" data-alt="Shinty Club Pavillion 1933" data-category="heritage" data-desc="An old photograph of how the pavilion looked in the 1930's," data-img="./gallery_files/pavilion1933.jpg" data-location="Factory Field Foyers" data-title="Shinty Club Pavillion 1933" data-year="1933"></div>
+<div class="gallery-item" data-alt="A Fine Season 1966" data-category="awards" data-desc="The 1966 trophies pictured for posterity, the Sutherland and MacGillivray cups alongside the National Sixes Cup won at Strachur." data-img="./gallery_files/WIDE-three-cups.jpg" data-location="Schoolhouse Boleskine" data-title="A Fine Season 1966" data-year="1966"></div>
+<div class="gallery-item" data-alt="Scotland Squad 1974" data-category="heritage" data-desc="Scotland squad line up for the team photograph, included is Boleskine former player Alister Forbes." data-img="./gallery_files/Scotland_1974.jpg" data-location="Bught Park Inverness. © Shinty Yearbook" data-title="Scotland Squad at the Bught Park Inverness 1974" data-year="1974"></div>
+<div class="gallery-item" data-alt="Crest and Logo Work" data-category="heritage" data-desc="Separating the various parts to build the updated logo." data-img="./gallery_files/gallery_screenshot_2.jpg" data-location="" data-title="More Crest and Logo Work" data-year="2026"></div>
+</div>
+<!-- Upload CTA -->
+<section class="content-section bg-charcoal" id="gallery-cta">
+<div class="container text-center relative-z">
+<span class="section-badge">Club Gallery</span>
+<h2 class="section-title">Got a Photo to Share?</h2>
+<p class="lead max-width-700">
+                Do you have photographs — old or new — from matches, club events, or Highland life
+                that you'd like to contribute to the gallery? We'd love to hear from you.
+            </p>
+<div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+<a class="btn btn-gold btn-lg" href="index.html#contact">Get in Touch</a>
+<a class="btn btn-gold btn-outline btn-lg" href="index.html">Back to Homepage</a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer id="contact">
+<div class="container footer-grid">
+<div class="footer-col footer-info">
+<img alt="Boleskine Camanachd Club Logo" class="footer-logo" src="./gallery_files/logo.png"/>
+<h3 class="font-cinzel text-gold mt-2">Boleskine Camanachd Club</h3>
+<p class="text-gray mt-2">Stratherrick's official shinty club, honoring the sport of the Highlands since 1927.</p>
+<div class="social-icons mt-3">
+<a aria-label="Facebook" href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+<a aria-label="YouTube" href="https://www.youtube.com/results?search_query=shinty" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+</div>
+</div>
+<div class="footer-col">
+<h4 class="font-cinzel text-gold">Quick Links</h4>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="index.html#heritage">Heritage &amp; History</a></li>
+<li><a href="index.html#fixtures">Fixtures &amp; News</a></li>
+<li><a href="index.html#membership">Membership</a></li>
+<li><a href="gallery.html">Club Gallery</a></li>
+<li><a href="index.html#contact">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4 class="font-cinzel text-gold">Training &amp; Match Ground</h4>
+<p class="text-gray">Farr Playing Field</p>
+<p class="text-gray">Farr, Inverness-shire</p>
+<p class="text-gray">IV2 6XJ, Scotland</p>
+<p class="text-gold mt-2"><i class="fa-solid fa-phone"></i> +44 (0) 1463 123456</p>
+<p class="text-gold"><i class="fa-solid fa-envelope"></i> secretary@boleskine-camanachd.co.uk</p>
+</div>
+</div>
+<div class="footer-bottom text-center">
+<div class="container">
+<p class="text-gray">© 2026 Boleskine Camanachd Club. All rights reserved.</p>
+<p class="dev-credits mt-1">Designed by Trial and Error.</p>
+<!-- Running Man Icon — Footer Only -->
+<div class="footer-running-man">
+<i class="fa-solid fa-person-running"></i>
+<span>Camanachd Since 1927</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Lightbox -->
+<div aria-label="Photo lightbox" aria-modal="true" id="lightbox" role="dialog">
+<div class="lb-inner">
+<button aria-label="Close lightbox" class="lb-close" id="lb-close">
+<i class="fa-solid fa-xmark"></i> Close
+            </button>
+<button aria-label="Previous photo" class="lb-nav lb-prev" id="lb-prev"><i class="fa-solid fa-chevron-left"></i></button>
+<button aria-label="Next photo" class="lb-nav lb-next" id="lb-next"><i class="fa-solid fa-chevron-right"></i></button>
+<div id="lb-media"></div>
+<div class="lb-info">
+<h3 class="font-cinzel" id="lb-title"></h3>
+<p id="lb-desc"></p>
+</div>
+</div>
+</div>
+<!-- Scripts -->
+<script src="./gallery_files/main.js"></script>
+<script>
+    (function() {
+        'use strict';
+
+        /* ═══════════════════════════════════════════════════
+           LINEAR CAROUSEL
+           ═══════════════════════════════════════════════════ */
+
+        var track       = document.getElementById('carousel-track');
+        var dotsContainer = document.getElementById('carousel-dots');
+        var counter     = document.getElementById('carousel-counter');
+        var prevBtn     = document.querySelector('.carousel-arrow.carousel-prev');
+        var nextBtn     = document.querySelector('.carousel-arrow.carousel-next');
+        var pool        = document.getElementById('item-pool');
+        var allPoolItems = Array.from(pool.querySelectorAll('.gallery-item'));
+
+        /* ── State ─────────────────────────────────── */
+        var slides = [];          // DOM elements of .carousel-slide
+        var currentSlide = 0;
+        var itemsPerView = 4;
+        var filteredItems = [...allPoolItems];
+        var autoScrollTimer = null;
+        var autoScrollSpeed = 60;  // pixels per second
+        var autoScrollOffset = 0;
+        var isPaused = false;
+        var isDragging = false;
+        var dragStartX = 0;
+        var dragDelta = 0;
+
+        /* ── Determine items per view ──────────────── */
+        function getItemsPerView() {
+            if (window.innerWidth <= 768) return 1;
+            return 2;
+        }
+
+        /* ── Build slides from filtered pool ───────── */
+        function buildSlides() {
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+            slides = [];
+            itemsPerView = getItemsPerView();
+
+            filteredItems.forEach(function(item, i) {
+                var slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.setAttribute('data-index', i);
+
+                var imgSrc  = item.dataset.img  || '';
+                var imgAlt  = item.dataset.alt  || '';
+                var title   = item.dataset.title || '';
+                var desc    = item.dataset.desc  || '';
+                var year    = item.dataset.year  || '';
+                var loc     = item.dataset.location || '';
+
+                slide.innerHTML =
+                    '<div class="image-frame-gold">' +
+                        (imgSrc
+                            ? '<img src="' + imgSrc + '" alt="' + imgAlt.replace(/"/g, '&quot;') + '" loading="lazy">'
+                            : '') +
+                        '<div class="cs-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Photo</span></div>' +
+                    '</div>' +
+                    '<div class="carousel-caption">' +
+                        '<h3 class="font-cinzel">' + title + '</h3>' +
+                        '<p>' + desc + '</p>' +
+                        '<div class="cs-meta">' +
+                            (year ? '<span><i class="fa-regular fa-calendar"></i> ' + year + '</span>' : '') +
+                            (loc  ? '<span><i class="fa-solid fa-location-dot"></i> '  + loc  + '</span>' : '') +
+                        '</div>' +
+                    '</div>';
+
+                slide.addEventListener('click', function() {
+                    openLightbox(i);
+                });
+
+                track.appendChild(slide);
+                slides.push(slide);
+            });
+
+            /* reveal animation — stagger fade-in */
+            slides.forEach(function(slide, i) {
+                setTimeout(function() {
+                    slide.classList.add('revealed');
+                }, 80 * i);
+            });
+
+            /* build dots */
+            var totalPages = Math.ceil(slides.length / itemsPerView);
+            for (var d = 0; d < totalPages; d++) {
+                var dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (d === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to page ' + (d + 1));
+                dot.addEventListener('click', (function(pageIdx) {
+                    return function() { goToPage(pageIdx); };
+                })(d));
+                dotsContainer.appendChild(dot);
+            }
+
+            currentSlide = 0;
+            autoScrollOffset = 0;
+            updateCarousel();
+        }
+
+        /* ── Navigate ──────────────────────────────── */
+        function goToPage(pageIdx) {
+            var totalPages = Math.ceil(slides.length / itemsPerView);
+            currentSlide = Math.max(0, Math.min(pageIdx, totalPages - 1));
+            autoScrollOffset = 0;
+        }
+
+        function updateCarousel() {
+            if (slides.length === 0) return;
+
+            var slideEl = slides[0];
+            if (!slideEl) return;
+            var slideWidth = slideEl.offsetWidth;
+            var gap = 19.2; // 1.2rem in px
+            var step = slideWidth + gap;
+
+            var offset = (currentSlide * itemsPerView * step) + autoScrollOffset;
+
+            var maxOffset = Math.max(0, (slides.length - itemsPerView) * step);
+            offset = Math.min(offset, maxOffset);
+            offset = Math.max(offset, 0);
+
+            track.style.transform = 'translateX(-' + offset + 'px)';
+
+            /* dots — track based on continuous scroll position */
+            var totalPages = Math.ceil(slides.length / itemsPerView);
+            var dots = dotsContainer.querySelectorAll('.carousel-dot');
+            var progress = maxOffset > 0 ? offset / maxOffset : 0;
+            var activeDotIdx = Math.min(Math.round(progress * (totalPages - 1)), totalPages - 1);
+            dots.forEach(function(d, i) {
+                d.classList.toggle('active', i === activeDotIdx);
+            });
+
+            /* counter */
+            var firstVisible = currentSlide * itemsPerView + 1;
+            var lastVisible = Math.min(firstVisible + itemsPerView - 1, slides.length);
+            counter.innerHTML = '<span>' + firstVisible + '–' + lastVisible + '</span> of <span>' + slides.length + '</span> photos';
+
+            /* arrow state */
+            prevBtn.disabled = (currentSlide === 0 && autoScrollOffset <= 0);
+            var atEnd = (offset >= maxOffset);
+            nextBtn.disabled = atEnd;
+        }
+
+        prevBtn.addEventListener('click', function() {
+            autoScrollOffset = 0;
+            goToPage(currentSlide - 1);
+        });
+
+        nextBtn.addEventListener('click', function() {
+            autoScrollOffset = 0;
+            goToPage(currentSlide + 1);
+        });
+
+        /* ── Auto-scroll ───────────────────────────── */
+        var lastTime = 0;
+
+        function autoScrollTick(timestamp) {
+            if (!lastTime) lastTime = timestamp;
+            var dt = (timestamp - lastTime) / 1000;
+            lastTime = timestamp;
+
+            if (!isPaused && !isDragging && slides.length > 0) {
+                autoScrollOffset += autoScrollSpeed * dt;
+
+                var slideWidth = slides[0].offsetWidth;
+                var gap = 19.2;
+                var step = slideWidth + gap;
+                var pageWidth = itemsPerView * step;
+                var maxOffset = Math.max(0, (slides.length - itemsPerView) * step);
+
+                /* when we've scrolled one full page worth, advance to next page */
+                if (autoScrollOffset >= pageWidth) {
+                    autoScrollOffset -= pageWidth;
+                    currentSlide++;
+                    if (currentSlide * itemsPerView >= slides.length) {
+                        currentSlide = 0;
+                        autoScrollOffset = 0;
+                    }
+                }
+
+                /* loop back if at the very end */
+                var currentOffset = (currentSlide * itemsPerView * step) + autoScrollOffset;
+                if (currentOffset >= maxOffset) {
+                    currentSlide = 0;
+                    autoScrollOffset = 0;
+                }
+            }
+
+            /* always update visual — no CSS transition, just direct transform */
+            updateCarousel();
+            requestAnimationFrame(autoScrollTick);
+        }
+
+        /* ── Hover pause ────────────────────────────── */
+        var container = document.querySelector('.carousel-container');
+
+        container.addEventListener('mouseenter', function() { isPaused = true; });
+        container.addEventListener('mouseleave', function() { isPaused = false; });
+
+        /* ── Swipe / Drag ───────────────────────────── */
+        track.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            track.classList.add('dragging');
+            e.preventDefault();
+        });
+
+        track.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            dragDelta = e.clientX - dragStartX;
+        });
+
+        track.addEventListener('mouseup', finishDrag);
+        track.addEventListener('mouseleave', finishDrag);
+
+        track.addEventListener('touchstart', function(e) {
+            isDragging = true;
+            dragStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        track.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            dragDelta = e.touches[0].clientX - dragStartX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', finishDrag);
+
+        function finishDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            track.classList.remove('dragging');
+
+            if (Math.abs(dragDelta) > 60) {
+                autoScrollOffset = 0;
+                if (dragDelta < 0) {
+                    goToPage(currentSlide + 1);
+                } else {
+                    goToPage(currentSlide - 1);
+                }
+            }
+            dragDelta = 0;
+        }
+
+        /* ── Keyboard ──────────────────────────────── */
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById('lightbox').classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') { autoScrollOffset = 0; goToPage(currentSlide - 1); }
+            if (e.key === 'ArrowRight') { autoScrollOffset = 0; goToPage(currentSlide + 1); }
+        });
+
+        /* ── Resize ────────────────────────────────── */
+        var resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                var newIpv = getItemsPerView();
+                if (newIpv !== itemsPerView) {
+                    currentSlide = 0;
+                    autoScrollOffset = 0;
+                    buildSlides();
+                }
+            }, 250);
+        });
+
+        /* ═══════════════════════════════════════════════════
+           FILTER
+           ═══════════════════════════════════════════════════ */
+
+        var filterTabs = document.querySelectorAll('.filter-tab');
+        var countVisible = document.getElementById('count-visible');
+        var countTotal   = document.getElementById('count-total');
+
+        countTotal.textContent = allPoolItems.length;
+
+        function applyFilter(category) {
+            filteredItems = category === 'all'
+                ? [...allPoolItems]
+                : allPoolItems.filter(function(item) { return item.dataset.category === category; });
+            countVisible.textContent = filteredItems.length;
+            currentSlide = 0;
+            autoScrollOffset = 0;
+            buildSlides();
+        }
+
+        filterTabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                filterTabs.forEach(function(t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                applyFilter(tab.dataset.filter);
+                /* scroll filter bar into view so both menu and gallery are visible */
+                var filterBar = document.getElementById('filter-bar');
+                if (filterBar) {
+                    filterBar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        /* ═══════════════════════════════════════════════════
+           LIGHTBOX
+           ═══════════════════════════════════════════════════ */
+
+        var lightbox  = document.getElementById('lightbox');
+        var lbMedia   = document.getElementById('lb-media');
+        var lbTitle   = document.getElementById('lb-title');
+        var lbDesc    = document.getElementById('lb-desc');
+        var lbClose   = document.getElementById('lb-close');
+        var lbPrev    = document.getElementById('lb-prev');
+        var lbNext    = document.getElementById('lb-next');
+        var lbIndex   = 0;
+
+        function openLightbox(idx) {
+            lbIndex = idx;
+            renderLightbox();
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function renderLightbox() {
+            var item = filteredItems[lbIndex];
+            if (!item) return;
+
+            var imgSrc = item.dataset.img  || '';
+            var imgAlt = item.dataset.alt  || '';
+            var title  = item.dataset.title || '';
+            var desc   = item.dataset.desc  || '';
+
+            lbTitle.textContent = title;
+            lbDesc.textContent  = desc;
+
+            if (imgSrc) {
+                lbMedia.innerHTML = '<img src="' + imgSrc + '" alt="' + imgAlt.replace(/"/g, '&quot;') + '">';
+            } else {
+                lbMedia.innerHTML = '<div class="lb-placeholder"><i class="fa-solid fa-camera"></i><p>Photo Pending Upload</p></div>';
+            }
+
+            lbPrev.style.opacity = lbIndex > 0 ? '1' : '0.3';
+            lbNext.style.opacity = lbIndex < filteredItems.length - 1 ? '1' : '0.3';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        lbClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+
+        lbPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (lbIndex > 0) { lbIndex--; renderLightbox(); }
+        });
+
+        lbNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (lbIndex < filteredItems.length - 1) { lbIndex++; renderLightbox(); }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft'  && lbIndex > 0) { lbIndex--; renderLightbox(); }
+            if (e.key === 'ArrowRight' && lbIndex < filteredItems.length - 1) { lbIndex++; renderLightbox(); }
+        });
+
+        /* ═══════════════════════════════════════════════════
+           INIT
+           ═══════════════════════════════════════════════════ */
+        buildSlides();
+        requestAnimationFrame(autoScrollTick);
+
+    })();
+    </script>
+</body>
+</html>

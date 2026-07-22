@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Updater | Boleskine Camanachd Club</title>
+    <link rel="icon" type="image/png" href="./assets/Round-Badge300.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --color-black: #0B0B0C;
+            --color-charcoal: #141416;
+            --color-gold: #F2910E;
+            --color-gold-hover: #C5720A;
+            --color-text: #EAEAEA;
+            --color-text-muted: #A0A0A5;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--color-black);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ── Sidebar ─────────────────────────────── */
+        .sidebar {
+            width: 360px;
+            min-width: 360px;
+            background: var(--color-charcoal);
+            border-right: 1px solid rgba(242,145,14,0.15);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(242,145,14,0.15);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .sidebar-header img {
+            width: 36px;
+            height: 36px;
+            opacity: 0.7;
+        }
+        .sidebar-header h1 {
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            color: var(--color-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .sidebar-header p {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin-top: 0.15rem;
+        }
+        .file-status {
+            font-size: 0.72rem;
+            padding: 0.6rem 1.5rem;
+            border-bottom: 1px solid rgba(242,145,14,0.08);
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .file-status .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #666;
+            flex-shrink: 0;
+        }
+        .file-status .dot.loaded { background: #28a745; }
+        .sidebar-actions {
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(242,145,14,0.08);
+        }
+        .item-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+        .item-list::-webkit-scrollbar { width: 6px; }
+        .item-list::-webkit-scrollbar-track { background: transparent; }
+        .item-list::-webkit-scrollbar-thumb { background: rgba(242,145,14,0.2); border-radius: 3px; }
+        .item-list .empty {
+            text-align: center;
+            color: var(--color-text-muted);
+            padding: 2rem 1rem;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+        .item-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(242,145,14,0.08);
+            border-radius: 4px;
+            padding: 0.65rem 0.75rem;
+            margin-bottom: 0.4rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+        .item-card:hover {
+            border-color: rgba(242,145,14,0.25);
+            background: rgba(242,145,14,0.04);
+        }
+        .item-card.active {
+            border-color: var(--color-gold);
+            background: rgba(242,145,14,0.08);
+        }
+        .item-card .thumb {
+            width: 42px;
+            height: 42px;
+            border-radius: 3px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #0d0d0e;
+        }
+        .item-card .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .item-card .info { flex: 1; min-width: 0; }
+        .item-card .info .cat-badge {
+            font-size: 0.55rem;
+            font-family: var(--font-title);
+            color: var(--color-gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .item-card .info .item-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .item-card .info .item-meta {
+            font-size: 0.68rem;
+            color: var(--color-text-muted);
+            margin-top: 0.1rem;
+        }
+        .item-card .delete-btn {
+            background: none;
+            border: 1px solid rgba(220,53,69,0.2);
+            color: rgba(220,53,69,0.5);
+            width: 26px;
+            height: 26px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.15s;
+            margin-top: 0.15rem;
+        }
+        .item-card .delete-btn:hover {
+            background: #dc3545;
+            color: #fff;
+            border-color: #dc3545;
+        }
+        .sidebar-footer {
+            padding: 0.6rem 1.5rem;
+            border-top: 1px solid rgba(242,145,14,0.12);
+            font-size: 0.65rem;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* ── Main Panel ───────────────────────────── */
+        .main {
+            flex: 1;
+            padding: 2rem 2.5rem;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        .main::-webkit-scrollbar { width: 6px; }
+        .main::-webkit-scrollbar-track { background: transparent; }
+        .main::-webkit-scrollbar-thumb { background: rgba(242,145,14,0.2); border-radius: 3px; }
+        .main h2 {
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            color: var(--color-text);
+        }
+        .main h2 i {
+            color: var(--color-gold);
+            margin-right: 0.4rem;
+        }
+
+        /* ── Image Browser ────────────────────────── */
+        .image-browser {
+            background: var(--color-charcoal);
+            border: 1px solid rgba(242,145,14,0.12);
+            border-radius: 4px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .image-browser .browser-label {
+            font-size: 0.68rem;
+            font-family: var(--font-title);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 0.6rem;
+        }
+        .image-browser select {
+            width: 100%;
+            padding: 0.55rem 0.8rem;
+            background: var(--color-black);
+            border: 1px solid rgba(242,145,14,0.2);
+            border-radius: 3px;
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .image-browser select:focus {
+            outline: none;
+            border-color: var(--color-gold);
+        }
+        .image-browser select option { background: var(--color-black); }
+        .image-browser select optgroup { background: var(--color-charcoal); color: var(--color-gold); font-weight: 600; }
+        .image-preview-box {
+            margin-top: 0.8rem;
+            background: #0d0d0e;
+            border: 1px solid rgba(242,145,14,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            text-align: center;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-preview-box img {
+            max-width: 100%;
+            max-height: 280px;
+            object-fit: contain;
+            display: block;
+        }
+        .image-preview-box .placeholder {
+            padding: 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        .image-preview-box .placeholder i {
+            font-size: 2rem;
+            color: rgba(242,145,14,0.25);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── Form ─────────────────────────────────── */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 0;
+        }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-family: var(--font-title);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 0.3rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.55rem 0.75rem;
+            background: var(--color-black);
+            border: 1px solid rgba(242,145,14,0.18);
+            border-radius: 3px;
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-gold);
+        }
+        .form-group textarea { resize: vertical; min-height: 56px; }
+        .form-group select option { background: var(--color-black); }
+        .form-group .hint {
+            font-size: 0.65rem;
+            color: var(--color-text-muted);
+            margin-top: 0.2rem;
+        }
+
+        /* ── Buttons ──────────────────────────────── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 1.3rem;
+            font-family: var(--font-title);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .btn-gold {
+            background: var(--color-gold);
+            color: var(--color-black);
+            border-color: var(--color-gold);
+        }
+        .btn-gold:hover {
+            background: var(--color-gold-hover);
+            border-color: var(--color-gold-hover);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--color-gold);
+            border-color: rgba(242,145,14,0.3);
+        }
+        .btn-outline:hover {
+            background: rgba(242,145,14,0.08);
+            border-color: var(--color-gold);
+        }
+        .btn-danger-outline {
+            background: transparent;
+            color: #dc3545;
+            border-color: rgba(220,53,69,0.3);
+        }
+        .btn-danger-outline:hover {
+            background: rgba(220,53,69,0.08);
+            border-color: #dc3545;
+        }
+        .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.65rem; }
+        .btn-group { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.2rem; }
+        .btn-group .spacer { flex: 1; }
+
+        .section-divider {
+            margin: 1.5rem 0;
+            border: none;
+            border-top: 1px solid rgba(242,145,14,0.1);
+        }
+
+        /* ── Toast ────────────────────────────────── */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--color-gold);
+            color: var(--color-black);
+            font-family: var(--font-title);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            padding: 0.7rem 1.4rem;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.error { background: #dc3545; color: #fff; }
+
+        /* ── Confirm Dialog ───────────────────────── */
+        .confirm-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .confirm-overlay.open { opacity: 1; pointer-events: auto; }
+        .confirm-box {
+            background: var(--color-charcoal);
+            border: 1px solid rgba(242,145,14,0.2);
+            border-radius: 6px;
+            padding: 1.5rem 2rem;
+            max-width: 380px;
+            text-align: center;
+        }
+        .confirm-box h3 {
+            font-family: var(--font-title);
+            font-size: 0.9rem;
+            color: var(--color-gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+        .confirm-box p {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+        .confirm-box .confirm-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        /* ── Responsive ───────────────────────────── */
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                min-width: unset;
+                height: auto;
+                max-height: 45vh;
+                position: relative;
+            }
+            .main { max-height: unset; padding: 1.5rem; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="assets/Running -Man-BandW-Left-500px.png" alt="Running Man">
+            <div>
+                <h1>Gallery Updater</h1>
+                <p>Boleskine Camanachd Club</p>
+            </div>
+        </div>
+        <div class="file-status">
+            <span class="dot" id="file-dot"></span>
+            <span id="file-label">Connecting...</span>
+        </div>
+        <div class="sidebar-actions">
+            <button class="btn btn-gold btn-sm" style="width:100%;justify-content:center;" onclick="startNewSlide()">
+                <i class="fa-solid fa-plus"></i> New Photo
+            </button>
+        </div>
+        <div class="item-list" id="item-list">
+            <div class="empty">Loading slides...</div>
+        </div>
+        <div class="sidebar-footer">
+            <i class="fa-regular fa-floppy-disk"></i>
+            <span id="slide-count">0 slides loaded</span>
+        </div>
+    </aside>
+
+    <!-- Main Panel -->
+    <main class="main">
+
+        <!-- Image Browser -->
+        <div class="image-browser">
+            <div class="browser-label"><i class="fa-solid fa-folder-open"></i> Image Browser</div>
+            <select id="image-select" onchange="onImageSelect()">
+                <option value="">-- Select an image --</option>
+            </select>
+            <div class="image-preview-box" id="image-preview">
+                <div class="placeholder">
+                    <i class="fa-solid fa-image"></i>
+                    Select an image to preview
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- Form -->
+        <h2 id="form-heading"><i class="fa-regular fa-pen-to-square"></i> Add Photo</h2>
+        <form id="item-form" onsubmit="return false;">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="f-title" placeholder="e.g. The Determined Spirit">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="f-category">
+                        <option value="heritage">Heritage</option>
+                        <option value="match">Match Day</option>
+                        <option value="training">Training</option>
+                        <option value="community">Community</option>
+                        <option value="awards">Awards &amp; Events</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Alt Text</label>
+                    <input type="text" id="f-alt" placeholder="Brief image description for accessibility">
+                </div>
+                <div class="form-group">
+                    <label>Image Path</label>
+                    <input type="text" id="f-img" placeholder="./gallery_files/photo.jpg" readonly>
+                    <div class="hint">Set automatically from the image browser above</div>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="text" id="f-year" placeholder="e.g. 2024, Feb 2026, Various Years">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="f-location" placeholder="e.g. Smith Park, Stratherrick">
+                </div>
+                <div class="form-group full">
+                    <label>Description</label>
+                    <textarea id="f-desc" placeholder="A short caption for the carousel..."></textarea>
+                </div>
+            </div>
+            <input type="hidden" id="f-editing-idx" value="">
+            <div class="btn-group">
+                <button class="btn btn-gold" id="submit-btn" onclick="submitSlide()">
+                    <i class="fa-solid fa-check"></i> <span id="submit-btn-text">Add to Carousel</span>
+                </button>
+                <button class="btn btn-outline" onclick="resetForm()">
+                    <i class="fa-solid fa-rotate-left"></i> Reset
+                </button>
+                <div class="spacer"></div>
+                <button class="btn btn-danger-outline" id="delete-btn" onclick="confirmDelete()" style="display:none;">
+                    <i class="fa-regular fa-trash-can"></i> Delete
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Confirm Dialog -->
+    <div class="confirm-overlay" id="confirm-overlay">
+        <div class="confirm-box">
+            <h3>Delete Slide</h3>
+            <p id="confirm-text">Are you sure you want to remove this slide from the carousel?</p>
+            <div class="confirm-actions">
+                <button class="btn btn-danger-outline btn-sm" onclick="executeDelete()">
+                    <i class="fa-regular fa-trash-can"></i> Yes, Delete
+                </button>
+                <button class="btn btn-outline btn-sm" onclick="closeConfirm()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        var slides = [];
+        var images = [];
+        var editingIdx = null;
+        var deleteTarget = null;
+
+        /* ── Helpers ──────────────────────────────── */
+        function escHtml(str) {
+            if (!str) return '';
+            var d = document.createElement('div');
+            d.textContent = str;
+            return d.innerHTML;
+        }
+
+        function escAttr(str) {
+            if (!str) return '';
+            return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function showToast(msg, isError) {
+            var el = document.getElementById('toast');
+            el.textContent = msg;
+            el.className = 'toast show' + (isError ? ' error' : '');
+            clearTimeout(el._timeout);
+            el._timeout = setTimeout(function() { el.className = 'toast'; }, 3000);
+        }
+
+        /* ── API helpers ─────────────────────────── */
+        async function apiGet(url) {
+            var res = await fetch(url);
+            if (!res.ok) throw new Error('GET ' + url + ' failed: ' + res.status);
+            return res.json();
+        }
+
+        async function apiPost(url, data) {
+            var res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            var json = await res.json();
+            if (!res.ok) throw new Error(json.error || 'POST ' + url + ' failed');
+            return json;
+        }
+
+        /* ── Load slides from backend ────────────── */
+        async function loadSlides() {
+            try {
+                slides = await apiGet('/api/slides');
+                renderSidebar();
+                updateFileStatus(true);
+            } catch (e) {
+                updateFileStatus(false);
+                document.getElementById('item-list').innerHTML =
+                    '<div class="empty"><i class="fa-solid fa-triangle-exclamation" style="color:#dc3545;"></i><br>Could not load gallery.html<br><span style="font-size:0.7rem;">' + escHtml(e.message) + '</span></div>';
+            }
+        }
+
+        /* ── Load images from backend ────────────── */
+        async function loadImages() {
+            try {
+                images = await apiGet('/api/images');
+                var sel = document.getElementById('image-select');
+                /* clear everything except the first placeholder option */
+                while (sel.options.length > 1) sel.remove(1);
+
+                var currentSource = '';
+                var currentGroup = null;
+
+                images.forEach(function(img) {
+                    if (img.source !== currentSource) {
+                        currentGroup = document.createElement('optgroup');
+                        currentGroup.label = img.source;
+                        sel.appendChild(currentGroup);
+                        currentSource = img.source;
+                    }
+                    var opt = document.createElement('option');
+                    opt.value = img.path;
+                    opt.textContent = img.name;
+                    currentGroup.appendChild(opt);
+                });
+            } catch (e) {
+                console.error('Failed to load images:', e);
+            }
+        }
+
+        /* ── File status ─────────────────────────── */
+        function updateFileStatus(loaded) {
+            var dot = document.getElementById('file-dot');
+            var label = document.getElementById('file-label');
+            if (loaded) {
+                dot.className = 'dot loaded';
+                label.textContent = 'Connected to gallery.html';
+            } else {
+                dot.className = 'dot';
+                label.textContent = 'Could not connect';
+            }
+        }
+
+        /* ── Render sidebar item list ─────────────── */
+        function renderSidebar() {
+            var container = document.getElementById('item-list');
+            var countEl = document.getElementById('slide-count');
+            countEl.textContent = slides.length + ' slide' + (slides.length !== 1 ? 's' : '') + ' loaded';
+
+            if (slides.length === 0) {
+                container.innerHTML = '<div class="empty"><i class="fa-solid fa-images" style="font-size:1.5rem;color:rgba(242,145,14,0.25);display:block;margin-bottom:0.5rem;"></i>No slides in gallery yet.<br>Add your first photo using the form.</div>';
+                return;
+            }
+
+            var html = '';
+            slides.forEach(function(item, idx) {
+                var isActive = (editingIdx === idx);
+                var imgSrc = item.img || '';
+                var thumbHtml = imgSrc
+                    ? '<img src="' + escAttr(imgSrc) + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'<i class=\\\\\'fa-solid fa-image\\\\\' style=\\\\\'color:rgba(242,145,14,0.2);font-size:0.8rem;\\\\\'></i>\'">'
+                    : '<i class="fa-solid fa-image" style="color:rgba(242,145,14,0.2);font-size:0.8rem;"></i>';
+                var meta = [];
+                if (item.year) meta.push(item.year);
+                if (item.location) meta.push(item.location);
+
+                html += '<div class="item-card' + (isActive ? ' active' : '') + '" onclick="selectSlide(' + idx + ')">' +
+                    '<div class="thumb">' + thumbHtml + '</div>' +
+                    '<div class="info">' +
+                        '<div class="cat-badge">' + escHtml(item.category) + '</div>' +
+                        '<div class="item-title">' + escHtml(item.title || 'Untitled') + '</div>' +
+                        '<div class="item-meta">' + escHtml(meta.join(' \u00b7 ')) + '</div>' +
+                    '</div>' +
+                    '<button class="delete-btn" onclick="event.stopPropagation();deleteSlide(' + idx + ')" title="Delete slide"><i class="fa-regular fa-trash-can"></i></button>' +
+                '</div>';
+            });
+            container.innerHTML = html;
+        }
+
+        /* ── Select slide (edit mode) ─────────────── */
+        window.selectSlide = function(idx) {
+            var item = slides[idx];
+            if (!item) return;
+            editingIdx = idx;
+
+            document.getElementById('f-title').value = item.title || '';
+            document.getElementById('f-category').value = item.category || 'heritage';
+            document.getElementById('f-alt').value = item.alt || '';
+            document.getElementById('f-img').value = item.img || '';
+            document.getElementById('f-year').value = item.year || '';
+            document.getElementById('f-location').value = item.location || '';
+            document.getElementById('f-desc').value = item.desc || '';
+
+            document.getElementById('f-editing-idx').value = String(idx);
+            document.getElementById('form-heading').innerHTML = '<i class="fa-regular fa-pen-to-square"></i> Edit Photo';
+            document.getElementById('submit-btn-text').textContent = 'Update Slide';
+            document.getElementById('delete-btn').style.display = '';
+
+            var sel = document.getElementById('image-select');
+            sel.value = item.img || '';
+            onImageSelect();
+
+            renderSidebar();
+        };
+
+        /* ── New slide ────────────────────────────── */
+        window.startNewSlide = function() {
+            resetForm();
+            document.getElementById('form-heading').innerHTML = '<i class="fa-regular fa-pen-to-square"></i> Add Photo';
+            document.getElementById('f-title').focus();
+        };
+
+        /* ── Image select -> preview + set path ────── */
+        window.onImageSelect = function() {
+            var sel = document.getElementById('image-select');
+            var path = sel.value;
+            var preview = document.getElementById('image-preview');
+
+            document.getElementById('f-img').value = path || '';
+
+            if (path) {
+                preview.innerHTML = '<img src="' + escAttr(path) + '" alt="Preview" onerror="this.parentElement.innerHTML=\'<div class=\\\\\'placeholder\\\\\'><i class=\\\\\'fa-solid fa-broken-image\\\\\'></i><div>Image not found</div></div>\'">';
+            } else {
+                preview.innerHTML = '<div class="placeholder"><i class="fa-solid fa-image"></i>Select an image to preview</div>';
+            }
+        };
+
+        /* ── Submit (add or update) ───────────────── */
+        window.submitSlide = async function() {
+            var data = {
+                title: document.getElementById('f-title').value.trim() || 'Untitled',
+                category: document.getElementById('f-category').value,
+                alt: document.getElementById('f-alt').value.trim(),
+                img: document.getElementById('f-img').value.trim(),
+                year: document.getElementById('f-year').value.trim(),
+                location: document.getElementById('f-location').value.trim(),
+                desc: document.getElementById('f-desc').value.trim()
+            };
+
+            if (!data.img) {
+                showToast('Please select an image', true);
+                return;
+            }
+
+            var editIdx = document.getElementById('f-editing-idx').value;
+            var btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+
+            try {
+                if (editIdx !== '') {
+                    var oldIdx = parseInt(editIdx, 10);
+                    var old = slides[oldIdx];
+                    if (old) {
+                        await apiPost('/api/slides/delete', { title: old.title, img: old.img });
+                    }
+                    await apiPost('/api/slides/add', data);
+                    showToast('Slide updated');
+                } else {
+                    await apiPost('/api/slides/add', data);
+                    showToast('Slide added to carousel');
+                }
+                resetForm();
+                await loadSlides();
+            } catch (e) {
+                showToast(e.message, true);
+            } finally {
+                btn.disabled = false;
+            }
+        };
+
+        /* ── Delete (from sidebar trash icon) ──────── */
+        window.deleteSlide = function(idx) {
+            deleteTarget = slides[idx];
+            if (!deleteTarget) return;
+            document.getElementById('confirm-text').textContent =
+                'Delete "' + (deleteTarget.title || 'Untitled') + '" from the carousel?';
+            document.getElementById('confirm-overlay').classList.add('open');
+        };
+
+        /* ── Delete (from form's Delete button) ───── */
+        window.confirmDelete = function() {
+            if (editingIdx === null) return;
+            deleteTarget = slides[editingIdx];
+            if (!deleteTarget) return;
+            document.getElementById('confirm-text').textContent =
+                'Delete "' + (deleteTarget.title || 'Untitled') + '" from the carousel?';
+            document.getElementById('confirm-overlay').classList.add('open');
+        };
+
+        window.closeConfirm = function() {
+            document.getElementById('confirm-overlay').classList.remove('open');
+            deleteTarget = null;
+        };
+
+        window.executeDelete = async function() {
+            if (!deleteTarget) return;
+            try {
+                await apiPost('/api/slides/delete', { title: deleteTarget.title, img: deleteTarget.img });
+                showToast('Slide deleted');
+                closeConfirm();
+                if (editingIdx !== null) {
+                    resetForm();
+                }
+                await loadSlides();
+            } catch (e) {
+                showToast(e.message, true);
+            }
+        };
+
+        /* ── Reset form ───────────────────────────── */
+        window.resetForm = function() {
+            document.getElementById('item-form').reset();
+            document.getElementById('f-editing-idx').value = '';
+            document.getElementById('form-heading').innerHTML = '<i class="fa-regular fa-pen-to-square"></i> Add Photo';
+            document.getElementById('submit-btn-text').textContent = 'Add to Carousel';
+            document.getElementById('delete-btn').style.display = 'none';
+            editingIdx = null;
+            deleteTarget = null;
+            document.getElementById('image-preview').innerHTML =
+                '<div class="placeholder"><i class="fa-solid fa-image"></i>Select an image to preview</div>';
+            renderSidebar();
+        };
+
+        /* ── Init ────────────────────────────────── */
+        loadSlides();
+        loadImages();
+
+    })();
+    </script>
+</body>
+</html>
