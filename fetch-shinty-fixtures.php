@@ -12,7 +12,7 @@
 
 define('API_BASE', 'https://matches.shinty.com/wp-json/sportspress/v2');
 define('TEAM_SEARCH', 'Boleskine');
-define('OUTPUT_FILE', __DIR__ . '/fixtures.js');
+define('OUTPUT_FILE', __DIR__ . '/index_files/fixtures.js');
 define('CURL_TIMEOUT', 10);
 
 function json_get(string $url): ?array {
