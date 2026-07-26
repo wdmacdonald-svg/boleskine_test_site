@@ -7,5 +7,5 @@ var fixtureData = {
     "location_formatted": "(A)",
     "way": "away",
     "status": "future",
-    "last_updated": "2026-07-26T11:34:54+00:00"
+    "last_updated": "2026-07-26T11:56:21+00:00"
 };

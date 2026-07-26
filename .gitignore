@@ -16,9 +16,6 @@ Desktop.ini
 *.bak
 *.backup
 
-# Batch files
-*.bat
-
 # Python cache
 __pycache__/
 *.pyc
