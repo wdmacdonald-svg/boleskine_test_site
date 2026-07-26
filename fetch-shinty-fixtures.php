@@ -147,7 +147,7 @@ $eventVenueIds = $event['venues'] ?? [];
 if (!empty($eventVenueIds)) {
     $venueInfo = json_get(API_BASE . "/venues/{$eventVenueIds[0]}");
     if ($venueInfo !== null) {
-        $venueName = $venueInfo['title']['rendered'] ?? '';
+        $venueName = $venueInfo['name'] ?? $venueInfo['title']['rendered'] ?? '';
     }
 }
 
