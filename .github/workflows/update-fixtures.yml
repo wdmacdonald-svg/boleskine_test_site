@@ -2,6 +2,13 @@ name: Update Fixtures
 
 on:
   workflow_dispatch:
+  schedule:
+    # Weekdays: once at 08:00 BST (07:00 UTC)
+    - cron: '0 7 * * 1-5'
+    # Saturdays: every 20 mins from 14:00-23:00 BST (matches 15:00-23:59 BST kickoffs)
+    - cron: '*/20 14-23 * * 6'
+    # Sundays: every 20 mins from 00:00-11:00 BST
+    - cron: '*/20 0-11 * * 0'
 
 jobs:
   fetch-fixtures:
@@ -26,5 +33,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add fixtures.js
+          git add index_files/fixtures.js
           git diff --cached --quiet || git commit -m "Update fixtures.js [skip ci]" && git push
