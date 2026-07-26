@@ -60,8 +60,6 @@ function ordinalSuffix(int $day): string {
 
 function abbreviateLocation(string $location): string {
     $location = preg_replace('/\bPark\b/i', 'Pk', $location);
-    $location = preg_replace('/\(home\)/i', '(H)', $location);
-    $location = preg_replace('/\(away\)/i', '(A)', $location);
     return $location;
 }
 
@@ -168,7 +166,7 @@ if ($rawDate) {
 }
 
 // Build location string
-$wayLabel = $isHome ? '(H)' : '(A)';
+$wayLabel = $isHome ? '(Home)' : '(Away)';
 if ($venueName) {
     $locationFormatted = abbreviateLocation($venueName . ' ' . $wayLabel);
 } else {

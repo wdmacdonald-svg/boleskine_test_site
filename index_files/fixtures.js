@@ -4,8 +4,8 @@ var fixtureData = {
     "away_team": "Boleskine",
     "date_formatted": "Saturday, August 8th",
     "time_formatted": "12:00 PM BST",
-    "location_formatted": "Spean Bridge, Playing Field (A)",
+    "location_formatted": "Spean Bridge, Playing Field (Away)",
     "way": "away",
     "status": "future",
-    "last_updated": "2026-07-26T12:28:27+00:00"
+    "last_updated": "2026-07-26T16:05:37+00:00"
 };
