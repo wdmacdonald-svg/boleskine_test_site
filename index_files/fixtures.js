@@ -7,5 +7,5 @@ var fixtureData = {
     "location_formatted": "Spean Bridge, Playing Field (Away)",
     "way": "away",
     "status": "future",
-    "last_updated": "2026-08-02T07:41:55+00:00"
+    "last_updated": "2026-08-02T09:49:04+00:00"
 };
