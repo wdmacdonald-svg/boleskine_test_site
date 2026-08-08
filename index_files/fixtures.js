@@ -7,5 +7,5 @@ var fixtureData = {
     "location_formatted": "Smith Pk, Inverarnie (Home)",
     "way": "home",
     "status": "future",
-    "last_updated": "2026-08-08T15:49:47+00:00"
+    "last_updated": "2026-08-08T16:31:50+00:00"
 };
