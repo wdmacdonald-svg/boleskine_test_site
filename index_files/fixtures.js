@@ -7,5 +7,5 @@ var fixtureData = {
     "location_formatted": "Braeview Pk, Beauly, IV4 7ED (Away)",
     "way": "away",
     "status": "future",
-    "last_updated": "2026-08-15T15:22:05+00:00"
+    "last_updated": "2026-08-15T15:53:24+00:00"
 };
