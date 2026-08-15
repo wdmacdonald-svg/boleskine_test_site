@@ -1,11 +1,11 @@
 var fixtureData = {
     "has_fixture": true,
-    "home_team": "Boleskine",
-    "away_team": "Kilmallie 2",
-    "date_formatted": "Saturday, August 15th",
-    "time_formatted": "2:00 PM BST",
-    "location_formatted": "Smith Pk, Inverarnie (Home)",
-    "way": "home",
+    "home_team": "Beauly 2",
+    "away_team": "Boleskine",
+    "date_formatted": "Saturday, August 22nd",
+    "time_formatted": "2:30 PM BST",
+    "location_formatted": "Braeview Pk, Beauly, IV4 7ED (Away)",
+    "way": "away",
     "status": "future",
-    "last_updated": "2026-08-14T08:13:57+00:00"
+    "last_updated": "2026-08-15T14:20:57+00:00"
 };
