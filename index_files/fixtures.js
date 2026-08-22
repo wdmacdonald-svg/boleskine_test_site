@@ -1,11 +1,11 @@
 var fixtureData = {
     "has_fixture": true,
-    "home_team": "Beauly 2",
+    "home_team": "Lewis",
     "away_team": "Boleskine",
-    "date_formatted": "Saturday, August 22nd",
+    "date_formatted": "Saturday, August 29th",
     "time_formatted": "2:30 PM BST",
-    "location_formatted": "Braeview Pk, Beauly, IV4 7ED (Away)",
+    "location_formatted": "Shawbost School, Shawbost, Western Isles (Away)",
     "way": "away",
     "status": "future",
-    "last_updated": "2026-08-21T07:40:06+00:00"
+    "last_updated": "2026-08-22T14:20:02+00:00"
 };
