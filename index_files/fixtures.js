@@ -7,5 +7,5 @@ var fixtureData = {
     "location_formatted": "Shawbost School, Shawbost, Western Isles (Away)",
     "way": "away",
     "status": "future",
-    "last_updated": "2026-08-22T19:40:03+00:00"
+    "last_updated": "2026-08-22T19:56:18+00:00"
 };
