@@ -874,7 +874,7 @@ a {
 
 /* CTA Section Styles */
 .cta-section {
-    background-image: url('assets/player_3_determined.png');
+    background-image: url('../assets/player_4_hopeful.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -902,7 +902,7 @@ a {
     position: relative;
     text-align: center;
     padding: 7rem 0;
-    background-image: url('assets/player_3_determined.png');
+    background-image: url('../assets/player_4_hopeful.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

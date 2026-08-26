@@ -61,12 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // If the user is scrolling through the hero, let scroll control which slide is active
         if (scrollTop < heroHeight) {
             const scrollPercent = scrollTop / heroHeight;
-            if (scrollPercent < 0.25) {
+            if (scrollPercent < 0.2) {
                 showSlide(0); // Bowed
-            } else if (scrollPercent >= 0.25 && scrollPercent < 0.6) {
+            } else if (scrollPercent >= 0.2 && scrollPercent < 0.45) {
                 showSlide(1); // Standing
+            } else if (scrollPercent >= 0.45 && scrollPercent < 0.7) {
+                showSlide(2); // Determined
             } else {
-                showSlide(2); // Determined close-up
+                showSlide(3); // Hopeful
             }
         }
 

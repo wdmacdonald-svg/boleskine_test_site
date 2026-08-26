@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boleskine Camanachd Club | Est. 1927</title>
@@ -18,6 +18,15 @@
     <link rel="stylesheet" href="./index_files/all.min.css">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./index_files/style.css">
+    <!-- Page Specific Styles -->
+    <style>
+        #dynamic-logo-container { position: fixed; }
+        #hero { position: relative; }
+        #slide-bowed { background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(11,11,12,0.9)), url('assets/player_1_bowed.png'); }
+        #slide-standing { background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(11,11,12,0.9)), url('assets/player_2_standing.png'); }
+        #slide-determined { background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(11,11,12,0.95)), url('assets/determined.png'); }
+        #slide-hopeful { background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(11,11,12,0.9)), url('assets/player_4_hopeful.png'); }
+    </style>
 </head>
 
 <body>
@@ -30,7 +39,7 @@
         <div class="header-container">
             <!-- Target slot for the dynamic logo -->
             <div id="logo-target-slot">
-                <div id="dynamic-logo-container" class="logo-docked" style="position: fixed;">
+                <div id="dynamic-logo-container" class="logo-docked">
                     <div class="logo-wrapper">
                         <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" id="dynamic-logo">
                         <div class="logo-shimmer"></div>
@@ -75,8 +84,7 @@
     <section id="hero">
         <div class="hero-slides-wrapper">
             <!-- Slide 1: Bowed/Contemplation -->
-            <div class="hero-slide" id="slide-bowed"
-                style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(11,11,12,0.9)), url(&#39;assets/player_1_bowed.png&#39;);">
+            <div class="hero-slide" id="slide-bowed">
                 <div class="hero-text-overlay text-center">
                     <span class="text-subtitle font-cinzel-bold">Silent Contemplation</span>
                     <h1 class="font-cinzel">Strength in Tradition</h1>
@@ -85,8 +93,7 @@
             </div>
 
             <!-- Slide 2: Standing/Turning -->
-            <div class="hero-slide" id="slide-standing"
-                style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(11,11,12,0.9)), url(&#39;assets/player_2_standing.png&#39;);">
+            <div class="hero-slide" id="slide-standing">
                 <div class="hero-text-overlay text-center">
                     <span class="text-subtitle font-cinzel-bold">Rising Tall</span>
                     <h1 class="font-cinzel">Pride of the Gaidheal</h1>
@@ -95,12 +102,20 @@
             </div>
 
             <!-- Slide 3: Determined Close-Up (Brighter Future) -->
-            <div class="hero-slide active" id="slide-determined"
-                style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(11,11,12,0.95)), url(&#39;assets/determined.png&#39;);">
+            <div class="hero-slide" id="slide-determined">
                 <div class="hero-text-overlay text-center">
                     <span class="text-subtitle font-gold font-cinzel-bold">A Brighter Future</span>
                     <h1 class="font-gold font-cinzel">Boleskine Camanachd</h1>
                     <p>A hopeful, determined vision for tomorrow.</p>
+                </div>
+            </div>
+
+            <!-- Slide 4: Hopeful/Triumphant -->
+            <div class="hero-slide active" id="slide-hopeful">
+                <div class="hero-text-overlay text-center">
+                    <span class="text-subtitle font-cinzel-bold">Rise Again</span>
+                    <h1 class="font-cinzel">Hope of the Gaidheal</h1>
+                    <p>Standing tall, ready to write the next chapter.</p>
                 </div>
             </div>
         </div>
@@ -235,9 +250,9 @@
                                 <p><i class="fa-regular fa-clock"></i> 2:30 PM BST</p>
                                 <p><i class="fa-solid fa-location-dot"></i> Smith Pk Inverarnie (H)</p>
                             </div>
-                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank"
+                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank" rel="noopener"
                                 class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League Standings</a>
-                            <a href="https://matches.shinty.com/" target="_blank"
+                            <a href="https://matches.shinty.com/" target="_blank" rel="noopener"
                                 class="btn btn-gold btn-xs mt-3 w-100 text-center">Fixtures and Results</a>
                         </div>
                     </div>
@@ -279,7 +294,7 @@
                         </div>
                         <div class="card-content">
                             <h3 class="card-heading font-cinzel"><a href="https://shinty.com/the-shinty-yearbook/"
-                                    target="_blank">Shinty Yearbooks</a>
+                                    target="_blank" rel="noopener">Shinty Yearbooks</a>
                             </h3>
                             <p>Read all previous Shinty Yearbooks on the Camanachd website.</p>
                             <span class="card-date"><i class="fa-regular fa-clock"></i> Archive</span>
@@ -288,19 +303,19 @@
                 </div>
             </div>
         </section>
-		
-		
-		<!-- Fixtures & News Section -->
-        <section id="fixtures" class="content-section bg-charcoal">
+
+
+        <!-- Other Information Section -->
+        <section id="other-info" class="content-section bg-charcoal">
             <div class="container">
-			
-			
+
+
                 <div class="text-center mb-5 reveal-on-scroll active">
-                    <span class="section-badge font-cinzel"></span>
+                    <span class="section-badge font-cinzel">More Info</span>
                     <h2 class="section-title font-cinzel">Other Information</h2>
-                    <div class="accent-line center"></div>					                
-					</div> 				
-				
+                    <div class="accent-line center"></div>
+                </div>
+
 
                 <div class="grid grid-4-col">
                     <!-- Fixture Card 1 -->
@@ -314,9 +329,9 @@
                                 <p><i class="fa-regular fa-clock"></i> 2:30 PM BST</p>
                                 <p><i class="fa-solid fa-location-dot"></i> Smith Pk Inverarnie (H)</p>
                             </div>
-                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank"
+                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank" rel="noopener"
                                 class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League Standings</a>
-                            <a href="https://matches.shinty.com/" target="_blank"
+                            <a href="https://matches.shinty.com/" target="_blank" rel="noopener"
                                 class="btn btn-gold btn-xs mt-3 w-100 text-center">Fixtures and Results</a>
                         </div>
                     </div>
@@ -350,15 +365,16 @@
                         </div>
                     </div>
 
-                    <!-- News Card 3: Shinty Yearbooks -->
+                    <!-- News Card 3: Community & Heritage -->
                     <div class="news-card reveal-on-scroll active">
                         <div class="card-img-wrapper">
-                            <div class="card-type font-cinzel">Resources</div>
-                            <img src="./index_files/yearbooks.png" alt="Shinty Yearbooks">
+                            <div class="card-type font-cinzel">Community</div>
+                            <img src="./assets/player_5_community.png"
+                                alt="Boleskine players sharing a moment of sportsmanship">
                         </div>
                         <div class="card-content">
                             <h3 class="card-heading font-cinzel"><a href="https://shinty.com/the-shinty-yearbook/"
-                                    target="_blank">Shinty Yearbooks</a>
+                                    target="_blank" rel="noopener">Shinty Yearbooks</a>
                             </h3>
                             <p>Read all previous Shinty Yearbooks on the Camanachd website.</p>
                             <span class="card-date"><i class="fa-regular fa-clock"></i> Archive</span>
@@ -367,9 +383,9 @@
                 </div>
             </div>
         </section>
-		
-		
-		
+
+
+
 
         <!-- Club Membership / Call To Action Section -->
         <section id="membership" class="content-section cta-section">
@@ -398,9 +414,9 @@
                 <p class="text-gray mt-2">Strathnairn, Foyers and Stratherrick's official shinty club, honoring the
                     sport of the Highlands since 1927 and before.</p>
                 <div class="social-icons mt-3">
-                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank"
+                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank" rel="noopener"
                         aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.youtube.com/results?search_query=shinty" target="_blank"
+                    <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" rel="noopener"
                         aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
@@ -422,7 +438,7 @@
                 <p class="text-gray">Inverarnie, Inverness-shire</p>
                 <p class="text-gray">IV2 6XJ, Scotland</p>
                 <p class="text-gold mt-2"><i class="fa-solid fa-phone"></i> +44 (0) 1463 123456</p>
-                <p class="text-gold"><i class="fa-solid fa-envelope"></i> Email boleskine-camanachd-Club.com</p>
+                <p class="text-gold"><i class="fa-solid fa-envelope"></i> Email: info@boleskine-camanachd-club.com</p>
             </div>
         </div>
 
@@ -437,7 +453,7 @@
     <!-- Scripts -->
     <script src="./index_files/main.js"></script>
     <script src="./index_files/fixtures.js"></script>
-    <script src="./index_files/fixtures(1).js"></script>
+    <!-- <script src="./index_files/fixtures(1).js"></script> -->
 
 
 </body>
