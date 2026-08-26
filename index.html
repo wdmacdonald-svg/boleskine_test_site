@@ -20,12 +20,29 @@
     <link rel="stylesheet" href="./index_files/style.css">
     <!-- Page Specific Styles -->
     <style>
-        #dynamic-logo-container { position: fixed; }
-        #hero { position: relative; }
-        #slide-bowed { background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(11,11,12,0.9)), url('assets/player_1_bowed.png'); }
-        #slide-standing { background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(11,11,12,0.9)), url('assets/player_2_standing.png'); }
-        #slide-determined { background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(11,11,12,0.95)), url('assets/determined.png'); }
-        #slide-hopeful { background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(11,11,12,0.9)), url('assets/player_4_hopeful.png'); }
+        #dynamic-logo-container {
+            position: fixed;
+        }
+
+        #hero {
+            position: relative;
+        }
+
+        #slide-bowed {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(11, 11, 12, 0.9)), url('assets/player_1_bowed.png');
+        }
+
+        #slide-standing {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(11, 11, 12, 0.9)), url('assets/player_2_standing.png');
+        }
+
+        #slide-determined {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(11, 11, 12, 0.95)), url('assets/determined.png');
+        }
+
+        #slide-hopeful {
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(11, 11, 12, 0.9)), url('assets/player_4_hopeful.png');
+        }
     </style>
 </head>
 
@@ -250,8 +267,9 @@
                                 <p><i class="fa-regular fa-clock"></i> 2:30 PM BST</p>
                                 <p><i class="fa-solid fa-location-dot"></i> Smith Pk Inverarnie (H)</p>
                             </div>
-                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank" rel="noopener"
-                                class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League Standings</a>
+                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank"
+                                rel="noopener" class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League
+                                Standings</a>
                             <a href="https://matches.shinty.com/" target="_blank" rel="noopener"
                                 class="btn btn-gold btn-xs mt-3 w-100 text-center">Fixtures and Results</a>
                         </div>
@@ -318,9 +336,9 @@
 
 
                 <div class="grid grid-4-col">
-                    <!-- Fixture Card 1 -->
-                    <div class="news-card reveal-on-scroll active">
-                        <div class="card-type font-cinzel">Next Match</div>
+                    <!-- Results Card -->
+                    <div class="news-card reveal-on-scroll active" id="latest-results-card">
+                        <div class="card-type font-cinzel">Latest Results</div>
                         <div class="fixture-details">
                             <div class="fixture-teams"><span class="team-name font-cinzel">Boleskine</span><span
                                     class="vs">vs</span><span class="team-name font-cinzel">Kingussie</span></div>
@@ -329,8 +347,9 @@
                                 <p><i class="fa-regular fa-clock"></i> 2:30 PM BST</p>
                                 <p><i class="fa-solid fa-location-dot"></i> Smith Pk Inverarnie (H)</p>
                             </div>
-                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank" rel="noopener"
-                                class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League Standings</a>
+                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank"
+                                rel="noopener" class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League
+                                Standings</a>
                             <a href="https://matches.shinty.com/" target="_blank" rel="noopener"
                                 class="btn btn-gold btn-xs mt-3 w-100 text-center">Fixtures and Results</a>
                         </div>
@@ -344,7 +363,7 @@
                         </div>
                         <div class="card-content">
                             <h3 class="card-heading font-cinzel"><a href="#">Latest News In Brief</a></h3>
-                            <p>We are pleased to announce new material in the Odes and Airs section on the Heritage
+                            <p> new material in the Odes and Airs section on the Heritage
                                 Site. This includes new poems by A.J. Mackay.</p>
                             <span class="card-date"><i class="fa-regular fa-clock"></i> June 5, 2026</span>
                         </div>
@@ -412,10 +431,10 @@
                 <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" class="footer-logo">
                 <h3 class="font-cinzel text-gold mt-2">Boleskine Camanachd Club</h3>
                 <p class="text-gray mt-2">Strathnairn, Foyers and Stratherrick's official shinty club, honoring the
-                    sport of the Highlands since 1927 and before.</p>
+                    sport of the Highlands since 1927 and beyond</p>
                 <div class="social-icons mt-3">
-                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank" rel="noopener"
-                        aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank"
+                        rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" rel="noopener"
                         aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
@@ -453,7 +472,7 @@
     <!-- Scripts -->
     <script src="./index_files/main.js"></script>
     <script src="./index_files/fixtures.js"></script>
-    <!-- <script src="./index_files/fixtures(1).js"></script> -->
+    <script src="./index_files/fixture_updater.js"></script>
 
 
 </body>
