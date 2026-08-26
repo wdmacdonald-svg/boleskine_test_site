@@ -499,7 +499,7 @@ a {
 .hero-slide.active {
     opacity: 1;
     z-index: 2;
-    animation: ken-burns 12s linear infinite forwards;
+    animation: ken-burns 12s infinite forwards;
 }
 
 @keyframes ken-burns {
@@ -893,11 +893,12 @@ a {
 }
 
 .cta-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
+
 #gallery-cta {
     position: relative;
     text-align: center;

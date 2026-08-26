@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoSlideshowTimer;
     let currentSlideIndex = 0;
     let isIntroPlaying = true; // Auto slideshow plays until user scrolls
-    const slideDuration = 4500; // Time per slide in ms
+    const slideDuration = 7000; // Time per slide in ms
 
     // --- 1. Cinematic Slideshow Logic ---
 
