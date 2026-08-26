@@ -1,11 +1,11 @@
 var fixtureData = {
     "has_fixture": true,
-    "home_team": "Lochaber 2",
+    "home_team": "Lewis",
     "away_team": "Boleskine",
-    "date_formatted": "Saturday, August 8th",
-    "time_formatted": "12:00 PM BST",
-    "location_formatted": "Spean Bridge, Playing Field (Away)",
+    "date_formatted": "Saturday, August 29th",
+    "time_formatted": "2:30 PM BST",
+    "location_formatted": "Shawbost School, Shawbost, Western Isles (Away)",
     "way": "away",
     "status": "future",
-    "last_updated": "2026-07-26T16:05:37+00:00"
+    "last_updated": "2026-08-23T10:17:44+00:00"
 };
