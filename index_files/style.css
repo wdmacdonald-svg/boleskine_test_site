@@ -337,8 +337,8 @@ a {
 
 #main-header.scrolled {
     background-color: rgba(11, 11, 12, 0.85);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(242, 145, 14, 0.2);
     height: 70px;
 }
