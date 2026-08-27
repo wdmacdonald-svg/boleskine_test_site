@@ -251,14 +251,14 @@
             <div class="container">
                 <div class="text-center mb-5 reveal-on-scroll active">
                     <span class="section-badge font-cinzel">Up Next</span>
-                    <h2 class="section-title font-cinzel">Match Fixtures &amp; News</h2>
+                    <h2 class="section-title font-cinzel">Results News &amp; Fixtures</h2>
                     <div class="accent-line center"></div>
                 </div>
 
                 <div class="grid grid-4-col">
-                    <!-- Fixture Card 1 -->
-                    <div class="news-card reveal-on-scroll active">
-                        <div class="card-type font-cinzel">Next Match</div>
+                    <!-- Results Card -->
+                    <div class="news-card reveal-on-scroll active" id="latest-results-card">
+                        <div class="card-type font-cinzel">Latest Results</div>
                         <div class="fixture-details">
                             <div class="fixture-teams"><span class="team-name font-cinzel">Boleskine</span><span
                                     class="vs">vs</span><span class="team-name font-cinzel">Kingussie</span></div>
@@ -303,9 +303,9 @@
                             <span class="card-date"><i class="fa-regular fa-clock"></i> May 28, 2026</span>
                         </div>
                     </div>
-					<!-- Results Card -->
-                    <div class="news-card reveal-on-scroll active" id="latest-results-card">
-                        <div class="card-type font-cinzel">Latest Results</div>
+                    <!-- Fixture Card 1 -->
+                    <div class="news-card reveal-on-scroll active" id="next-match-card">
+                        <div class="card-type font-cinzel">Next Match</div>
                         <div class="fixture-details">
                             <div class="fixture-teams"><span class="team-name font-cinzel">Boleskine</span><span
                                     class="vs">vs</span><span class="team-name font-cinzel">Kingussie</span></div>
@@ -339,7 +339,7 @@
 
 
                 <div class="grid grid-4-col">
-                    
+
                     <!-- News Card 1 -->
                     <div class="news-card reveal-on-scroll active">
                         <div class="card-img-wrapper">
@@ -360,14 +360,17 @@
                     <!-- News Card 2 -->
                     <div class="news-card reveal-on-scroll active">
                         <div class="card-img-wrapper">
-                            <div class="card-type font-cinzel">Heritage</div>
+                            <div class="card-type font-cinzel">Media</div>
                             <img src="./index_files/player_1_original.png" alt="Shinty Club Slogan Background">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-heading font-cinzel"><a href="#">Centenary News</a>
+                            <h3 class="card-heading font-cinzel"><a href="#">Social Media</a>
                             </h3>
-                            <p>As we approach our 100th anniversary, the club is planning special Events to
-                                celebrate One Hundred Years of Boleskine Shinty Club. See latest Heritage site.</p>
+                            <p>
+                                <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank" rel="noopener" class="media-link"><i class="fa-brands fa-facebook"></i> Boleskine on Facebook</a><br><br>
+                                <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" rel="noopener" class="media-link"><i class="fa-brands fa-youtube"></i> Links to Shinty on Youtube</a><br><br>
+                                Links available on every page footer
+                            </p>
                             <span class="card-date"><i class="fa-regular fa-clock"></i> May 28, 2026</span>
                         </div>
                     </div>
@@ -376,23 +379,21 @@
                     <div class="news-card reveal-on-scroll active">
                         <div class="card-img-wrapper">
                             <!-- Google Maps Embed -->
-                            <iframe 
-                                src="https://maps.google.com/maps?q=Boleskine%20Shinty%20Club,%20Smith%20Park,%20Inverarnie,%20Inverness-shire&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
-                                class="map-iframe" 
-                                width="600"
-                                height="450"
-                                allowfullscreen
-                                loading="lazy" 
+                            <iframe
+                                src="https://maps.google.com/maps?q=Boleskine%20Shinty%20Club,%20Smith%20Park,%20Inverarnie,%20Inverness-shire&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                                class="map-iframe" width="600" height="450" allowfullscreen loading="lazy"
                                 title="Google Maps Location">
                             </iframe>
                         </div>
                         <div class="card-content">
                             <h3 class="card-heading font-cinzel">Find Us</h3>
                             <p>Smith Park, Inverarnie<br>Inverness-shire, IV2 6XJ</p>
-                            <a href="https://maps.google.com/?q=Smith+Park,+Inverarnie,+Inverness-shire,+IV2+6XJ" target="_blank" rel="noopener" class="btn btn-gold btn-xs mt-2 w-100 text-center">Get Directions</a>
+                            <a href="https://www.google.com/maps/place/Boleskine+Shinty+Club/@57.3915967,-4.1916221,9784m/data=!3m1!1e3!4m9!1m2!2m1!1sSmith+Park,+Inverarnie,+Inverness-shire,+IV2+6XJ!3m5!1s0x488f6e24316aadd3:0xac85c4b815f97636!8m2!3d57.3867936!4d-4.1818406!16s%2Fg%2F11cms_fbth?entry=ttu&g_ep=EgoyMDI2MDgyNC4wIKXMDSoASAFQAw%3D%3D"
+                                target="_blank" rel="noopener" class="btn btn-gold btn-xs mt-2 w-100 text-center">Get
+                                Directions</a>
                         </div>
                     </div>
-					<!-- News Card 3: Shinty Yearbooks -->
+                    <!-- News Card 3: Shinty Yearbooks -->
                     <div class="news-card reveal-on-scroll active">
                         <div class="card-img-wrapper">
                             <div class="card-type font-cinzel">Resources</div>
@@ -406,7 +407,7 @@
                             <span class="card-date"><i class="fa-regular fa-clock"></i> Archive</span>
                         </div>
                     </div>
-					
+
                 </div>
             </div>
         </section>
@@ -465,7 +466,7 @@
                 <p class="text-gray">Inverarnie, Inverness-shire</p>
                 <p class="text-gray">IV2 6XJ, Scotland</p>
                 <p class="text-gold mt-2"><i class="fa-solid fa-phone"></i> +44 (0) 1463 123456</p>
-                <p class="text-gold"><i class="fa-solid fa-envelope"></i> Email: info@boleskine-camanachd-club.com</p>
+                <p class="text-gold"><i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com</p>
             </div>
         </div>
 

@@ -1,10 +1,10 @@
 <?php
 /**
- * Standalone fixture fetcher for Boleskine Camanachd Club.
+ * Standalone fixtures and results fetcher for Boleskine Camanachd Club.
  *
  * Calls the Sportspress REST API on matches.shinty.com to retrieve
- * Boleskine's next upcoming match, then writes the result to fixtures.js
- * as a JavaScript variable assignment (works with file:// and http://).
+ * Boleskine's next upcoming match and latest past match, then writes 
+ * the combined result to fixtures.js.
  *
  * Requirements: PHP CLI, php-curl extension.
  * Usage: php fetch-shinty-fixtures.php
@@ -23,11 +23,12 @@ function json_get(string $url): ?array {
         CURLOPT_TIMEOUT => CURL_TIMEOUT,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_SSL_VERIFYPEER => true,
-        CURLOPT_USERAGENT => 'Boleskine-Fixture-Fetcher/1.0',
+        CURLOPT_USERAGENT => 'Boleskine-Fixture-Fetcher/2.0',
     ]);
     $body = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $error = curl_error($ch);
+    curl_close($ch);
 
     if ($error !== '') {
         fwrite(STDERR, "cURL error: $error\n");
@@ -59,131 +60,123 @@ function ordinalSuffix(int $day): string {
 }
 
 function abbreviateLocation(string $location): string {
-    $location = preg_replace('/\bPark\b/i', 'Pk', $location);
-    return $location;
+    return preg_replace('/\bPark\b/i', 'Pk', $location);
 }
 
-// Step 1: Find Boleskine's team ID
+function formatEventDate(string $rawDate): array {
+    if (!$rawDate) return ['', ''];
+    $ts = strtotime($rawDate);
+    $dateFmt = date('l', $ts) . ', ' . date('F', $ts) . ' ' . ordinalSuffix((int) date('j', $ts));
+    $timeFmt = date('g:i', $ts) . ' PM BST';
+    return [$dateFmt, $timeFmt];
+}
+
+// 1. Fetch Team ID
 $teams = json_get(API_BASE . '/teams?search=' . urlencode(TEAM_SEARCH));
-if ($teams === null || empty($teams)) {
-    $output = [
-        'has_fixture' => false,
-        'last_updated' => date('c'),
-    ];
-    file_put_contents(OUTPUT_FILE, 'var fixtureData = ' . json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';' . "\n");
+if (empty($teams)) {
     fwrite(STDERR, "Team 'Boleskine' not found on remote API.\n");
-    exit(0);
+    exit(1);
 }
-
 $teamId = (int) $teams[0]['id'];
 
-// Step 2: Fetch upcoming events and filter for Boleskine
+// Helper to fetch Team Name
+$teamNamesCache = [];
+function getTeamName(int $tid) {
+    global $teamNamesCache;
+    if (isset($teamNamesCache[$tid])) return $teamNamesCache[$tid];
+    $info = json_get(API_BASE . "/teams/{$tid}");
+    $name = $info['title']['rendered'] ?? "Team {$tid}";
+    $teamNamesCache[$tid] = $name;
+    return $name;
+}
+
 $today = date('Y-m-d\TH:i:s');
-$events = json_get(API_BASE . "/events?after={$today}&order=asc&orderby=date&per_page=50");
-
-if ($events === null || empty($events)) {
-    $output = [
-        'has_fixture' => false,
-        'last_updated' => date('c'),
-    ];
-    file_put_contents(OUTPUT_FILE, 'var fixtureData = ' . json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';' . "\n");
-    fwrite(STDERR, "No upcoming events found on remote API.\n");
-    exit(0);
-}
-
-// Filter to only events that include Boleskine's team ID and are still upcoming
-$boleskineEvents = array_filter($events, function ($e) use ($teamId, $today) {
-    $teamIds = array_map('intval', $e['teams'] ?? []);
-    $status = $e['status'] ?? '';
-    $date = $e['date'] ?? '';
-    return in_array($teamId, $teamIds) && $status === 'future' && $date >= $today;
-});
-$boleskineEvents = array_values($boleskineEvents);
-
-if (empty($boleskineEvents)) {
-    $output = [
-        'has_fixture' => false,
-        'last_updated' => date('c'),
-    ];
-    file_put_contents(OUTPUT_FILE, 'var fixtureData = ' . json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';' . "\n");
-    fwrite(STDERR, "No upcoming fixture found for Boleskine.\n");
-    exit(0);
-}
-
-$event = $boleskineEvents[0];
-
-// The API returns team IDs in a flat array, not full objects.
-// Fetch team names for the two teams in this event.
-$eventTeamIds = array_map('intval', $event['teams'] ?? []);
-$teamNames = [];
-foreach ($eventTeamIds as $tid) {
-    $teamInfo = json_get(API_BASE . "/teams/{$tid}");
-    if ($teamInfo !== null) {
-        $teamNames[$tid] = $teamInfo['title']['rendered'] ?? "Team {$tid}";
-    } else {
-        $teamNames[$tid] = "Team {$tid}";
-    }
-}
-
-// Determine home / away — first team ID is home
-$homeTeam = '';
-$awayTeam = '';
-$isHome = null;
-
-if (count($eventTeamIds) >= 2) {
-    $homeTeam = $teamNames[$eventTeamIds[0]] ?? '';
-    $awayTeam = $teamNames[$eventTeamIds[1]] ?? '';
-    $isHome = ($eventTeamIds[0] === $teamId);
-} elseif (count($eventTeamIds) === 1) {
-    $homeTeam = $teamNames[$eventTeamIds[0]] ?? '';
-    $isHome = ($eventTeamIds[0] === $teamId);
-}
-
-// Venue from event — API returns venue IDs, fetch name
-$venueName = '';
-$eventVenueIds = $event['venues'] ?? [];
-if (!empty($eventVenueIds)) {
-    $venueInfo = json_get(API_BASE . "/venues/{$eventVenueIds[0]}");
-    if ($venueInfo !== null) {
-        $venueName = $venueInfo['name'] ?? $venueInfo['title']['rendered'] ?? '';
-    }
-}
-
-// Date/time from top-level event fields
-$rawDate = $event['date'] ?? '';
-
-// Format date and time from the top-level date field
-$dateFormatted = '';
-$timeFormatted = '';
-
-if ($rawDate) {
-    $ts = strtotime($rawDate);
-    $dayName = date('l', $ts);
-    $monthName = date('F', $ts);
-    $dayNum = (int) date('j', $ts);
-    $dateFormatted = $dayName . ', ' . $monthName . ' ' . ordinalSuffix($dayNum);
-    $timeFormatted = date('g:i', $ts) . ' PM BST';
-}
-
-// Build location string
-$wayLabel = $isHome ? '(Home)' : '(Away)';
-if ($venueName) {
-    $locationFormatted = abbreviateLocation($venueName . ' ' . $wayLabel);
-} else {
-    $locationFormatted = $wayLabel;
-}
-
 $output = [
-    'has_fixture' => true,
-    'home_team' => $homeTeam ?: 'Boleskine',
-    'away_team' => $awayTeam ?: '',
-    'date_formatted' => $dateFormatted,
-    'time_formatted' => $timeFormatted,
-    'location_formatted' => $locationFormatted,
-    'way' => $isHome ? 'home' : 'away',
-    'status' => $event['status'] ?? 'future',
     'last_updated' => date('c'),
+    'fixtures' => ['has_fixture' => false],
+    'results'  => ['has_result' => false],
 ];
 
+// 2. Fetch Next Fixture
+$futureEvents = json_get(API_BASE . "/events?after={$today}&order=asc&orderby=date&per_page=50") ?? [];
+$fixtures = array_values(array_filter($futureEvents, function($e) use ($teamId, $today) {
+    $tids = array_map('intval', $e['teams'] ?? []);
+    return in_array($teamId, $tids) && ($e['status'] ?? '') === 'future' && ($e['date'] ?? '') >= $today;
+}));
+
+if (!empty($fixtures)) {
+    $ev = $fixtures[0];
+    $tids = array_map('intval', $ev['teams'] ?? []);
+    $homeTeam = count($tids) > 0 ? getTeamName($tids[0]) : '';
+    $awayTeam = count($tids) > 1 ? getTeamName($tids[1]) : '';
+    $isHome = count($tids) > 0 && $tids[0] === $teamId;
+    
+    $venueName = '';
+    if (!empty($ev['venues'])) {
+        $vInfo = json_get(API_BASE . "/venues/{$ev['venues'][0]}");
+        $venueName = $vInfo['name'] ?? $vInfo['title']['rendered'] ?? '';
+    }
+    
+    list($dFmt, $tFmt) = formatEventDate($ev['date'] ?? '');
+    $wayLabel = $isHome ? '(H)' : '(A)';
+    $locFmt = $venueName ? abbreviateLocation("$venueName $wayLabel") : $wayLabel;
+    
+    $output['fixtures'] = [
+        'has_fixture' => true,
+        'home_team' => $homeTeam,
+        'away_team' => $awayTeam,
+        'date_formatted' => $dFmt,
+        'time_formatted' => $tFmt,
+        'location_formatted' => $locFmt,
+    ];
+}
+
+// 3. Fetch Latest Result
+$pastEvents = json_get(API_BASE . "/events?before={$today}&order=desc&orderby=date&per_page=50") ?? [];
+$results = array_values(array_filter($pastEvents, function($e) use ($teamId, $today) {
+    $tids = array_map('intval', $e['teams'] ?? []);
+    return in_array($teamId, $tids) && in_array($e['status'] ?? '', ['publish', 'closed']) && ($e['date'] ?? '') < $today;
+}));
+
+if (!empty($results)) {
+    $ev = $results[0];
+    $tids = array_map('intval', $ev['teams'] ?? []);
+    $homeId = $tids[0] ?? 0;
+    $awayId = $tids[1] ?? 0;
+    $homeTeam = getTeamName($homeId);
+    $awayTeam = getTeamName($awayId);
+    
+    $res = $ev['results'] ?? [];
+    $homeGoals = $res[$homeId]['goals'] ?? '0';
+    $awayGoals = $res[$awayId]['goals'] ?? '0';
+    
+    // Fetch Goalscorers for Boleskine
+    $boleskineScorers = [];
+    $perf = $ev['performance'] ?? [];
+    if (isset($perf[$teamId]) && (is_array($perf[$teamId]) || is_object($perf[$teamId]))) {
+        foreach ((array)$perf[$teamId] as $pid => $stats) {
+            if ($pid == 0) continue; // Skip totals row
+            if (!empty($stats['goals']) && $stats['goals'] !== '0') {
+                $pInfo = json_get(API_BASE . "/players/{$pid}");
+                $pName = $pInfo['title']['rendered'] ?? "Player {$pid}";
+                $boleskineScorers[] = "$pName {$stats['goals']}";
+            }
+        }
+    }
+    
+    list($dFmt, $tFmt) = formatEventDate($ev['date'] ?? '');
+    
+    $output['results'] = [
+        'has_result' => true,
+        'home_team' => $homeTeam,
+        'away_team' => $awayTeam,
+        'home_score' => $homeGoals,
+        'away_score' => $awayGoals,
+        'boleskine_scorers' => $boleskineScorers,
+        'date_formatted' => $dFmt,
+    ];
+}
+
 file_put_contents(OUTPUT_FILE, 'var fixtureData = ' . json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';' . "\n");
-echo "Fixtures updated successfully.\n";
+echo "Fixtures and results updated successfully.\n";
+

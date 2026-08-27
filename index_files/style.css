@@ -819,6 +819,20 @@ a {
     color: var(--color-gold);
 }
 
+.media-link i {
+    color: var(--color-gold);
+    transition: color 0.3s ease;
+    margin-right: 0.2rem;
+}
+
+.media-link:hover {
+    color: #ffffff;
+}
+
+.media-link:hover i {
+    color: var(--color-text-muted);
+}
+
 .card-date {
     font-size: 0.8rem;
     color: var(--color-text-muted);
@@ -827,12 +841,16 @@ a {
 
 /* Fixture details specifically */
 .fixture-details {
-    padding: 2.2rem 1.8rem;
+    padding: 3.5rem 1.8rem 2.2rem 1.8rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100%;
     flex-grow: 1;
+}
+
+.fixture-details .btn:first-of-type {
+    margin-top: auto !important;
 }
 
 .fixture-teams {
