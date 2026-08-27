@@ -87,6 +87,10 @@ function getTeamName(int $tid) {
     if (isset($teamNamesCache[$tid])) return $teamNamesCache[$tid];
     $info = json_get(API_BASE . "/teams/{$tid}");
     $name = $info['title']['rendered'] ?? "Team {$tid}";
+    
+    // Strip trailing ' 2' or '2' to hide the fact it's a second team!
+    $name = preg_replace('/(?:\s+)?2$/', '', $name);
+    
     $teamNamesCache[$tid] = $name;
     return $name;
 }
