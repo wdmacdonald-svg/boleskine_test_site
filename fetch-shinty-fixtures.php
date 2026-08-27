@@ -102,8 +102,10 @@ $output = [
     'results'  => ['has_result' => false],
 ];
 
+$searchEnc = urlencode(TEAM_SEARCH);
+
 // 2. Fetch Next Fixture
-$futureEvents = json_get(API_BASE . "/events?teams={$teamId}&after={$today}&order=asc&orderby=date&per_page=50") ?? [];
+$futureEvents = json_get(API_BASE . "/events?search={$searchEnc}&after={$today}&order=asc&orderby=date&per_page=50") ?? [];
 $fixtures = array_values(array_filter($futureEvents, function($e) use ($teamId, $today) {
     $tids = array_map('intval', $e['teams'] ?? []);
     return in_array($teamId, $tids) && ($e['status'] ?? '') === 'future' && ($e['date'] ?? '') >= $today;
@@ -137,7 +139,7 @@ if (!empty($fixtures)) {
 }
 
 // 3. Fetch Latest Result
-$pastEvents = json_get(API_BASE . "/events?teams={$teamId}&before={$today}&order=desc&orderby=date&per_page=50") ?? [];
+$pastEvents = json_get(API_BASE . "/events?search={$searchEnc}&before={$today}&order=desc&orderby=date&per_page=50") ?? [];
 $results = array_values(array_filter($pastEvents, function($e) use ($teamId, $today) {
     $tids = array_map('intval', $e['teams'] ?? []);
     return in_array($teamId, $tids) && in_array($e['status'] ?? '', ['publish', 'closed']) && ($e['date'] ?? '') < $today;

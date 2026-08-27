@@ -1,9 +1,6 @@
 name: Update Fixtures
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
   schedule:
     # Weekdays: once at 08:00 BST (07:00 UTC)
