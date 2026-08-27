@@ -11,7 +11,8 @@
  */
 
 define('API_BASE', 'https://matches.shinty.com/wp-json/sportspress/v2');
-define('TEAM_SEARCH', 'Boleskine');
+// Easily change this back to 'Boleskine' next season!
+define('TEAM_SEARCH', 'Kingussie');
 define('OUTPUT_FILE', __DIR__ . '/index_files/fixtures.js');
 define('CURL_TIMEOUT', 10);
 
