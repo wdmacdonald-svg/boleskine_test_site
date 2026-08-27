@@ -72,13 +72,19 @@ function formatEventDate(string $rawDate): array {
     return [$dateFmt, $timeFmt];
 }
 
-// 1. Fetch Team ID
+// 1. Resolve Team ID
 $teams = json_get(API_BASE . '/teams?search=' . urlencode(TEAM_SEARCH));
 if (empty($teams)) {
-    fwrite(STDERR, "Team 'Boleskine' not found on remote API.\n");
-    exit(1);
+    die("Team not found.\n");
 }
-$teamId = (int) $teams[0]['id'];
+$teamId = 0;
+foreach ($teams as $t) {
+    if (strtolower(trim($t['title']['rendered'] ?? '')) === strtolower(TEAM_SEARCH)) {
+        $teamId = (int) $t['id'];
+        break;
+    }
+}
+if (!$teamId) $teamId = (int) $teams[0]['id'];
 
 // Helper to fetch Team Name
 $teamNamesCache = [];
