@@ -860,12 +860,40 @@ a {
     margin-bottom: 1.5rem;
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(242, 145, 14, 0.15);
+    width: 100%;
+}
+
+.fixture-teams .team-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.fixture-teams .home-wrap {
+    justify-content: flex-start;
+}
+
+.fixture-teams .away-wrap {
+    justify-content: flex-end;
 }
 
 .fixture-teams .team-name {
     font-size: 1.1rem;
     font-weight: 700;
     color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.fixture-teams .team-score {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    flex-shrink: 0;
 }
 
 .fixture-teams .vs {

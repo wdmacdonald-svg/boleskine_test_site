@@ -16,9 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             if (fTeams) {
                 fTeams.innerHTML =
-                    '<span class="team-name font-cinzel">' + data.fixtures.home_team + '</span>' +
+                    '<div class="team-wrap home-wrap">' +
+                    '<span class="team-name font-cinzel" title="' + data.fixtures.home_team + '">' + data.fixtures.home_team + '</span>' +
+                    '</div>' +
                     '<span class="vs">vs</span>' +
-                    '<span class="team-name font-cinzel">' + data.fixtures.away_team + '</span>';
+                    '<div class="team-wrap away-wrap">' +
+                    '<span class="team-name font-cinzel" title="' + data.fixtures.away_team + '">' + data.fixtures.away_team + '</span>' +
+                    '</div>';
             }
             if (fMeta) {
                 fMeta.innerHTML =
@@ -43,9 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             if (rTeams) {
                 rTeams.innerHTML =
-                    '<span class="team-name font-cinzel">' + data.results.home_team + ' ' + data.results.home_score + '</span>' +
+                    '<div class="team-wrap home-wrap">' +
+                    '<span class="team-name font-cinzel" title="' + data.results.home_team + '">' + data.results.home_team + '</span>' +
+                    '<span class="team-score font-cinzel">' + data.results.home_score + '</span>' +
+                    '</div>' +
                     '<span class="vs">-</span>' +
-                    '<span class="team-name font-cinzel">' + data.results.away_score + ' ' + data.results.away_team + '</span>';
+                    '<div class="team-wrap away-wrap">' +
+                    '<span class="team-score font-cinzel">' + data.results.away_score + '</span>' +
+                    '<span class="team-name font-cinzel" title="' + data.results.away_team + '">' + data.results.away_team + '</span>' +
+                    '</div>';
             }
             if (rMeta) {
                 var scorersText = data.results.boleskine_scorers && data.results.boleskine_scorers.length > 0 
