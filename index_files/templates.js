@@ -1,0 +1,121 @@
+const siteHeaderHTML = `
+    <!-- Sticky Navigation Bar (Revealed fully as user scrolls) -->
+    <header id="main-header" class="scrolled">
+        <div class="header-container">
+            <!-- Target slot for the dynamic logo -->
+            <div id="logo-target-slot">
+                <div id="dynamic-logo-container" class="logo-docked">
+                    <div class="logo-wrapper">
+                        <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" id="dynamic-logo">
+                        <div class="logo-shimmer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <nav id="desktop-nav">
+                <ul>
+                    <li><a href="index.html#hero" class="active">Home</a></li>
+                    <li><a href="index.html#heritage">Heritage Site</a></li>
+                    <li><a href="index.html#fixtures">Latest News</a></li>
+                    <li><a href="index.html#membership">Membership</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <button id="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu-drawer">
+        <nav>
+            <ul>
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="index.html#heritage">Heritage Site</a></li>
+                <li><a href="index.html#fixtures">Latest News</a></li>
+                <li><a href="index.html#membership">Membership</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+`;
+
+const siteFooterHTML = `
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col footer-info">
+                <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" class="footer-logo">
+                <h3 class="font-cinzel text-gold mt-2">Boleskine Camanachd Club</h3>
+                <p class="text-gray mt-2">Strathnairn, Foyers and Stratherrick's official shinty club, honoring the
+                    sport of the Highlands since 1927 and beyond</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="font-cinzel text-gold">Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#hero">Home</a></li>
+                    <li><a href="index.html#heritage">Heritage &amp; History</a></li>
+                    <li><a href="index.html#fixtures">Fixtures &amp; News</a></li>
+                    <li><a href="index.html#membership">Membership</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="font-cinzel text-gold">Training &amp; Match Ground</h4>
+                <p class="text-gray">Smith Park</p>
+                <p class="text-gray">Inverarnie, Inverness-shire</p>
+                <p class="text-gray">IV2 6XJ, Scotland</p>
+                <div class="social-icons mt-3 mb-2">
+                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank"
+                        rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" rel="noopener"
+                        aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+                <p class="text-gold"><i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom text-center">
+            <div class="container">
+                <p class="text-gray">© 2026 Boleskine Camanachd Club. All rights reserved.</p>
+                <p class="dev-credits mt-1">Designed by Trial and Error.</p>
+            </div>
+        </div>
+    </footer>
+`;
+
+// Inject into placeholders immediately on script execution
+document.addEventListener('DOMContentLoaded', () => {
+    const headerSlot = document.getElementById('site-header');
+    if (headerSlot) {
+        headerSlot.innerHTML = siteHeaderHTML;
+    }
+
+    const footerSlot = document.getElementById('site-footer');
+    if (footerSlot) {
+        footerSlot.innerHTML = siteFooterHTML;
+    }
+
+    // Dynamically set the active navigation link based on current page
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('#desktop-nav a, #mobile-menu-drawer a');
+    
+    navLinks.forEach(link => {
+        // Remove hardcoded active class
+        link.classList.remove('active');
+        
+        const linkPath = link.getAttribute('href').split('#')[0];
+        // If it's a direct match, or if it's an anchor link on the same page
+        if (linkPath === currentPath || (linkPath === '' && currentPath === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+});

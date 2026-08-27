@@ -51,51 +51,8 @@
     <!-- Dynamic Logo Container (Moves from center-screen to navbar on scroll) -->
 
 
-    <!-- Sticky Navigation Bar (Revealed fully as user scrolls) -->
-    <header id="main-header" class="scrolled">
-        <div class="header-container">
-            <!-- Target slot for the dynamic logo -->
-            <div id="logo-target-slot">
-                <div id="dynamic-logo-container" class="logo-docked">
-                    <div class="logo-wrapper">
-                        <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" id="dynamic-logo">
-                        <div class="logo-shimmer"></div>
-                    </div>
-                </div>
-            </div>
-
-            <nav id="desktop-nav">
-                <ul>
-                    <li><a href="#hero" class="active">Home</a></li>
-                    <li><a href="#heritage">Heritage Site</a></li>
-                    <li><a href="#fixtures">Latest News</a></li>
-                    <li><a href="#membership">Membership</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="nav-actions">
-                <button id="mobile-menu-toggle" aria-label="Toggle Menu">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu-drawer">
-        <nav>
-            <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#heritage">Heritage Site</a></li>
-                <li><a href="#fixtures">Latest News</a></li>
-                <li><a href="#membership">Membership</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
+    <!-- Template Injection Placeholders -->
+    <div id="site-header"></div>
 
     <!-- Cinematic Hero Section -->
     <section id="hero">
@@ -433,52 +390,11 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container footer-grid">
-            <div class="footer-col footer-info">
-                <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" class="footer-logo">
-                <h3 class="font-cinzel text-gold mt-2">Boleskine Camanachd Club</h3>
-                <p class="text-gray mt-2">Strathnairn, Foyers and Stratherrick's official shinty club, honoring the
-                    sport of the Highlands since 1927 and beyond</p>
-                <div class="social-icons mt-3">
-                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank"
-                        rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" rel="noopener"
-                        aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-col">
-                <h4 class="font-cinzel text-gold">Quick Links</h4>
-                <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#heritage">Heritage &amp; History</a></li>
-                    <li><a href="#fixtures">Fixtures &amp; News</a></li>
-                    <li><a href="#membership">Membership</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4 class="font-cinzel text-gold">Training &amp; Match Ground</h4>
-                <p class="text-gray">Smith Park</p>
-                <p class="text-gray">Inverarnie, Inverness-shire</p>
-                <p class="text-gray">IV2 6XJ, Scotland</p>
-                <p class="text-gold mt-2"><i class="fa-solid fa-phone"></i> +44 (0) 1463 123456</p>
-                <p class="text-gold"><i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com</p>
-            </div>
-        </div>
-
-        <div class="footer-bottom text-center">
-            <div class="container">
-                <p class="text-gray">© 2026 Boleskine Camanachd Club. All rights reserved.</p>
-                <p class="dev-credits mt-1">Designed by Trial and Error.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Template Injection Placeholders -->
+    <div id="site-footer"></div>
 
     <!-- Scripts -->
+    <script src="./index_files/templates.js"></script>
     <script src="./index_files/main.js"></script>
     <script src="./index_files/fixtures.js"></script>
     <script src="./index_files/fixture_updater.js"></script>
