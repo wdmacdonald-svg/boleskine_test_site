@@ -5,6 +5,11 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      test_team:
+        description: 'Team name to test (leave blank for Boleskine)'
+        required: false
+        default: ''
   schedule:
     # Weekdays: once at 08:00 BST (07:00 UTC)
     - cron: '0 7 * * 1-5'
@@ -31,6 +36,8 @@ jobs:
 
       - name: Fetch fixtures
         run: php fetch-shinty-fixtures.php
+        env:
+          TEST_TEAM: ${{ github.event.inputs.test_team }}
 
       - name: Commit if changed
         run: |

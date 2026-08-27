@@ -12,6 +12,10 @@
 
 define('API_BASE', 'https://matches.shinty.com/wp-json/sportspress/v2');
 // Easily change this back to 'Boleskine' next season!
+$envTeam = getenv('TEST_TEAM');
+if (!empty($envTeam)) {
+    define('TEAM_SEARCH', trim($envTeam));
+}
 if (!defined('TEAM_SEARCH')) {
     define('TEAM_SEARCH', 'Boleskine');
 }
