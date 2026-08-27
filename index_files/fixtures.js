@@ -1,5 +1,5 @@
 var fixtureData = {
-    "last_updated": "2026-08-27T20:40:22+00:00",
+    "last_updated": "2026-08-27T20:55:08+00:00",
     "fixtures": {
         "has_fixture": true,
         "home_team": "Kyles Athletic",
