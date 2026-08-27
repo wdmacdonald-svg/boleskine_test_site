@@ -66,6 +66,7 @@ const siteFooterHTML = `
                     <li><a href="index.html#membership">Membership</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
+                <p class="text-gold mt-3"><i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com</p>
             </div>
 
             <div class="footer-col">
@@ -79,7 +80,6 @@ const siteFooterHTML = `
                     <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" rel="noopener"
                         aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
-                <p class="text-gold"><i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com</p>
             </div>
         </div>
 
