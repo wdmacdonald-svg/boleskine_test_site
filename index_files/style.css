@@ -902,6 +902,7 @@ a {
     color: var(--color-gold);
     text-transform: uppercase;
     opacity: 0.8;
+    margin: 0 0.8rem;
 }
 
 .fixture-meta p {
