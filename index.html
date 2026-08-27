@@ -303,19 +303,22 @@
                             <span class="card-date"><i class="fa-regular fa-clock"></i> May 28, 2026</span>
                         </div>
                     </div>
-
-                    <!-- News Card 3: Shinty Yearbooks -->
-                    <div class="news-card reveal-on-scroll active">
-                        <div class="card-img-wrapper">
-                            <div class="card-type font-cinzel">Resources</div>
-                            <img src="./index_files/yearbooks.png" alt="Shinty Yearbooks">
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-heading font-cinzel"><a href="https://shinty.com/the-shinty-yearbook/"
-                                    target="_blank" rel="noopener">Shinty Yearbooks</a>
-                            </h3>
-                            <p>Read all previous Shinty Yearbooks on the Camanachd website.</p>
-                            <span class="card-date"><i class="fa-regular fa-clock"></i> Archive</span>
+					<!-- Results Card -->
+                    <div class="news-card reveal-on-scroll active" id="latest-results-card">
+                        <div class="card-type font-cinzel">Latest Results</div>
+                        <div class="fixture-details">
+                            <div class="fixture-teams"><span class="team-name font-cinzel">Boleskine</span><span
+                                    class="vs">vs</span><span class="team-name font-cinzel">Kingussie</span></div>
+                            <div class="fixture-meta">
+                                <p><i class="fa-regular fa-calendar-days"></i> Saturday, July 4th</p>
+                                <p><i class="fa-regular fa-clock"></i> 2:30 PM BST</p>
+                                <p><i class="fa-solid fa-location-dot"></i> Smith Pk Inverarnie (H)</p>
+                            </div>
+                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank"
+                                rel="noopener" class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League
+                                Standings</a>
+                            <a href="https://matches.shinty.com/" target="_blank" rel="noopener"
+                                class="btn btn-gold btn-xs mt-3 w-100 text-center">Fixtures and Results</a>
                         </div>
                     </div>
                 </div>
@@ -336,25 +339,7 @@
 
 
                 <div class="grid grid-4-col">
-                    <!-- Results Card -->
-                    <div class="news-card reveal-on-scroll active" id="latest-results-card">
-                        <div class="card-type font-cinzel">Latest Results</div>
-                        <div class="fixture-details">
-                            <div class="fixture-teams"><span class="team-name font-cinzel">Boleskine</span><span
-                                    class="vs">vs</span><span class="team-name font-cinzel">Kingussie</span></div>
-                            <div class="fixture-meta">
-                                <p><i class="fa-regular fa-calendar-days"></i> Saturday, July 4th</p>
-                                <p><i class="fa-regular fa-clock"></i> 2:30 PM BST</p>
-                                <p><i class="fa-solid fa-location-dot"></i> Smith Pk Inverarnie (H)</p>
-                            </div>
-                            <a href="https://matches.shinty.com/mowi-north-division-2-2026/" target="_blank"
-                                rel="noopener" class="btn btn-gold btn-xs mt-3 w-100 text-center">Current League
-                                Standings</a>
-                            <a href="https://matches.shinty.com/" target="_blank" rel="noopener"
-                                class="btn btn-gold btn-xs mt-3 w-100 text-center">Fixtures and Results</a>
-                        </div>
-                    </div>
-
+                    
                     <!-- News Card 1 -->
                     <div class="news-card reveal-on-scroll active">
                         <div class="card-img-wrapper">
@@ -387,12 +372,31 @@
                         </div>
                     </div>
 
-                    <!-- News Card 3: Community & Heritage -->
+                    <!-- Map Card -->
                     <div class="news-card reveal-on-scroll active">
                         <div class="card-img-wrapper">
-                            <div class="card-type font-cinzel">Community</div>
-                            <img src="./assets/player_5_community.png"
-                                alt="Boleskine players sharing a moment of sportsmanship">
+                            <!-- Google Maps Embed -->
+                            <iframe 
+                                src="https://maps.google.com/maps?q=Boleskine%20Shinty%20Club,%20Smith%20Park,%20Inverarnie,%20Inverness-shire&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed" 
+                                class="map-iframe" 
+                                width="600"
+                                height="450"
+                                allowfullscreen
+                                loading="lazy" 
+                                title="Google Maps Location">
+                            </iframe>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-heading font-cinzel">Find Us</h3>
+                            <p>Smith Park, Inverarnie<br>Inverness-shire, IV2 6XJ</p>
+                            <a href="https://maps.google.com/?q=Smith+Park,+Inverarnie,+Inverness-shire,+IV2+6XJ" target="_blank" rel="noopener" class="btn btn-gold btn-xs mt-2 w-100 text-center">Get Directions</a>
+                        </div>
+                    </div>
+					<!-- News Card 3: Shinty Yearbooks -->
+                    <div class="news-card reveal-on-scroll active">
+                        <div class="card-img-wrapper">
+                            <div class="card-type font-cinzel">Resources</div>
+                            <img src="./index_files/yearbooks.png" alt="Shinty Yearbooks">
                         </div>
                         <div class="card-content">
                             <h3 class="card-heading font-cinzel"><a href="https://shinty.com/the-shinty-yearbook/"
@@ -402,6 +406,7 @@
                             <span class="card-date"><i class="fa-regular fa-clock"></i> Archive</span>
                         </div>
                     </div>
+					
                 </div>
             </div>
         </section>
