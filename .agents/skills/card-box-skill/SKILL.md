@@ -44,3 +44,22 @@ If the card has an absolutely positioned badge (like a top label or title badge)
 ## 4. Consistent Aspect Ratios and Grid Alignment
 **Important Note:** When editing cards, ensure that all cards in the same section or row maintain the same aspect ratio or height.
 **Reason:** If one card shrinks or grows significantly (for instance, by adding or removing extra lines of text such as 'Links available on every page footer'), it can break the visual alignment of the entire row unless the flex layout is properly configured to stretch all items identically.
+
+## 5. Centering Separators Between Variable-Length Text
+When placing a separator (e.g., "VS" or "-") perfectly in the middle of a card between two dynamic strings of varying lengths (e.g., team names), relying entirely on `flex: 1` can leave the separator visually offset if one string is much shorter than the other.
+
+To cluster the text around the centralized separator perfectly:
+1. Ensure both sides are inside wrappers with `flex: 1` so the separator is absolutely centered in the card.
+2. Align the text inside the **left** wrapper to the **right** (`justify-content: flex-end`).
+3. Align the text inside the **right** wrapper to the **left** (`justify-content: flex-start`).
+
+```css
+.card-team-left-wrap {
+    flex: 1;
+    justify-content: flex-end; /* Text hugs the separator */
+}
+.card-team-right-wrap {
+    flex: 1;
+    justify-content: flex-start; /* Text hugs the separator */
+}
+```

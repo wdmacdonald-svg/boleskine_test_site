@@ -872,11 +872,11 @@ a {
 }
 
 .fixture-teams .home-wrap {
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 .fixture-teams .away-wrap {
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .fixture-teams .team-name {
