@@ -1,9 +1,7 @@
 name: FTP Deployment to Live Server
 
 on:
-  push:
-    branches:
-      - master # Triggers deployment when you push to the master branch
+  workflow_dispatch: # This adds a manual "Run workflow" button in GitHub Actions
 
 jobs:
   web-deploy:
