@@ -1,6 +1,6 @@
 const siteHeaderHTML = `
     <!-- Sticky Navigation Bar (Revealed fully as user scrolls) -->
-    <header id="main-header" class="scrolled">
+    <header id="main-header">
         <div class="header-container">
             <!-- Target slot for the dynamic logo -->
             <div id="logo-target-slot">
