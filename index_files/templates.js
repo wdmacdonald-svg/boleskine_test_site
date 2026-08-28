@@ -106,16 +106,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Dynamically set the active navigation link based on current page
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const currentHash = window.location.hash;
     const navLinks = document.querySelectorAll('#desktop-nav a, #mobile-menu-drawer a');
     
     navLinks.forEach(link => {
-        // Remove hardcoded active class
         link.classList.remove('active');
         
-        const linkPath = link.getAttribute('href').split('#')[0];
-        // If it's a direct match, or if it's an anchor link on the same page
-        if (linkPath === currentPath || (linkPath === '' && currentPath === 'index.html')) {
-            link.classList.add('active');
+        const linkHref = link.getAttribute('href');
+        const [linkPath, linkHash] = linkHref.split('#');
+        const path = linkPath || 'index.html';
+        const hash = linkHash ? '#' + linkHash : '';
+        
+        // If on index.html, only highlight the exact matching hash (or Home if no hash is present)
+        if (currentPath === 'index.html' || currentPath === '') {
+            if (path === 'index.html' && (hash === currentHash || (hash === '#hero' && !currentHash))) {
+                link.classList.add('active');
+            }
+        } 
+        // If on another page (e.g. gallery), highlight based purely on path
+        else {
+            if (path === currentPath) {
+                link.classList.add('active');
+            }
         }
     });
 });
