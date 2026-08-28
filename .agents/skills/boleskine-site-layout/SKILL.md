@@ -31,8 +31,8 @@ The site footer must strictly follow a 3-column layout:
 **CRITICAL RULE:** Do NOT include telephone numbers anywhere in the footer or header. All communication is routed strictly through social media and email.
 
 ## 3. Contact Details Positioning
-- **Email Address**: Placed at the bottom of the middle column (Quick Links).
-- **Social Media (Facebook/YouTube)**: Placed at the bottom of the right column (Training & Match Ground).
+- **Email Address**: Placed at the bottom of the right column (Training & Match Ground).
+- **Social Media (Facebook/YouTube)**: Placed at the bottom of the left column (Club Info).
 
 ## 4. Active Navigation Links
 The `templates.js` script handles automatic highlighting of the current active page in the navigation bar. Do not try to hardcode `class="active"` on navigation links inside individual HTML files.

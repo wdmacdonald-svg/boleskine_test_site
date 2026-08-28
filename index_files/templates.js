@@ -55,6 +55,12 @@ const siteFooterHTML = `
                 <h3 class="font-cinzel text-gold mt-2">Boleskine Camanachd Club</h3>
                 <p class="text-gray mt-2">Strathnairn, Foyers and Stratherrick's official shinty club, honoring the
                     sport of the Highlands since 1927 and beyond</p>
+                <div class="social-icons mt-3 mb-2">
+                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank"
+                        rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" rel="noopener"
+                        aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
             </div>
 
             <div class="footer-col">
@@ -66,7 +72,6 @@ const siteFooterHTML = `
                     <li><a href="index.html#membership">Membership</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
-                <p class="text-gold mt-3"><i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com</p>
             </div>
 
             <div class="footer-col">
@@ -74,12 +79,7 @@ const siteFooterHTML = `
                 <p class="text-gray">Smith Park</p>
                 <p class="text-gray">Inverarnie, Inverness-shire</p>
                 <p class="text-gray">IV2 6XJ, Scotland</p>
-                <div class="social-icons mt-3 mb-2">
-                    <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank"
-                        rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.youtube.com/results?search_query=shinty" target="_blank" rel="noopener"
-                        aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
+                <p class="text-gold mt-3"><i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com</p>
             </div>
         </div>
 
