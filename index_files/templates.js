@@ -15,6 +15,7 @@ const siteHeaderHTML = `
             <nav id="desktop-nav">
                 <ul>
                     <li><a href="index.html#hero" class="active">Home</a></li>
+                    <li><a href="about.html">About the Site</a></li>
                     <li><a href="index.html#heritage">Heritage Site</a></li>
                     <li><a href="index.html#fixtures">Latest News</a></li>
                     <li><a href="index.html#membership">Membership</a></li>
@@ -37,6 +38,7 @@ const siteHeaderHTML = `
         <nav>
             <ul>
                 <li><a href="index.html#hero">Home</a></li>
+                <li><a href="about.html">About the Site</a></li>
                 <li><a href="index.html#heritage">Heritage Site</a></li>
                 <li><a href="index.html#fixtures">Latest News</a></li>
                 <li><a href="index.html#membership">Membership</a></li>

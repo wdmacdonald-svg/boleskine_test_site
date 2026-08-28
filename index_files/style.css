@@ -1081,3 +1081,225 @@ footer {
     height: 100%;
     border: 0;
 }
+
+/* ── Roadmap Timeline (About Page) ── */
+.roadmap-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 3rem auto;
+    padding-left: 2rem;
+}
+
+.roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--color-gold);
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(242, 145, 14, 0.2);
+    border-radius: 8px;
+    transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.timeline-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-gold);
+}
+
+.timeline-icon {
+    position: absolute;
+    top: 2rem;
+    left: -2.8rem;
+    width: 40px;
+    height: 40px;
+    background: var(--color-charcoal);
+    border: 3px solid var(--color-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+.timeline-date {
+    display: block;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.timeline-content p {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+}
+
+/* ── Site Architecture Map ── */
+.site-architecture-map {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.arch-hub {
+    display: inline-block;
+    background: rgba(11, 11, 12, 0.8);
+    border: 2px solid var(--color-gold);
+    border-radius: 12px;
+    padding: 2rem 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(242, 145, 14, 0.1);
+}
+
+.arch-hub h3 {
+    color: var(--color-gold);
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+}
+
+.arch-hub i {
+    font-size: 2.5rem;
+    color: var(--color-gold);
+}
+
+.arch-hub p {
+    color: #ccc;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.arch-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.arch-line {
+    width: 3px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--color-gold), rgba(242, 145, 14, 0.2));
+}
+
+.arch-arrow {
+    color: rgba(242, 145, 14, 0.5);
+    font-size: 1.5rem;
+    margin-top: -10px;
+}
+
+.arch-foundation {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(242, 145, 14, 0.15);
+    border-radius: 12px;
+    padding: 3rem;
+    margin-top: 1rem;
+}
+
+.arch-foundation-header {
+    margin-bottom: 3rem;
+}
+
+.arch-foundation-header i {
+    font-size: 2.5rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+}
+
+.arch-foundation-header h3 {
+    font-size: 2rem;
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.arch-foundation-header .badge {
+    background: rgba(242, 145, 14, 0.1);
+    color: var(--color-gold);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border: 1px solid rgba(242, 145, 14, 0.3);
+}
+
+.arch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.arch-card {
+    background: rgba(11, 11, 12, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: transform var(--transition-speed), background var(--transition-speed), border-color var(--transition-speed);
+}
+
+.arch-card:hover {
+    transform: translateY(-5px);
+    background: rgba(242, 145, 14, 0.05);
+    border-color: rgba(242, 145, 14, 0.3);
+}
+
+.arch-card i {
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.arch-card h4 {
+    font-size: 1.1rem;
+    color: #eee;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ── Page Nav Strip ── */
+.page-nav-strip {
+    background-color: var(--color-charcoal);
+    border-bottom: 1px solid rgba(242, 145, 14, 0.1);
+    padding: 0.9rem 0;
+}
+
+.page-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+}
+
+.page-nav-inner a {
+    font-family: var(--font-title);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color var(--transition-speed);
+}
+
+.page-nav-inner a:hover {
+    color: var(--color-gold);
+}

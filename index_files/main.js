@@ -41,14 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize auto slideshow on page load
-    showSlide(0);
-    startAutoSlideshow();
+    if (slides.length > 0) {
+        showSlide(0);
+        startAutoSlideshow();
+    }
 
     // --- 2. Dynamic Logo and Scroll Animations ---
 
     function updateAnimations() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const heroHeight = heroSection.offsetHeight;
+        const heroHeight = heroSection ? heroSection.offsetHeight : 0;
 
         // Disable auto-slideshow once user scrolls down significantly
         if (scrollTop > 50) {
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // A. Scroll-controlled slide progression
         // If the user is scrolling through the hero, let scroll control which slide is active
-        if (scrollTop < heroHeight) {
+        if (heroSection && slides.length > 0 && scrollTop < heroHeight) {
             const scrollPercent = scrollTop / heroHeight;
             if (scrollPercent < 0.2) {
                 showSlide(0); // Bowed
