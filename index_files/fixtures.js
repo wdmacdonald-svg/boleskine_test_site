@@ -1,11 +1,11 @@
 var fixtureData = {
-    "last_updated": "2026-08-28T19:14:31+00:00",
+    "last_updated": "2026-08-29T08:21:14+00:00",
     "fixtures": {
         "has_fixture": true,
         "home_team": "Lewis",
         "away_team": "Boleskine",
         "date_formatted": "Saturday, August 29th",
-        "time_formatted": "2:30 PM BST",
+        "time_formatted": "3:00 PM BST",
         "location_formatted": "Shawbost School, Shawbost, Western Isles (A)"
     },
     "results": {
