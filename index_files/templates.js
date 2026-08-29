@@ -56,7 +56,7 @@ const siteFooterHTML = `
                 <img src="./index_files/logo.png" alt="Boleskine Camanachd Club Logo" class="footer-logo">
                 <h3 class="font-cinzel text-gold mt-2">Boleskine Camanachd Club</h3>
                 <p class="text-gray mt-2">Strathnairn, Foyers and Stratherrick's official shinty club, honoring the
-                    sport of the Highlands since 1927 and beyond</p>
+                    sport of the Highlands since 1927</p>
                 <div class="social-icons mt-3 mb-2">
                     <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/" target="_blank"
                         rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
