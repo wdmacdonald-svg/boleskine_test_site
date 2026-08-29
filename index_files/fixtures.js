@@ -1,20 +1,20 @@
 var fixtureData = {
-    "last_updated": "2026-08-29T08:36:19+00:00",
+    "last_updated": "2026-08-29T16:36:19+00:00",
     "fixtures": {
         "has_fixture": true,
-        "home_team": "Lewis",
+        "home_team": "Kilmallie",
         "away_team": "Boleskine",
-        "date_formatted": "Saturday, August 29th",
-        "time_formatted": "3:00 PM BST",
-        "location_formatted": "Shawbost School, Shawbost, Western Isles (A)"
+        "date_formatted": "Saturday, September 26th",
+        "time_formatted": "2:30 PM BST",
+        "location_formatted": "Canal Pk, Caol, PH33 7DT (A)"
     },
     "results": {
         "has_result": true,
-        "home_team": "Beauly",
+        "home_team": "Lewis",
         "away_team": "Boleskine",
-        "home_score": "3",
+        "home_score": "2",
         "away_score": "0",
         "boleskine_scorers": [],
-        "date_formatted": "Saturday, August 22nd"
+        "date_formatted": "Saturday, August 29th"
     }
 };
