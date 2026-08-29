@@ -13,6 +13,10 @@ on:
   schedule:
     # Weekdays: once at 08:00 BST (07:00 UTC)
     - cron: '0 7 * * 1-5'
+    # Thursday & Friday extra check: 18:00 BST (17:00 UTC)
+    - cron: '0 17 * * 4,5'
+    # Saturday extra early check: 08:00 BST (07:00 UTC)
+    - cron: '0 7 * * 6'
     # Saturdays: every 20 mins from 14:00-23:00 BST (matches 15:00-23:59 BST kickoffs)
     - cron: '*/20 14-23 * * 6'
     # Sundays: every 20 mins from 00:00-11:00 BST
