@@ -1,0 +1,36 @@
+name: FTP Deployment to Live Server
+
+on:
+  workflow_dispatch: # This adds a manual "Run workflow" button in GitHub Actions
+
+jobs:
+  web-deploy:
+    name: Deploy to Live Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+      
+      - name: Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /test/
+          exclude: |
+            **/.git/**
+            **/.github/**
+            **/.agents/**
+            **/scratch/**
+            **/*.bat
+            **/*.ps1
+            **/*.md
+            **/*.bak
+            updater.py
+            updater.html
+            indexupdating.html
+            test-team.php
+            admin-gallery.html
+            .hintrc
+            .gitignore
