@@ -640,9 +640,10 @@ a {
 .marquee-track {
     display: flex;
     white-space: nowrap;
-    animation: marquee-scroll 30s linear infinite;
+    animation: marquee-scroll 60s linear infinite;
     gap: 1.5rem;
     padding-left: 0.75rem;
+    padding-right: 0.75rem;
 }
 
 .marquee-track:hover {

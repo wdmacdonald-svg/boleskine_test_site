@@ -16,9 +16,8 @@ const siteHeaderHTML = `
                 <ul>
                     <li><a href="index.html#hero" class="active">Home</a></li>
                     <li><a href="about.html">About the Site</a></li>
-                    <li><a href="index.html#heritage">Heritage Site</a></li>
-                    <li><a href="index.html#fixtures">Latest News</a></li>
-                    <li><a href="index.html#membership">Membership</a></li>
+                    <li><a href="https://boleskinecamanachdclub.com/test/heritage/">Heritage Site</a></li>
+                    <li><a href="https://boleskinecamanachdclub.com/test/heritage/club-news/">Latest News</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -39,9 +38,8 @@ const siteHeaderHTML = `
             <ul>
                 <li><a href="index.html#hero">Home</a></li>
                 <li><a href="about.html">About the Site</a></li>
-                <li><a href="index.html#heritage">Heritage Site</a></li>
-                <li><a href="index.html#fixtures">Latest News</a></li>
-                <li><a href="index.html#membership">Membership</a></li>
+                <li><a href="https://boleskinecamanachdclub.com/test/heritage/">Heritage Site</a></li>
+                <li><a href="https://boleskinecamanachdclub.com/test/heritage/club-news/">Latest News</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
         </nav>
@@ -71,7 +69,6 @@ const siteFooterHTML = `
                     <li><a href="index.html#hero">Home</a></li>
                     <li><a href="index.html#heritage">Heritage &amp; History</a></li>
                     <li><a href="index.html#fixtures">Fixtures &amp; News</a></li>
-                    <li><a href="index.html#membership">Membership</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
             </div>
