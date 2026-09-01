@@ -18,7 +18,7 @@ const siteHeaderHTML = `
                     <li><a href="about.html">About the Site</a></li>
                     <li><a href="https://boleskinecamanachdclub.com/test/heritage/">Heritage Site</a></li>
                     <li><a href="https://boleskinecamanachdclub.com/test/heritage/club-news/">Latest News</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="contact.html" target="_blank">Contact</a></li>
                 </ul>
             </nav>
 
@@ -40,7 +40,7 @@ const siteHeaderHTML = `
                 <li><a href="about.html">About the Site</a></li>
                 <li><a href="https://boleskinecamanachdclub.com/test/heritage/">Heritage Site</a></li>
                 <li><a href="https://boleskinecamanachdclub.com/test/heritage/club-news/">Latest News</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="contact.html" target="_blank">Contact</a></li>
             </ul>
         </nav>
     </div>
@@ -69,7 +69,7 @@ const siteFooterHTML = `
                     <li><a href="index.html#hero">Home</a></li>
                     <li><a href="index.html#heritage">Heritage &amp; History</a></li>
                     <li><a href="index.html#fixtures">Fixtures &amp; News</a></li>
-                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="contact.html" target="_blank">Contact</a></li>
                 </ul>
             </div>
 

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Boleskine Camanachd Club</title>
+    <link rel="icon" type="image/png" href="./assets/Round-Badge300.png">
+    <meta name="description"
+        content="Get in touch with Boleskine Camanachd Club. We'd love to hear from you.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./index_files/css2" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="./index_files/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./index_files/style.css">
+    <style>
+        .contact-hero-section {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: url('./assets/Our-Home-Stratherrick.png');
+            background-size: cover;
+            background-position: center center;
+            position: relative;
+        }
+        .contact-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(11, 11, 12, 0.6) 0%, rgba(11, 11, 12, 0.9) 100%);
+            z-index: 1;
+        }
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        .contact-form-container {
+            background-color: #1a1a1c;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: -10rem;
+            position: relative;
+            z-index: 10;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background-color: #0b0b0c;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-gold);
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .wp-screenshots-section {
+            padding: 4rem 0;
+            background-color: #0b0b0c;
+        }
+        .scattered-screenshots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 4rem;
+            position: relative;
+            min-height: 400px;
+        }
+        .scattered-img {
+            position: absolute;
+            max-width: 60%;
+            border-radius: 8px;
+            border: 2px solid #333;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            transition: transform 0.4s ease, z-index 0.1s ease, border-color 0.4s ease;
+            cursor: pointer;
+        }
+        .scattered-img:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            border-color: var(--color-gold);
+            z-index: 10;
+        }
+        .img-1 {
+            transform: rotate(-6deg) translateX(-15%);
+            z-index: 1;
+        }
+        .img-2 {
+            transform: rotate(5deg) translateX(15%) translateY(10%);
+            z-index: 2;
+        }
+        @media (max-width: 768px) {
+            .scattered-screenshots {
+                min-height: 250px;
+            }
+            .scattered-img {
+                max-width: 75%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Placeholder -->
+    <div id="site-header"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="content-section contact-hero-section">
+            <div class="contact-hero-overlay"></div>
+
+            <div class="container contact-hero-content pb-5">
+                <span class="section-badge mx-auto">Get In Touch</span>
+                <h1 class="font-cinzel text-gold mt-2" style="font-size: clamp(2.4rem, 6vw, 4.2rem); text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);">Contact The Club</h1>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section class="content-section" style="padding-top: 0; padding-bottom: 4rem;">
+            <div class="container">
+                <div class="max-width-700 mx-auto contact-form-container">
+                    <p class="text-center mb-4 text-gray">Fill out the form below and we'll get back to you as soon as possible.</p>
+                    <form action="contact.php" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control" required placeholder="How can we help?">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Write your message here..."></textarea>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-gold btn-lg w-100">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Continuity Section -->
+        <section class="wp-screenshots-section text-center">
+            <div class="container">
+                <h2 class="font-cinzel text-white">Explore Our Heritage</h2>
+                <p class="lead text-gray max-width-700 mx-auto mt-3">
+                    As a reminder, this modern portal is just the tip of the iceberg. Our deep heritage archive awaits you, bridging the gap between our modern interactive features and our rich historical site.
+                </p>
+                <div class="scattered-screenshots">
+                    <img src="assets/wp-screenshot-1.jpg" alt="Heritage Site Industry Arrives" class="scattered-img img-1">
+                    <img src="assets/wp-screenshot-2.jpg" alt="Heritage Site Bygone Days" class="scattered-img img-2">
+                </div>
+                <div style="margin-top: 5rem;">
+                    <a href="heritage/" class="btn btn-gold btn-outline btn-lg text-white">Visit The Heritage Archive</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="site-footer"></div>
+
+    <!-- Scripts -->
+    <script src="./index_files/templates.js"></script>
+    <script src="./index_files/main.js"></script>
+</body>
+
+</html>
