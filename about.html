@@ -16,6 +16,62 @@
     <link rel="stylesheet" href="./index_files/all.min.css">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./index_files/style.css">
+    <style>
+        .about-hero-section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: url('./assets/player_4_hopeful.png');
+            background-size: cover;
+            background-position: center top;
+            position: relative;
+        }
+        .about-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(11, 11, 12, 0.9) 0%, rgba(11, 11, 12, 0.6) 50%, rgba(11, 11, 12, 0.9) 100%);
+            z-index: 1;
+        }
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        .about-hero-title {
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+        .about-hero-subtitle {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+        .arch-section {
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+        }
+        .arch-title {
+            padding-bottom: 1rem;
+        }
+        .arch-subtitle {
+            margin-bottom: 4rem;
+        }
+        .scrapbook-item-1 { --rot: -5deg; --x: -10px; --y: 10px; }
+        .scrapbook-item-2 { --rot: 7deg; --x: 10px; --y: -5px; }
+        .scrapbook-item-3 { --rot: -3deg; --x: 20px; --y: 15px; }
+        .scrapbook-item-4 { --rot: 9deg; --x: -15px; --y: 5px; }
+        .scrapbook-item-5 {
+            --rot: -12deg; --x: 30px; --y: -10px;
+            width: 140px; height: 140px; padding: 2px; border-radius: 50%;
+        }
+        .scrapbook-item-5 img {
+            object-fit: contain; filter: none; border-radius: 50%;
+        }
+        .scrapbook-item-6 { --rot: 12deg; --x: -25px; --y: 20px; }
+        .heritage-btn-container {
+            margin-top: 1.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,19 +81,16 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="content-section"
-            style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; background-image: url('./assets/player_4_hopeful.png'); background-size: cover; background-position: center top; position: relative;">
+        <section class="content-section about-hero-section">
             <!-- Dark gradient overlay for text readability -->
-            <div
-                style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11, 11, 12, 0.9) 0%, rgba(11, 11, 12, 0.6) 50%, rgba(11, 11, 12, 0.9) 100%); z-index: 1;">
+            <div class="about-hero-overlay">
             </div>
 
-            <div class="container" style="position: relative; z-index: 2; width: 100%;">
+            <div class="container about-hero-content">
                 <span class="section-badge mx-auto">About the Site</span>
-                <h1 class="font-cinzel text-gold mt-2"
-                    style="font-size: clamp(2.4rem, 6vw, 4.2rem); text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);">Our
+                <h1 class="font-cinzel text-gold mt-2 about-hero-title">Our
                     Roadmap</h1>
-                <p class="lead max-width-700 mt-2 mx-auto" style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);">
+                <p class="lead max-width-700 mt-2 mx-auto about-hero-subtitle">
                     Preserving the club's rich heritage while celebrating its future and ongoing development.
                 </p>
             </div>
@@ -51,12 +104,12 @@
         </div>
 
         <!-- Site Architecture Map Section -->
-        <section class="content-section" style="padding-top: 4rem; padding-bottom: 2rem;">
+        <section class="content-section arch-section">
             <div class="container text-center">
-                <h2 class="font-cinzel text-gold">Understanding Our Site</h2>
-                <p class="lead max-width-700 mx-auto" style="margin-bottom: 4rem;">
+                <h2 class="font-cinzel text-gold arch-title">Understanding Our Site</h2>
+                <p class="lead max-width-700 mx-auto arch-subtitle">
                     Our digital presence consists of two main pillars: the modern interactive portal you see today,
-                    which serves as the gateway to our massive historical archive built underneath it.
+                    which serves as the gateway to our historical archive built underneath.
                 </p>
 
                 <div class="site-architecture-map">
@@ -83,29 +136,29 @@
                             <span class="badge">75+ Pages of Deep History</span>
                         </div>
                         <div class="scrapbook-gallery">
-                            <div class="scrapbook-item" style="--rot: -5deg; --x: -10px; --y: 10px;">
+                            <div class="scrapbook-item scrapbook-item-1">
                                 <img src="assets/Screenshot%202026-08-30%20141505.png" alt="Heritage Trophy">
                             </div>
-                            <div class="scrapbook-item" style="--rot: 7deg; --x: 10px; --y: -5px;">
+                            <div class="scrapbook-item scrapbook-item-2">
                                 <img src="assets/Screenshot%202026-08-30%20141334.png" alt="Heritage Junior Teams">
                             </div>
-                            <div class="scrapbook-item" style="--rot: -3deg; --x: 20px; --y: 15px;">
+                            <div class="scrapbook-item scrapbook-item-3">
                                 <img src="assets/Screenshot%202026-08-30%20141249.png" alt="Heritage Home">
                             </div>
-                            <div class="scrapbook-item" style="--rot: 9deg; --x: -15px; --y: 5px;">
+                            <div class="scrapbook-item scrapbook-item-4">
                                 <img src="assets/Screenshot%202026-08-30%20141142.png" alt="Heritage Final 1928">
                             </div>
-                            <div class="scrapbook-item" style="--rot: -12deg; --x: 30px; --y: -10px; width: 140px; height: 140px; padding: 2px; border-radius: 50%;">
-                                <img src="assets/Round-Badge300.png" alt="Heritage Icon 1" style="object-fit: contain; filter: none; border-radius: 50%;">
+                            <div class="scrapbook-item scrapbook-item-5">
+                                <img src="assets/Round-Badge300.png" alt="Heritage Icon 1">
                             </div>
-                            <div class="scrapbook-item" style="--rot: 12deg; --x: -25px; --y: 20px;">
+                            <div class="scrapbook-item scrapbook-item-6">
                                 <img src="assets/BoleskineVInverness.jpg" alt="Heritage Action Shot">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div style="margin-top: 1.5rem;">
+                <div class="heritage-btn-container">
                     <a href="heritage/" class="btn btn-gold btn-outline btn-lg text-white">Visit The Heritage Site</a>
                 </div>
             </div>
