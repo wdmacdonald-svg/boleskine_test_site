@@ -36,3 +36,8 @@ The site footer must strictly follow a 3-column layout:
 
 ## 4. Active Navigation Links
 The `templates.js` script handles automatic highlighting of the current active page in the navigation bar. Do not try to hardcode `class="active"` on navigation links inside individual HTML files.
+
+## 5. CSS Styling Best Practices
+Always avoid using in-line CSS (e.g., `style="..."`) within HTML tags. This prevents IDE warnings and maintains clean markup.
+- **For lighter, smaller pages:** Place your CSS inside a `<style>` block within the `<head>` section of the document.
+- **For larger, more demanding pages:** Always use an external CSS file (like `style.css`) and link it in the `<head>` section.

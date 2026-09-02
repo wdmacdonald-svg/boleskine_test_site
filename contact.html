@@ -43,6 +43,7 @@
             background-color: #1a1a1c;
             padding: 3rem;
             border-radius: 12px;
+            border: 1px solid var(--color-gold);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             margin-top: -10rem;
             position: relative;
@@ -89,21 +90,29 @@
             border-radius: 8px;
             border: 2px solid #333;
             box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            transition: transform 0.4s ease, z-index 0.1s ease, border-color 0.4s ease;
+            /* Slower transition for a more relaxed feel */
+            transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 1s ease;
             cursor: pointer;
         }
         .scattered-img:hover {
-            transform: scale(1.05) rotate(0deg) !important;
             border-color: var(--color-gold);
             z-index: 10;
         }
         .img-1 {
-            transform: rotate(-6deg) translateX(-15%);
+            transform: translateX(-15%) rotate(-6deg);
             z-index: 1;
         }
+        .img-1:hover {
+            /* Maintain translation so it doesn't jump away from the mouse */
+            transform: translateX(-15%) scale(1.08) rotate(0deg) !important;
+        }
         .img-2 {
-            transform: rotate(5deg) translateX(15%) translateY(10%);
+            transform: translateX(15%) translateY(10%) rotate(5deg);
             z-index: 2;
+        }
+        .img-2:hover {
+            /* Maintain translation so it doesn't jump away from the mouse */
+            transform: translateX(15%) translateY(10%) scale(1.08) rotate(0deg) !important;
         }
         @media (max-width: 768px) {
             .scattered-screenshots {
@@ -112,6 +121,20 @@
             .scattered-img {
                 max-width: 75%;
             }
+        }
+        .contact-hero-title {
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+        .contact-form-section {
+            padding-top: 0;
+            padding-bottom: 4rem;
+        }
+        .heritage-btn-container-contact {
+            margin-top: 5rem;
+        }
+        .honeypot-field {
+            display: none;
         }
     </style>
 </head>
@@ -128,16 +151,22 @@
 
             <div class="container contact-hero-content pb-5">
                 <span class="section-badge mx-auto">Get In Touch</span>
-                <h1 class="font-cinzel text-gold mt-2" style="font-size: clamp(2.4rem, 6vw, 4.2rem); text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);">Contact The Club</h1>
+                <h1 class="font-cinzel text-gold mt-2 contact-hero-title">Contact The Club</h1>
             </div>
         </section>
 
         <!-- Form Section -->
-        <section class="content-section" style="padding-top: 0; padding-bottom: 4rem;">
+        <section class="content-section contact-form-section">
             <div class="container">
                 <div class="max-width-700 mx-auto contact-form-container">
                     <p class="text-center mb-4 text-gray">Fill out the form below and we'll get back to you as soon as possible.</p>
                     <form action="contact.php" method="POST">
+                        <!-- Honeypot Field (Hidden from humans) -->
+                        <div class="honeypot-field" aria-hidden="true">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+                        
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" class="form-control" required placeholder="John Doe">
@@ -153,6 +182,7 @@
                         <div class="form-group">
                             <label for="message">Your Message</label>
                             <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Write your message here..."></textarea>
+                            <small class="text-gray mt-1 d-block">* Please include a maximum of 3 URLs to help us prevent spam.</small>
                         </div>
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-gold btn-lg w-100">Send Message</button>
@@ -173,7 +203,7 @@
                     <img src="assets/wp-screenshot-1.jpg" alt="Heritage Site Industry Arrives" class="scattered-img img-1">
                     <img src="assets/wp-screenshot-2.jpg" alt="Heritage Site Bygone Days" class="scattered-img img-2">
                 </div>
-                <div style="margin-top: 5rem;">
+                <div class="heritage-btn-container-contact">
                     <a href="heritage/" class="btn btn-gold btn-outline btn-lg text-white">Visit The Heritage Archive</a>
                 </div>
             </div>

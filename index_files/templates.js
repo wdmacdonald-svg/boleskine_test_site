@@ -78,7 +78,11 @@ const siteFooterHTML = `
                 <p class="text-gray">Smith Park</p>
                 <p class="text-gray">Inverarnie, Inverness-shire</p>
                 <p class="text-gray">IV2 6XJ, Scotland</p>
-                <p class="text-gold mt-3"><i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com</p>
+                <p class="mt-3">
+                    <a href="contact.html" target="_blank" class="footer-email-link">
+                        <i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com
+                    </a>
+                </p>
             </div>
         </div>
 

@@ -89,6 +89,14 @@ a {
     transition: var(--transition-quick);
 }
 
+.footer-email-link {
+    color: var(--color-gold);
+}
+
+.footer-email-link:hover {
+    color: var(--color-text-muted);
+}
+
 /* Layout Elements */
 .container {
     width: 100%;
