@@ -1,5 +1,5 @@
 var fixtureData = {
-    "last_updated": "2026-09-02T12:02:16+00:00",
+    "last_updated": "2026-09-03T11:55:19+00:00",
     "fixtures": {
         "has_fixture": true,
         "home_team": "Kilmallie",
