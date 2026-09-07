@@ -54,6 +54,10 @@ body {
     color: #ffffff !important;
 }
 
+.text-white {
+    color: #ffffff !important;
+}
+
 .text-gray {
     color: var(--color-text-muted) !important;
 }
@@ -87,6 +91,14 @@ a {
     color: inherit;
     text-decoration: none;
     transition: var(--transition-quick);
+}
+
+.footer-email-link {
+    color: var(--color-gold);
+}
+
+.footer-email-link:hover {
+    color: var(--color-text-muted);
 }
 
 /* Layout Elements */
@@ -371,7 +383,7 @@ a {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: #ffffff !important;
     padding: 0.5rem 0;
     display: inline-block;
     position: relative;
@@ -556,16 +568,15 @@ a {
 .hero-controls {
     position: absolute;
     bottom: 9rem;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 3rem;
     z-index: 10;
-    text-align: center;
+    text-align: left;
 }
 
 .scroll-indicator {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     color: var(--color-text-muted);
 }
 
@@ -788,6 +799,8 @@ a {
 .card-img-wrapper iframe.map-iframe {
     border: 0;
     pointer-events: none;
+    height: calc(100% + 65px);
+    margin-top: -65px;
 }
 
 .news-card:hover .card-img-wrapper img,
@@ -827,35 +840,85 @@ a {
     color: var(--color-gold);
 }
 
+.media-link i {
+    color: var(--color-gold);
+    transition: color 0.3s ease;
+    margin-right: 0.2rem;
+}
+
+.media-link:hover {
+    color: #ffffff;
+}
+
+.media-link:hover i {
+    color: var(--color-text-muted);
+}
+
 .card-date {
     font-size: 0.8rem;
     color: var(--color-text-muted);
     margin-top: auto;
 }
 
+.card-content .btn {
+    margin-top: auto !important;
+}
+
 /* Fixture details specifically */
 .fixture-details {
-    padding: 2.2rem 1.8rem;
+    padding: 3.5rem 1.8rem 2.2rem 1.8rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100%;
     flex-grow: 1;
+}
+
+.fixture-details .btn:first-of-type {
+    margin-top: auto !important;
 }
 
 .fixture-teams {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 1.5rem;
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(242, 145, 14, 0.15);
+    width: 100%;
+}
+
+.fixture-teams .team-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 0 1 auto;
+    min-width: 0;
+}
+
+.fixture-teams .home-wrap {
+    justify-content: flex-end;
+}
+
+.fixture-teams .away-wrap {
+    justify-content: flex-start;
 }
 
 .fixture-teams .team-name {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.fixture-teams .team-score {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    flex-shrink: 0;
 }
 
 .fixture-teams .vs {
@@ -864,6 +927,7 @@ a {
     color: var(--color-gold);
     text-transform: uppercase;
     opacity: 0.8;
+    margin: 0 0.3rem;
 }
 
 .fixture-meta p {
@@ -872,6 +936,7 @@ a {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    justify-content: flex-start;
 }
 
 .fixture-meta i {
@@ -882,7 +947,7 @@ a {
 
 /* CTA Section Styles */
 .cta-section {
-    background-image: url('../assets/player_4_hopeful.png');
+    background-image: url('player_4_hopeful.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -899,41 +964,6 @@ a {
     background-color: rgba(11, 11, 12, 0.85);
     z-index: 1;
 }
-
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-#gallery-cta {
-    position: relative;
-    text-align: center;
-    padding: 7rem 0;
-    background-image: url('../assets/player_4_hopeful.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-#gallery-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba(11, 11, 12, 0.85);
-    z-index: 1;
-}
-
-#gallery-cta .container {
-    position: relative;
-    z-index: 2;
-}
-
-
-
-
-
 
 /* Footer Section */
 footer {
@@ -1064,4 +1094,333 @@ footer {
     .content-section {
         padding: 5rem 0;
     }
+}
+
+/* Utilities */
+.map-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ── Roadmap Timeline (About Page) ── */
+.roadmap-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 3rem auto;
+    padding-left: 2rem;
+}
+
+.roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--color-gold);
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(242, 145, 14, 0.2);
+    border-radius: 8px;
+    transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.timeline-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-gold);
+}
+
+.timeline-icon {
+    position: absolute;
+    top: 2rem;
+    left: -2.8rem;
+    width: 40px;
+    height: 40px;
+    background: var(--color-charcoal);
+    border: 3px solid var(--color-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+.timeline-date {
+    display: block;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-content h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.timeline-content p {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+}
+
+/* ── Site Architecture Map ── */
+.site-architecture-map {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.arch-hub {
+    display: inline-block;
+    background: rgba(11, 11, 12, 0.8);
+    border: 2px solid var(--color-gold);
+    border-radius: 12px;
+    padding: 2rem 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(242, 145, 14, 0.1);
+}
+
+.arch-hub h3 {
+    color: var(--color-gold);
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+}
+
+.arch-hub i {
+    font-size: 2.5rem;
+    color: var(--color-gold);
+}
+
+.arch-hub p {
+    color: #ccc;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.arch-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.arch-line {
+    width: 3px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--color-gold), rgba(242, 145, 14, 0.2));
+}
+
+.arch-arrow {
+    color: rgba(242, 145, 14, 0.5);
+    font-size: 1.5rem;
+    margin-top: -10px;
+}
+
+.arch-foundation {
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid var(--color-gold);
+    border-radius: 12px;
+    padding: 3rem;
+    margin-top: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(242, 145, 14, 0.1);
+}
+
+.arch-foundation-header {
+    margin-bottom: 3rem;
+}
+
+.arch-foundation-header i {
+    font-size: 2.5rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+}
+
+.arch-foundation-header h3 {
+    font-size: 2rem;
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.arch-foundation-header .badge {
+    background: rgba(242, 145, 14, 0.1);
+    color: var(--color-gold);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border: 1px solid rgba(242, 145, 14, 0.3);
+}
+
+.arch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.arch-card {
+    background: rgba(11, 11, 12, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: transform var(--transition-speed), background var(--transition-speed), border-color var(--transition-speed);
+}
+
+.arch-card:hover {
+    transform: translateY(-5px);
+    background: rgba(242, 145, 14, 0.05);
+    border-color: rgba(242, 145, 14, 0.3);
+}
+
+.arch-card i {
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.arch-card h4 {
+    font-size: 1.1rem;
+    color: #eee;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ── Page Nav Strip ── */
+.page-nav-strip {
+    background-color: var(--color-charcoal);
+    border-bottom: 1px solid rgba(242, 145, 14, 0.1);
+    padding: 0.9rem 0;
+}
+
+.page-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+}
+
+.page-nav-inner a {
+    font-family: var(--font-title);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color var(--transition-speed);
+}
+
+.page-nav-inner a:hover {
+    color: var(--color-gold);
+}
+
+/* ── Scrapbook Gallery (About Page) ── */
+.scrapbook-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem 1rem;
+    perspective: 1000px;
+}
+
+.scrapbook-item {
+    position: relative;
+    width: 200px;
+    height: 140px;
+    background: #fff;
+    padding: 3px; /* Trimmed border */
+    border-radius: 2px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(242, 145, 14, 0.2);
+    transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--rot, 0deg));
+    transition: transform 0.6s ease-out, box-shadow 0.6s ease-out, filter 0.6s ease-out;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.scrapbook-item:hover {
+    transform: translate(0, -8px) rotate(0deg) scale(1.08);
+    z-index: 10;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 0 2px var(--color-gold);
+}
+
+.scrapbook-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.2) contrast(1.1);
+    transition: filter 0.6s ease-out;
+}
+
+.scrapbook-item:hover img {
+    filter: sepia(0) contrast(1);
+}
+
+/* ── Timeline Section Background ── */
+.timeline-section-bg {
+    position: relative;
+    background-image: url('../assets/Boleskine1930_RemasteredGreyscale700.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 1;
+}
+
+.timeline-section-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 11, 12, 0.85); /* Dark overlay */
+    z-index: -1;
+}
+
+/* ── Page Nav Strip (Global) ────────────────────────── */
+.page-nav-strip {
+    background-color: var(--color-charcoal);
+    border-bottom: 1px solid rgba(242, 145, 14, 0.1);
+    padding: 1rem 0;
+}
+
+.page-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 24px;
+}
+
+.page-nav-inner a {
+    font-family: var(--font-title);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-nav-inner a:hover {
+    color: var(--color-gold);
+}
+
+.hover-gold:hover {
+    color: var(--color-gold) !important;
 }

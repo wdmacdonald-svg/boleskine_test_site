@@ -13,11 +13,11 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="./index_files/css2" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="./index_files/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="./index_files/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <!-- Page Specific Styles -->
     <style>
         #dynamic-logo-container {
@@ -359,7 +359,7 @@
                             <img src="./index_files/player_1_original.png" alt="Shinty Club Slogan Background">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-heading font-cinzel"><a href="#">Social Media</a>
+                            <h3 class="card-heading font-cinzel"><a href="#site-footer">Social Media</a>
                             </h3>
                             <p>
                                 <a href="https://www.facebook.com/people/Boleskine-Camanachd-Club/100057269995639/"
@@ -385,11 +385,14 @@
                             </iframe>
                         </div>
                         <div class="card-content">
-                            <h3 class="card-heading font-cinzel">Find Us</h3>
+                            <h3 class="card-heading font-cinzel">
+                                <a href="https://www.google.com/maps/place/Boleskine+Shinty+Club/@57.3915967,-4.1916221,9784m/data=!3m1!1e3!4m9!1m2!2m1!1sSmith+Park,+Inverarnie,+Inverness-shire,+IV2+6XJ!3m5!1s0x488f6e24316aadd3:0xac85c4b815f97636!8m2!3d57.3867936!4d-4.1818406!16s%2Fg%2F11cms_fbth?entry=ttu&amp;g_ep=EgoyMDI2MDgyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="hover-gold text-white" style="text-decoration: none; transition: color 0.3s ease;">Find Us</a>
+                            </h3>
                             <p>Smith Park, Inverarnie<br>Inverness-shire, IV2 6XJ</p>
-                            <a href="https://www.google.com/maps/place/Boleskine+Shinty+Club/@57.3915967,-4.1916221,9784m/data=!3m1!1e3!4m9!1m2!2m1!1sSmith+Park,+Inverarnie,+Inverness-shire,+IV2+6XJ!3m5!1s0x488f6e24316aadd3:0xac85c4b815f97636!8m2!3d57.3867936!4d-4.1818406!16s%2Fg%2F11cms_fbth?entry=ttu&g_ep=EgoyMDI2MDgyNC4wIKXMDSoASAFQAw%3D%3D"
-                                target="_blank" rel="noopener" class="btn btn-gold btn-xs mt-2 w-100 text-center">Get
-                                Directions</a>
+                            <span class="card-date"><i class="fa-regular fa-calendar"></i> <span id="card-datetime"></span></span>
+                            <script>
+                                document.getElementById('card-datetime').innerText = new Date().toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+                            </script>
                         </div>
                     </div>
                     <!-- News Card 3: Shinty Yearbooks -->

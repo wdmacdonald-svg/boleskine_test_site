@@ -11,18 +11,18 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-<link href="./gallery_files/css2" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet"/>
 <!-- FontAwesome -->
-<link href="./gallery_files/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
 <!-- Shared Stylesheet -->
-<link href="./gallery_files/style.css" rel="stylesheet"/>
+<link href="./css/style.css" rel="stylesheet"/>
 <style>
         /* ── Gallery Page Hero ─────────────────────────── */
         #gallery-hero {
             position: relative;
             /* height: 52vh;*/
             /* min-height: 380px;*/
-            min-height: 62vh;
+            min-height: 80vh;
             background-image:
                 linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, rgba(11, 11, 12, 0.65) 100%),
                 url('assets/player_1_bowed.png');
@@ -630,35 +630,7 @@
             margin: 0 auto 2rem;
         }
 
-        /* ── Page Nav Strip ────────────────────────── */
-        .page-nav-strip {
-            background-color: var(--color-charcoal);
-            border-bottom: 1px solid rgba(242, 145, 14, 0.1);
-            padding: 0.9rem 0;
-        }
 
-        .page-nav-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .page-nav-inner a {
-            font-family: var(--font-title);
-            font-size: 0.78rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--color-text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .page-nav-inner a:hover {
-            color: var(--color-gold);
-        }
 
         /* ── Responsive ────────────────────────────── */
         @media (max-width: 1024px) {
@@ -716,13 +688,8 @@
 <!-- Gallery Hero -->
 <section id="gallery-hero">
 <div class="gallery-hero-content">
-<div class="breadcrumb font-cinzel">
-<a href="index.html">Home</a>
-<i class="fa-solid fa-chevron-right"></i>
-<span>Club Gallery</span>
-</div>
 <h1 class="font-cinzel">Club <span style="color:var(--color-gold)">Gallery</span></h1>
-<p>A growing archive of moments — matches, milestones, and Highland memories from Boleskine Camanachd Club.
+<p class="text-white">A growing archive of moments — matches, milestones, and Highland memories from Boleskine Camanachd Club.
             </p>
 </div>
 </section>
