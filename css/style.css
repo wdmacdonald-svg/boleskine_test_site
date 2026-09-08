@@ -807,7 +807,7 @@ a {
 
 .card-img-wrapper iframe.map-iframe {
     border: 0;
-    pointer-events: none;
+    /*pointer-events: none;*/
     height: calc(100% + 65px);
     margin-top: -65px;
 }
