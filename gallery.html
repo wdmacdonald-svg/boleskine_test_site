@@ -858,6 +858,7 @@ If anyone has an original newspaper cutting, let us know." data-img="./assets/Bo
                     slide.setAttribute('data-index', i);
 
                     var imgSrc = item.dataset.img || '';
+                    var thumbSrc = item.dataset.thumb || imgSrc;
                     var imgAlt = item.dataset.alt || '';
                     var title = item.dataset.title || '';
                     var desc = item.dataset.desc || '';
@@ -866,8 +867,8 @@ If anyone has an original newspaper cutting, let us know." data-img="./assets/Bo
 
                     slide.innerHTML =
                         '<div class="image-frame-gold">' +
-                        (imgSrc
-                            ? '<img src="' + imgSrc + '" alt="' + imgAlt.replace(/"/g, '&quot;') + '" loading="lazy">'
+                        (thumbSrc
+                            ? '<img src="' + thumbSrc + '" alt="' + imgAlt.replace(/"/g, '&quot;') + '" loading="lazy">'
                             : '') +
                         '<div class="cs-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i><span>View Photo</span></div>' +
                         '</div>' +

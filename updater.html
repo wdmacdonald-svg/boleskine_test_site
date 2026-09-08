@@ -484,8 +484,11 @@
         <!-- Image Browser -->
         <div class="image-browser">
             <div class="browser-label"><i class="fa-solid fa-folder-open"></i> Image Browser</div>
-            <select id="image-select" onchange="onImageSelect()">
-                <option value="">-- Select an image --</option>
+            <select id="thumb-select" onchange="onImageSelect('thumb-select', 'f-thumb')" style="margin-bottom: 0.5rem;">
+                <option value="">-- Select Thumbnail Image --</option>
+            </select>
+            <select id="image-select" onchange="onImageSelect('image-select', 'f-img')">
+                <option value="">-- Select Full-Size Image --</option>
             </select>
             <div class="image-preview-box" id="image-preview">
                 <div class="placeholder">
@@ -520,7 +523,11 @@
                     <input type="text" id="f-alt" placeholder="Brief image description for accessibility">
                 </div>
                 <div class="form-group">
-                    <label>Image Path</label>
+                    <label>Thumbnail Path</label>
+                    <input type="text" id="f-thumb" placeholder="./gallery_files/photo-thumb.webp" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Full Image Path</label>
                     <input type="text" id="f-img" placeholder="./gallery_files/photo.jpg" readonly>
                     <div class="hint">Set automatically from the image browser above</div>
                 </div>
@@ -635,24 +642,37 @@
         async function loadImages() {
             try {
                 images = await apiGet('/api/images');
-                var sel = document.getElementById('image-select');
+                var selImg = document.getElementById('image-select');
+                var selThumb = document.getElementById('thumb-select');
                 /* clear everything except the first placeholder option */
-                while (sel.options.length > 1) sel.remove(1);
+                while (selImg.options.length > 1) selImg.remove(1);
+                while (selThumb.options.length > 1) selThumb.remove(1);
 
                 var currentSource = '';
-                var currentGroup = null;
+                var currentGroupImg = null;
+                var currentGroupThumb = null;
 
                 images.forEach(function(img) {
                     if (img.source !== currentSource) {
-                        currentGroup = document.createElement('optgroup');
-                        currentGroup.label = img.source;
-                        sel.appendChild(currentGroup);
+                        currentGroupImg = document.createElement('optgroup');
+                        currentGroupImg.label = img.source;
+                        selImg.appendChild(currentGroupImg);
+                        
+                        currentGroupThumb = document.createElement('optgroup');
+                        currentGroupThumb.label = img.source;
+                        selThumb.appendChild(currentGroupThumb);
+                        
                         currentSource = img.source;
                     }
-                    var opt = document.createElement('option');
-                    opt.value = img.path;
-                    opt.textContent = img.name;
-                    currentGroup.appendChild(opt);
+                    var optImg = document.createElement('option');
+                    optImg.value = img.path;
+                    optImg.textContent = img.name;
+                    currentGroupImg.appendChild(optImg);
+
+                    var optThumb = document.createElement('option');
+                    optThumb.value = img.path;
+                    optThumb.textContent = img.name;
+                    currentGroupThumb.appendChild(optThumb);
                 });
             } catch (e) {
                 console.error('Failed to load images:', e);
@@ -686,10 +706,10 @@
             var html = '';
             slides.forEach(function(item, idx) {
                 var isActive = (editingIdx === idx);
-                var imgSrc = item.img || '';
-                var thumbHtml = imgSrc
-                    ? '<img src="' + escAttr(imgSrc) + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'<i class=\\\\\'fa-solid fa-image\\\\\' style=\\\\\'color:rgba(242,145,14,0.2);font-size:0.8rem;\\\\\'></i>\'">'
-                    : '<i class="fa-solid fa-image" style="color:rgba(242,145,14,0.2);font-size:0.8rem;"></i>';
+            var imgSrc = item.thumb || item.img || '';
+            var thumbHtml = imgSrc
+                ? '<img src="' + escAttr(imgSrc) + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'<i class=\\\\\'fa-solid fa-image\\\\\' style=\\\\\'color:rgba(242,145,14,0.2);font-size:0.8rem;\\\\\'></i>\'">'
+                : '<i class="fa-solid fa-image" style="color:rgba(242,145,14,0.2);font-size:0.8rem;"></i>';
                 var meta = [];
                 if (item.year) meta.push(item.year);
                 if (item.location) meta.push(item.location);
@@ -716,6 +736,7 @@
             document.getElementById('f-title').value = item.title || '';
             document.getElementById('f-category').value = item.category || 'heritage';
             document.getElementById('f-alt').value = item.alt || '';
+            document.getElementById('f-thumb').value = item.thumb || '';
             document.getElementById('f-img').value = item.img || '';
             document.getElementById('f-year').value = item.year || '';
             document.getElementById('f-location').value = item.location || '';
@@ -726,9 +747,18 @@
             document.getElementById('submit-btn-text').textContent = 'Update Slide';
             document.getElementById('delete-btn').style.display = '';
 
-            var sel = document.getElementById('image-select');
-            sel.value = item.img || '';
-            onImageSelect();
+            var selImg = document.getElementById('image-select');
+            var selThumb = document.getElementById('thumb-select');
+            selImg.value = item.img || '';
+            selThumb.value = item.thumb || '';
+            
+            if(selImg.value) {
+                onImageSelect('image-select', 'f-img');
+            } else if(selThumb.value) {
+                onImageSelect('thumb-select', 'f-thumb');
+            } else {
+                document.getElementById('image-preview').innerHTML = '<div class="placeholder"><i class="fa-solid fa-image"></i>Select an image to preview</div>';
+            }
 
             renderSidebar();
         };
@@ -741,12 +771,12 @@
         };
 
         /* ── Image select -> preview + set path ────── */
-        window.onImageSelect = function() {
-            var sel = document.getElementById('image-select');
+        window.onImageSelect = function(selectId, inputId) {
+            var sel = document.getElementById(selectId);
             var path = sel.value;
             var preview = document.getElementById('image-preview');
 
-            document.getElementById('f-img').value = path || '';
+            document.getElementById(inputId).value = path || '';
 
             if (path) {
                 preview.innerHTML = '<img src="' + escAttr(path) + '" alt="Preview" onerror="this.parentElement.innerHTML=\'<div class=\\\\\'placeholder\\\\\'><i class=\\\\\'fa-solid fa-broken-image\\\\\'></i><div>Image not found</div></div>\'">';
@@ -761,14 +791,15 @@
                 title: document.getElementById('f-title').value.trim() || 'Untitled',
                 category: document.getElementById('f-category').value,
                 alt: document.getElementById('f-alt').value.trim(),
+                thumb: document.getElementById('f-thumb').value.trim(),
                 img: document.getElementById('f-img').value.trim(),
                 year: document.getElementById('f-year').value.trim(),
                 location: document.getElementById('f-location').value.trim(),
                 desc: document.getElementById('f-desc').value.trim()
             };
 
-            if (!data.img) {
-                showToast('Please select an image', true);
+            if (!data.img && !data.thumb) {
+                showToast('Please select at least one image', true);
                 return;
             }
 
