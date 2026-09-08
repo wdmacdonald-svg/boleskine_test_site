@@ -35,6 +35,22 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Club Membership CTA Section Background */
+#membership.cta-section {
+    background-image: url('../index_files/OldPavilion.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#membership .cta-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(11, 11, 12, 0.85); /* Fades the image making it very subtle */
+    z-index: 0;
 }
 
 /* Typography Utility */
@@ -639,7 +655,7 @@ a {
     display: flex;
     align-items: center;
     border-top: 0px solid rgba(242, 145, 14, 0.1);
-    border-bottom: 1px solid rgba(242, 145, 14, 0.15);
+    border-bottom: 0px solid rgba(242, 145, 14, 0.15);
     overflow: hidden;
 }
 
@@ -1350,7 +1366,8 @@ footer {
     width: 200px;
     height: 140px;
     background: #fff;
-    padding: 3px; /* Trimmed border */
+    padding: 3px;
+    /* Trimmed border */
     border-radius: 2px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(242, 145, 14, 0.2);
     transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--rot, 0deg));
@@ -1394,7 +1411,8 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(11, 11, 12, 0.85); /* Dark overlay */
+    background-color: rgba(11, 11, 12, 0.85);
+    /* Dark overlay */
     z-index: -1;
 }
 
