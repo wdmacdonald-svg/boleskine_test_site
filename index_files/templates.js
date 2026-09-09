@@ -80,7 +80,7 @@ const siteFooterHTML = `
                 <p class="text-gray">IV2 6XJ, Scotland</p>
                 <p class="mt-3">
                     <a href="contact.html" target="_blank" class="footer-email-link">
-                        <i class="fa-solid fa-envelope"></i> Email: info@boleskinecamanachdclub.com
+                        <i class="fa-solid fa-envelope"></i> Email: Through the contact page
                     </a>
                 </p>
             </div>

@@ -6,8 +6,8 @@
     --color-gold-hover: #C5720A;
     --color-gold-light: #FDDBB4;
     --color-gold-rgb: 242, 145, 14;
-    --color-text: #EAEAEA;
-    --color-text-muted: #A0A0A5;
+    --color-text: #f4f0e6;
+    --color-text-muted: #dfd6c7;
     --font-title: 'Cinzel', serif;
     --font-body: 'Outfit', sans-serif;
     --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -49,7 +49,8 @@ body {
 #membership .cta-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(11, 11, 12, 0.85); /* Fades the image making it very subtle */
+    background-color: rgba(11, 11, 12, 0.85);
+    /* Fades the image making it very subtle */
     z-index: 0;
 }
 
@@ -527,7 +528,7 @@ a {
 .hero-slide.active {
     opacity: 1;
     z-index: 2;
-    animation: ken-burns 12s linear infinite;
+    animation: ken-burns 12s linear infinite alternate;
 }
 
 @keyframes ken-burns {

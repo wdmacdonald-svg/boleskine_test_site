@@ -484,10 +484,10 @@
         <!-- Image Browser -->
         <div class="image-browser">
             <div class="browser-label"><i class="fa-solid fa-folder-open"></i> Image Browser</div>
-            <select id="thumb-select" onchange="onImageSelect('thumb-select', 'f-thumb')" style="margin-bottom: 0.5rem;">
+            <select id="thumb-select" title="Select Thumbnail Image" onchange="onImageSelect('thumb-select', 'f-thumb')" style="margin-bottom: 0.5rem;">
                 <option value="">-- Select Thumbnail Image --</option>
             </select>
-            <select id="image-select" onchange="onImageSelect('image-select', 'f-img')">
+            <select id="image-select" title="Select Full-Size Image" onchange="onImageSelect('image-select', 'f-img')">
                 <option value="">-- Select Full-Size Image --</option>
             </select>
             <div class="image-preview-box" id="image-preview">
@@ -510,7 +510,7 @@
                 </div>
                 <div class="form-group">
                     <label>Category</label>
-                    <select id="f-category">
+                    <select id="f-category" title="Select Category">
                         <option value="heritage">Heritage</option>
                         <option value="match">Match Day</option>
                         <option value="training">Training</option>
@@ -546,14 +546,14 @@
             </div>
             <input type="hidden" id="f-editing-idx" value="">
             <div class="btn-group">
-                <button class="btn btn-gold" id="submit-btn" onclick="submitSlide()">
+                <button type="button" class="btn btn-gold" id="submit-btn" onclick="submitSlide()">
                     <i class="fa-solid fa-check"></i> <span id="submit-btn-text">Add to Carousel</span>
                 </button>
-                <button class="btn btn-outline" onclick="resetForm()">
+                <button type="button" class="btn btn-outline" onclick="resetForm()">
                     <i class="fa-solid fa-rotate-left"></i> Reset
                 </button>
                 <div class="spacer"></div>
-                <button class="btn btn-danger-outline" id="delete-btn" onclick="confirmDelete()" style="display:none;">
+                <button type="button" class="btn btn-danger-outline" id="delete-btn" onclick="confirmDelete()" style="display:none;">
                     <i class="fa-regular fa-trash-can"></i> Delete
                 </button>
             </div>
