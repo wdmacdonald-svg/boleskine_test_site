@@ -17,7 +17,7 @@ if (!empty($envTeam)) {
     define('TEAM_SEARCH', trim($envTeam));
 }
 if (!defined('TEAM_SEARCH')) {
-    define('TEAM_SEARCH', 'Boleskine');
+    define('TEAM_SEARCH', 'Lochcarron');
 }
 define('OUTPUT_FILE', __DIR__ . '/index_files/fixtures.js');
 define('CURL_TIMEOUT', 10);
