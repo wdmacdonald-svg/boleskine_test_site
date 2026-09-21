@@ -1,20 +1,20 @@
 var fixtureData = {
-    "last_updated": "2026-09-21T13:36:29+00:00",
+    "last_updated": "2026-09-21T16:05:15+00:00",
     "fixtures": {
         "has_fixture": true,
-        "home_team": "Kilmallie",
-        "away_team": "Boleskine",
+        "home_team": "Lochcarron",
+        "away_team": "Beauly",
         "date_formatted": "Saturday, September 26th",
         "time_formatted": "2:30 PM BST",
-        "location_formatted": "Canal Pk, Caol, PH33 7DT (A)"
+        "location_formatted": "Battery Pk, Lochcarron, IV54 8YE (H)"
     },
     "results": {
         "has_result": true,
-        "home_team": "Lewis",
-        "away_team": "Boleskine",
-        "home_score": "2",
-        "away_score": "0",
+        "home_team": "Lochcarron",
+        "away_team": "Lewis",
+        "home_score": "P",
+        "away_score": "P",
         "boleskine_scorers": [],
-        "date_formatted": "Saturday, August 29th"
+        "date_formatted": "Saturday, September 12th"
     }
 };
