@@ -107,8 +107,18 @@ document.addEventListener('DOMContentLoaded', () => {
         footerSlot.innerHTML = siteFooterHTML;
     }
 
-    // Dynamically set the active navigation link based on current page
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+    // If on contact page, make footer contact links go to top of page
+    if (currentPath === 'contact.html' && footerSlot) {
+        const contactLinks = footerSlot.querySelectorAll('a[href="contact.html"]');
+        contactLinks.forEach(link => {
+            link.href = '#';
+            link.removeAttribute('target');
+        });
+    }
+
+    // Dynamically set the active navigation link based on current page
     const currentHash = window.location.hash;
     const navLinks = document.querySelectorAll('#desktop-nav a, #mobile-menu-drawer a');
     
