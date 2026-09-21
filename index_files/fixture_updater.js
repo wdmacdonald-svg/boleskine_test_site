@@ -58,12 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     '</div>';
             }
             if (rMeta) {
-                var scorersText = data.results.boleskine_scorers && data.results.boleskine_scorers.length > 0 
-                    ? data.results.boleskine_scorers.join(', ') 
+                var scorersText = data.results.team_scorers && data.results.team_scorers.length > 0 
+                    ? data.results.team_scorers.join(', ') 
                     : 'None';
                 rMeta.innerHTML =
                     '<p><i class="fa-regular fa-calendar-days"></i> ' + data.results.date_formatted + '</p>' +
-                    '<p><i class="fa-solid fa-futbol"></i> Boleskine Scorers: ' + scorersText + '</p>';
+                    '<p><i class="fa-solid fa-futbol"></i> Scorers: ' + scorersText + '</p>';
             }
         }
     }

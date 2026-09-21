@@ -1,5 +1,5 @@
 var fixtureData = {
-    "last_updated": "2026-09-21T16:05:15+00:00",
+    "last_updated": "2026-09-21T16:09:41+00:00",
     "fixtures": {
         "has_fixture": true,
         "home_team": "Lochcarron",
@@ -14,7 +14,7 @@ var fixtureData = {
         "away_team": "Lewis",
         "home_score": "P",
         "away_score": "P",
-        "boleskine_scorers": [],
+        "team_scorers": [],
         "date_formatted": "Saturday, September 12th"
     }
 };
