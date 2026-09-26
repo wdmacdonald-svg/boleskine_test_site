@@ -1,20 +1,20 @@
 var fixtureData = {
-    "last_updated": "2026-09-25T20:20:50+00:00",
+    "last_updated": "2026-09-26T12:04:50+00:00",
     "fixtures": {
         "has_fixture": true,
         "home_team": "Lochcarron",
-        "away_team": "Beauly",
-        "date_formatted": "Saturday, September 26th",
-        "time_formatted": "11:00 PM BST",
+        "away_team": "Kilmallie",
+        "date_formatted": "Saturday, October 3rd",
+        "time_formatted": "2:30 PM BST",
         "location_formatted": "Battery Pk, Lochcarron, IV54 8YE (H)"
     },
     "results": {
         "has_result": true,
         "home_team": "Lochcarron",
-        "away_team": "Lewis",
+        "away_team": "Beauly",
         "home_score": "P",
         "away_score": "P",
         "team_scorers": [],
-        "date_formatted": "Saturday, September 12th"
+        "date_formatted": "Saturday, September 26th"
     }
 };
