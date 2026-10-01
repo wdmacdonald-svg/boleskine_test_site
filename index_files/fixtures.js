@@ -1,5 +1,5 @@
 var fixtureData = {
-    "last_updated": "2026-09-30T13:20:09+00:00",
+    "last_updated": "2026-10-01T14:10:21+00:00",
     "fixtures": {
         "has_fixture": true,
         "home_team": "Lochcarron",
