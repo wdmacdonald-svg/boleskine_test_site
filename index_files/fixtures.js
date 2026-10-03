@@ -1,20 +1,22 @@
 var fixtureData = {
-    "last_updated": "2026-10-03T12:15:54+00:00",
+    "last_updated": "2026-10-03T17:50:33+00:00",
     "fixtures": {
         "has_fixture": true,
         "home_team": "Lochcarron",
-        "away_team": "Kilmallie",
-        "date_formatted": "Saturday, October 3rd",
+        "away_team": "Lochaber",
+        "date_formatted": "Saturday, October 10th",
         "time_formatted": "2:30 PM BST",
         "location_formatted": "Battery Pk, Lochcarron, IV54 8YE (H)"
     },
     "results": {
         "has_result": true,
         "home_team": "Lochcarron",
-        "away_team": "Beauly",
-        "home_score": "P",
-        "away_score": "P",
-        "team_scorers": [],
-        "date_formatted": "Saturday, September 26th"
+        "away_team": "Kilmallie",
+        "home_score": "1",
+        "away_score": "4",
+        "team_scorers": [
+            "Crisdean Finlayson 1 (67')"
+        ],
+        "date_formatted": "Saturday, October 3rd"
     }
 };
