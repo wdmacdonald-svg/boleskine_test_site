@@ -170,7 +170,7 @@ if (!empty($results)) {
     $awayGoals = $res[$awayId]['goals'] ?? '0';
     
     // Fetch Goalscorers for Boleskine
-    $teamScorers = [];
+    $boleskineScorers = [];
     $perf = $ev['performance'] ?? [];
     if (isset($perf[$teamId]) && (is_array($perf[$teamId]) || is_object($perf[$teamId]))) {
         foreach ((array)$perf[$teamId] as $pid => $stats) {
@@ -178,7 +178,7 @@ if (!empty($results)) {
             if (!empty($stats['goals']) && $stats['goals'] !== '0') {
                 $pInfo = json_get(API_BASE . "/players/{$pid}");
                 $pName = $pInfo['title']['rendered'] ?? "Player {$pid}";
-                $teamScorers[] = "$pName {$stats['goals']}";
+                $boleskineScorers[] = "$pName {$stats['goals']}";
             }
         }
     }
@@ -191,7 +191,7 @@ if (!empty($results)) {
         'away_team' => $awayTeam,
         'home_score' => $homeGoals,
         'away_score' => $awayGoals,
-        'team_scorers' => $teamScorers,
+        'boleskine_scorers' => $boleskineScorers,
         'date_formatted' => $dFmt,
     ];
 }

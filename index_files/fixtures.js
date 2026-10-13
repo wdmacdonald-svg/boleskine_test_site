@@ -14,7 +14,7 @@ var fixtureData = {
         "away_team": "Lochaber",
         "home_score": "P",
         "away_score": "P",
-        "team_scorers": [],
+        "boleskine_scorers": [],
         "date_formatted": "Saturday, October 10th"
     }
 };
