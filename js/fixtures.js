@@ -20,9 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (teams) {
         teams.innerHTML =
+            '<div class="team-row home-row">' +
             '<span class="team-name font-cinzel">' + data.home_team + '</span>' +
-            '<span class="vs">vs</span>' +
-            '<span class="team-name font-cinzel">' + data.away_team + '</span>';
+            '</div>' +
+            '<span class="vs font-cinzel">V</span>' +
+            '<div class="team-row away-row">' +
+            '<span class="team-name font-cinzel">' + data.away_team + '</span>' +
+            '</div>';
     }
 
     if (meta) {

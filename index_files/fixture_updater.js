@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             if (fTeams) {
                 fTeams.innerHTML =
-                    '<div class="team-wrap home-wrap">' +
+                    '<div class="team-row home-row">' +
                     '<span class="team-name font-cinzel" title="' + data.fixtures.home_team + '">' + data.fixtures.home_team + '</span>' +
                     '</div>' +
-                    '<span class="vs">vs</span>' +
-                    '<div class="team-wrap away-wrap">' +
+                    '<span class="vs font-cinzel">V</span>' +
+                    '<div class="team-row away-row">' +
                     '<span class="team-name font-cinzel" title="' + data.fixtures.away_team + '">' + data.fixtures.away_team + '</span>' +
                     '</div>';
             }
@@ -47,14 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             if (rTeams) {
                 rTeams.innerHTML =
-                    '<div class="team-wrap home-wrap">' +
+                    '<div class="team-row home-row">' +
                     '<span class="team-name font-cinzel" title="' + data.results.home_team + '">' + data.results.home_team + '</span>' +
                     '<span class="team-score font-cinzel">' + data.results.home_score + '</span>' +
                     '</div>' +
-                    '<span class="vs">-</span>' +
-                    '<div class="team-wrap away-wrap">' +
-                    '<span class="team-score font-cinzel">' + data.results.away_score + '</span>' +
+                    '<div class="team-row away-row">' +
                     '<span class="team-name font-cinzel" title="' + data.results.away_team + '">' + data.results.away_team + '</span>' +
+                    '<span class="team-score font-cinzel">' + data.results.away_score + '</span>' +
                     '</div>';
             }
             if (rMeta) {

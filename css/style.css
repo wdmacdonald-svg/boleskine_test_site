@@ -906,28 +906,21 @@ a {
 
 .fixture-teams {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
     margin-bottom: 1.5rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0 0.8rem 0;
     border-bottom: 1px solid rgba(242, 145, 14, 0.15);
     width: 100%;
+    min-height: 82px;
 }
 
+.fixture-teams .team-row,
 .fixture-teams .team-wrap {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    flex: 0 1 auto;
+    width: 100%;
     min-width: 0;
-}
-
-.fixture-teams .home-wrap {
-    justify-content: flex-end;
-}
-
-.fixture-teams .away-wrap {
-    justify-content: flex-start;
 }
 
 .fixture-teams .team-name {
@@ -952,8 +945,81 @@ a {
     font-weight: 700;
     color: var(--color-gold);
     text-transform: uppercase;
-    opacity: 0.8;
-    margin: 0 0.3rem;
+    opacity: 0.9;
+}
+
+/* Next Match / Fixture Card - Stacked Home over Away with V in between */
+#next-match-card .fixture-teams {
+    align-items: center;
+    gap: 0.2rem;
+}
+
+#next-match-card .fixture-teams .team-row,
+#next-match-card .fixture-teams .team-wrap {
+    justify-content: center;
+    text-align: center;
+}
+
+#next-match-card .fixture-teams .team-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 0.5px;
+}
+
+#next-match-card .fixture-teams .vs {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin: 0.15rem 0;
+    display: block;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Latest Results Card - Stacked Home with Score over Away with Score */
+#latest-results-card .fixture-teams {
+    gap: 0.45rem;
+}
+
+#latest-results-card .fixture-teams .team-row,
+#latest-results-card .fixture-teams .team-wrap {
+    justify-content: space-between;
+    padding: 0.1rem 0;
+}
+
+#latest-results-card .fixture-teams .team-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    flex: 1;
+    min-width: 0;
+    letter-spacing: 0.5px;
+}
+
+#latest-results-card .fixture-teams .team-score {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    margin-left: 0.75rem;
+    flex-shrink: 0;
+    text-align: right;
+    min-width: 1.5rem;
+}
+
+#latest-results-card .fixture-teams .vs {
+    display: none;
 }
 
 .fixture-meta p {
