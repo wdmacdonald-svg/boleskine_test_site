@@ -1,22 +1,20 @@
 var fixtureData = {
-    "last_updated": "2026-10-24T11:52:29+00:00",
+    "last_updated": "2026-10-24T17:16:01+00:00",
     "fixtures": {
         "has_fixture": true,
-        "home_team": "Lochaber",
+        "home_team": "Strathglass",
         "away_team": "Lochcarron",
-        "date_formatted": "Saturday, October 24th",
+        "date_formatted": "Thursday, December 31st",
         "time_formatted": "2:30 PM BST",
-        "location_formatted": "Spean Bridge, Playing Field (A)"
+        "location_formatted": "Cannich Sports &amp; Recreation Pk, Cannich, IV4 7LJ (A)"
     },
     "results": {
         "has_result": true,
-        "home_team": "Lochcarron",
-        "away_team": "Lochaber",
-        "home_score": "1",
-        "away_score": "4",
-        "boleskine_scorers": [
-            "Niall Arnott 1 (83')"
-        ],
-        "date_formatted": "Saturday, October 17th"
+        "home_team": "Lochaber",
+        "away_team": "Lochcarron",
+        "home_score": "P",
+        "away_score": "P",
+        "boleskine_scorers": [],
+        "date_formatted": "Saturday, October 24th"
     }
 };
