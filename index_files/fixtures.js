@@ -1,5 +1,5 @@
 var fixtureData = {
-    "last_updated": "2026-11-27T17:12:46+00:00",
+    "last_updated": "2026-11-28T00:24:44+00:00",
     "fixtures": {
         "has_fixture": true,
         "home_team": "Strathglass",
